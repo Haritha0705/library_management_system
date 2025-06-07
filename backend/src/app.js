@@ -1,19 +1,22 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv/config";
-import logger from "./utils/logger";
+import logger from "./utils/logger.js";
+import "dotenv/config";
+import { connect } from "./utils/databaseConnection.js";
 
 const app = express();
 const PORT = process.env.PORT || "8090";
+
 app.use(cors());
-app.use(express.json({limit:"20md"}));
+app.use(express.json({ limit: "20mb" }));
 
-app.get("/",(req,res) =>{
-    res.send("<h2>Libriry managemt System API</h2>");
+app.get("/", (req, res, next) => {
+    res.send("<h2>📚 Library Management System API</h2>");
     next();
-} )
+});
 
-app.listen(PORT,()=>{
-    logger.info("this is testing")
-    console.log(`Server is up and runing on port ${PORT}`)
-})
+app.listen(PORT, () => {
+    logger.info(`🚀 Server is up and running on PORT ${PORT}`);
+    connect();
+});
+
