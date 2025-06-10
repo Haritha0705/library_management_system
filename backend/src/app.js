@@ -4,9 +4,10 @@ import logger from "./utils/logger.js";
 import "dotenv/config";
 import { connect } from "./utils/databaseConnection.js";
 import passport from "passport";
+import MongoStore from "connect-mongo";
 import session from "express-session";
 import { googleAuth } from "./configs/google_auth.js";
-import { routesInit } from "./api/routes/index.js"
+import { routesInit } from "./api/routes/index.js";
 
 const app = express();
 const PORT = process.env.PORT || "8090";
@@ -17,11 +18,20 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "20mb" }));
 
-// Session middleware for Passport
+// ✅ Single session middleware setup
 app.use(session({
-    secret: "library-secret",
+    secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URL || process.env.MONGO_URI,
+        collectionName: "sessions",
+    }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24, // 1 day
+        secure: false,
+        httpOnly: true,
+    },
 }));
 
 // Initialize Passport
@@ -31,8 +41,9 @@ app.use(passport.session());
 // Setup Google OAuth strategy
 googleAuth(passport);
 
+// Simple Home Route
 app.get("/", (req, res) => {
-    res.send("<a href='http://127.0.0.1:8090/auth/google'>Login with Google</a>");
+    res.send("<a href='/auth/google'>Login with Google</a>");
 });
 
 // Connect to DB

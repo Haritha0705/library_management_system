@@ -4,7 +4,9 @@ const routesInit = (app,passport) =>{
              scope: ['profile',"email"] }));
     app.get('/auth/google/callback',
         passport.authenticate('google', {
-            failureRedirect: '/login' }),
+            failureRedirect: '/login' ,
+            successRedirect: '/user'
+        }),
         (req, res) => {
             console.log("User Authenticated")
         });
