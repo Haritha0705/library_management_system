@@ -8,7 +8,6 @@ const connect = async () => {
     const MONGODB_URL = config.DB_CONNECTION_STRING;
 
     if (database) return;
-
     mongoose
         .connect(MONGODB_URL,{
                 useNewUrlParser: true,
