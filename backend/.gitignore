@@ -29,3 +29,6 @@ coverage/
 # Build files (if any)
 dist/
 build/
+
+
+google_client_info.json
