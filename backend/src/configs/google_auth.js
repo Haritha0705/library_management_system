@@ -1,54 +1,49 @@
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import dotenv from "dotenv";
-dotenv.config();
+import GoogleStrategy from "passport-google-oauth20";
+import config from "./index.js";
 import User from "../api/models/user_model.js";
 
 const googleAuth = (passport) => {
-    // Setup Google Strategy
-    passport.use(new GoogleStrategy({
-            clientID: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: process.env.GOOGLE_REDIRECT_URL,
-        },
-        async (accessToken, refreshToken, profile, done) => {
-            try {
+    passport.use(
+        new GoogleStrategy(
+            {
+                clientID: config.GOOGLE_CLIENT_ID,
+                clientSecret: config.GOOGLE_CLIENT_SECRET,
+                callbackURL: config.GOOGLE_REDIRECT_URL,
+            },
+            async (accessToken, refreshToken, profile, callback) => {
                 const userObj = {
                     googleId: profile.id,
                     displayName: profile.displayName,
-                    firstName: profile.name?.givenName || "",
-                    lastName: profile.name?.familyName || "",
-                    gmail: profile.emails?.[0]?.value || "",
-                    image: profile.photos?.[0]?.value || "",
+                    gmail: profile.emails[0].value,
+                    image: profile.photos[0].value,
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
                 };
 
-                let user = await User.findOne({ googleId: profile.id });
+                const user = await User.findOne({ googleId: profile.id });
+                if (user) return callback(null, user);
 
-                if (user) {
-                    return done(null, user);
+                try {
+                    const newUser = await User.create(userObj);
+                    return callback(null, newUser);
+                } catch (err) {
+                    return callback(err);
                 }
-
-                const newUser = await User.create(userObj);
-                return done(null, newUser);
-            } catch (err) {
-                return done(err, null);
             }
-        }
-    ));
+        )
+    );
 
-    // Serialize user ID to session
-    passport.serializeUser((user, done) => {
-        done(null, user.id);
-    });
+    passport.serializeUser((user, cb) => cb(null, user.id));
 
-    // Deserialize user from session using ID
-    passport.deserializeUser(async (id, done) => {
+    passport.deserializeUser(async (id, cb) => {
         try {
             const user = await User.findById(id);
-            done(null, user);
+            cb(null, user);
         } catch (err) {
-            done(err, null);
+            cb(err);
         }
     });
+
 };
 
 export { googleAuth };

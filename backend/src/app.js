@@ -1,57 +1,44 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import logger from "./utils/logger.js";
-import "dotenv/config";
-import { connect } from "./utils/databaseConnection.js";
 import passport from "passport";
-import MongoStore from "connect-mongo";
 import session from "express-session";
+import logger from "./utils/logger.js";
+import config from "./configs/index.js";
+import MongoStore from "connect-mongo";
+import { connect } from "./utils/databaseConnection.js";
 import { googleAuth } from "./configs/google_auth.js";
 import { routesInit } from "./api/routes/index.js";
 
 const app = express();
 const PORT = process.env.PORT || "8090";
-const HOST = "127.0.0.1";
 
-// Middlewares
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "20mb" }));
-
-// ✅ Single session middleware setup
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URL || process.env.MONGO_URI,
-        collectionName: "sessions",
-    }),
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 1 day
-        secure: false,
-        httpOnly: true,
-    },
-}));
-
-// Initialize Passport
+app.use(
+    session({
+        secret: config.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({ mongoUrl: config.DB_CONNECTION_STRING }),
+        cookie: {
+            secure: false,
+            expires: new Date(Date.now() + 10000),
+            maxAge: 10000,
+        },
+    })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Setup Google OAuth strategy
-googleAuth(passport);
-
-// Simple Home Route
-app.get("/", (req, res) => {
-    res.send("<a href='/auth/google'>Login with Google</a>");
+app.get("/", (req, res, next) => {
+    res.send("<a href='http://localhost:8090/auth/google'>Login with Google</a>");
+    next();
 });
 
-// Connect to DB
-connect();
-
-// Initialize Routes
-routesInit(app, passport);
-
-app.listen(PORT, HOST, () => {
-    logger.info(`🚀 Server is up and running at http://${HOST}:${PORT}`);
+app.listen(PORT, () => {
+    logger.info(`🚀 Server is running on PORT ${PORT}`);
+    connect();
+    routesInit(app, passport);
+    googleAuth(passport);
 });
