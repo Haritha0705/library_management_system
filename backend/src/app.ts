@@ -1,10 +1,14 @@
-// middleware
-// app.use(cors({
-//     origin:"http://localhost:5173"
-// }));
+import express from "express";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const app = express();
 app.use(express.json());
 
-// routes
 app.use("/api/auth",authRoutes)
 app.use("/api/users",usersRoutes)
 app.use("/api/books",bookRoutes)
+app.use(errorHandler)
+
+export default app;
