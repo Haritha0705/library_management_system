@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import {strict} from "node:assert";
-import {type} from "node:os";
 
 const userSchema = new mongoose.Schema({
     name:String,
