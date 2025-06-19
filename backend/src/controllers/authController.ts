@@ -13,7 +13,6 @@ export const register = async (req: Request, res: Response) => {
     const token = generateToken(user.id);
     res.json({ token });
 };
-
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
