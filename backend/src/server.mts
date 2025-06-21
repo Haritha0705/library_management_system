@@ -1,12 +1,15 @@
 import express from "express";
-import rootRouter from "./routes/index.mjs";
+import "dotenv/config"
+import userRouter from "./routes/user.mjs";
 
 const app = express();
 
 app.use(express.json())
 
-app.use(rootRouter);
+app.use("/api/v1",userRouter);
 
-app.listen(8080,()=>{
-    console.log("Server runing")
-})
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

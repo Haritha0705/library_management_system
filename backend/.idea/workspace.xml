@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="fix bug db.mjs">
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/db.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.mts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Haritha0705&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Haritha0705/library_management_system.git&quot;,
+    &quot;accountId&quot;: &quot;8f017358-2a91-4be8-8df7-590c61b61dcd&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2ydxjOggY3cNO39JmdTW2uSsaeT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.app.mts.executor": "Run",
+    "Node.js.server.mts.executor": "Run",
+    "Node.js.server.ts.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "ts.external.directory.path": "/Users/harithawikramasinha/Documents/MY/Personal projects/library_management_system/backend/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-WS-251.26094.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="" />
+      <created>1750178385580</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1750178385580</updated>
+      <workItem from="1750178386616" duration="1204000" />
+      <workItem from="1750220726338" duration="18159000" />
+      <workItem from="1750418420551" duration="8000" />
+      <workItem from="1750421267528" duration="5000" />
+      <workItem from="1750421278938" duration="4000" />
+      <workItem from="1750512706840" duration="5795000" />
+    </task>
+    <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
+      <option name="closed" value="true" />
+      <created>1750179402578</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750179402578</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add .env file and setup">
+      <option name="closed" value="true" />
+      <created>1750221494315</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1750221494315</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add backend folder stature">
+      <option name="closed" value="true" />
+      <created>1750224411004</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1750224411004</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add new files in route folder">
+      <option name="closed" value="true" />
+      <created>1750256095511</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1750256095511</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add app.ts">
+      <option name="closed" value="true" />
+      <created>1750260755299</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1750260755299</updated>
+    </task>
+    <task id="LOCAL-00006" summary="connent db">
+      <option name="closed" value="true" />
+      <created>1750261719122</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1750261719122</updated>
+    </task>
+    <task id="LOCAL-00007" summary="set up models">
+      <option name="closed" value="true" />
+      <created>1750262369491</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1750262369491</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add middleware">
+      <option name="closed" value="true" />
+      <created>1750263451758</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1750263451758</updated>
+    </task>
+    <task id="LOCAL-00009" summary="change all back end files ts to mts">
+      <option name="closed" value="true" />
+      <created>1750513752578</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1750513752578</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix bug and delete app.mjs">
+      <option name="closed" value="true" />
+      <created>1750515301969</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1750515301969</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix bug db.mjs">
+      <option name="closed" value="true" />
+      <created>1750519133811</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1750519133811</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="set up nodejs add nodem and typesript" />
+    <MESSAGE value="add .env file and setup" />
+    <MESSAGE value="add backend folder stature" />
+    <MESSAGE value="add new files in route folder" />
+    <MESSAGE value="add app.ts" />
+    <MESSAGE value="connent db" />
+    <MESSAGE value="set up models" />
+    <MESSAGE value="add middleware" />
+    <MESSAGE value="change all back end files ts to mts" />
+    <MESSAGE value="fix bug and delete app.mjs" />
+    <MESSAGE value="fix bug db.mjs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug db.mjs" />
+  </component>
+</project>
