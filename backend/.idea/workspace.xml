@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="fix bug db.mjs">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/db.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.mts" afterDir="false" />
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add role of users">
+      <change afterPath="$PROJECT_DIR$/src/controllers/authControllers.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/authRoutes.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,27 +44,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.app.mts.executor": "Run",
-    "Node.js.server.mts.executor": "Run",
-    "Node.js.server.ts.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "ts.external.directory.path": "/Users/harithawikramasinha/Documents/MY/Personal projects/library_management_system/backend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.app.mts.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.server.mts.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.server.ts.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/harithawikramasinha/Documents/MY/Personal projects/library_management_system/backend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -88,6 +89,8 @@
       <workItem from="1750421267528" duration="5000" />
       <workItem from="1750421278938" duration="4000" />
       <workItem from="1750512706840" duration="5795000" />
+      <workItem from="1750520503987" duration="9558000" />
+      <workItem from="1750579003508" duration="71000" />
     </task>
     <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
       <option name="closed" value="true" />
@@ -177,7 +180,47 @@
       <option name="project" value="LOCAL" />
       <updated>1750519133811</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="set up new back end project">
+      <option name="closed" value="true" />
+      <created>1750521921658</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1750521921658</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add new files in back end">
+      <option name="closed" value="true" />
+      <created>1750525083225</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1750525083225</updated>
+    </task>
+    <task id="LOCAL-00014" summary="connet mongo db">
+      <option name="closed" value="true" />
+      <created>1750528050234</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1750528050234</updated>
+    </task>
+    <task id="LOCAL-00015" summary="create back end folder stcture">
+      <option name="closed" value="true" />
+      <created>1750528385123</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1750528385123</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add role of users">
+      <option name="closed" value="true" />
+      <created>1750530449624</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1750530449624</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +238,11 @@
     <MESSAGE value="change all back end files ts to mts" />
     <MESSAGE value="fix bug and delete app.mjs" />
     <MESSAGE value="fix bug db.mjs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug db.mjs" />
+    <MESSAGE value="set up new back end project" />
+    <MESSAGE value="add new files in back end" />
+    <MESSAGE value="connet mongo db" />
+    <MESSAGE value="create back end folder stcture" />
+    <MESSAGE value="add role of users" />
+    <option name="LAST_COMMIT_MESSAGE" value="add role of users" />
   </component>
 </project>
