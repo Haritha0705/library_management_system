@@ -1,19 +1,14 @@
 import express from "express";
 import "dotenv/config"
-import memberRouter from "./routes/memberRoutes.mjs";
 import connectDB from "./config/db.mjs";
-import adminRouter from "./routes/adminRoutes.mjs";
-import librarianRouter from "./routes/librarianRoutes.mjs";
+import memberRoutes from "./routes/memberRoutes.mjs";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json())
 
-
-app.use("/api/v1/admin",adminRouter);
-app.use("/api/v1/librarian",librarianRouter);
-app.use("/api/v1/user",memberRouter);
+app.use("/api/v1/member",memberRoutes);
 
 
 // Start server

@@ -1,9 +1,8 @@
-import express from "express";
-import {registerMember} from "../controllers/memberControllers.mjs";
+import {Router} from "express";
+import registerMember from "../controllers/memberControllers.mjs";
 
+const router = Router();
 
-const memberRouter = express.Router();
+router.post("/register", registerMember);
 
-memberRouter.get("/",registerMember)
-
-export default memberRouter;
+export default router;
