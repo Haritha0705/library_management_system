@@ -73,4 +73,16 @@ const loginMember = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-export {registerMember,loginMember};
+const logoutMember = async (req: Request, res: Response):Promise<any> =>{
+    try {
+        //clear token
+        res.clearCookie('token')
+
+        return res.status(200).json({success: true, message: "Logout successful!"})
+    }catch (e:any){
+        console.log(e)
+        res.status(500).json({success:true,message:e.message})
+    }
+}
+
+export {registerMember,loginMember,logoutMember};
