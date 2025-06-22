@@ -10,17 +10,17 @@ const registerMember = async (req: Request, res: Response):Promise<any> => {
 
         //check in required value in here
         if (!name || !email || !password){
-            return res.json({success:false,message:"Missing details!"}).status(400)
+            return res.status(400).json({success:false,message:"Missing details!"})
         }
 
         //email validate check
         if (!validator.isEmail(email)){
-            return res.json({success:false,message:"Enter valid email!"}).status(400)
+            return res.status(400).json({success:false,message:"Enter valid email!"})
         }
 
         //password is strong or not check
         if (password.length > 8){
-            return res.json({success:false,message:"Enter valid password!"}).status(400)
+            return res.status(400).json({success:false,message:"Enter valid password!"})
         }
 
         //hashing password
@@ -37,12 +37,40 @@ const registerMember = async (req: Request, res: Response):Promise<any> => {
         const member = await newMember.save()
 
         const token = jwt.sign({id:member._id},process.env.JWT_SECRET as string)
-        res.json({success:true,token}).status(201)
+        return  res.status(201).json({success:true,token})
 
     }catch (e:any) {
         console.log(e)
-        res.json({success:true,message:e.message}).status(500)
+        return  res.status(500).json({success:true,message:e.message})
     }
 };
 
-export default registerMember;
+const loginMember = async (req: Request, res: Response):Promise<any> =>{
+    try {
+        const {email,password} = req.body
+
+        //find member in db
+        const member = await memberModel.findOne({email})
+
+        //is memer is not or here
+        if (!member){
+            return  res.status(404).json({success:false,message:"user does not exits"})
+        }
+
+        //hashing password check and jwt token process
+        const isMatch = await bcrypt.compare(password,member.password)
+        if (isMatch) {
+            const token = jwt.sign({id: member._id}, process.env.JWT_SECRET as string);
+            return res.status(200).json({ success: true, token });
+        } else {
+            return res.status(400).json({ success: false, message: "Invalid Credentials!" });
+        }
+
+
+    }catch (e:any){
+        console.log(e)
+        res.status(500).json({success:true,message:e.message})
+    }
+}
+
+export {registerMember,loginMember};
