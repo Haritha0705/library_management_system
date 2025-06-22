@@ -4,6 +4,12 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import memberModel from "../models/memberModel.mjs";
 
+// Extend Request type to include `memberId`
+interface CustomRequest extends Request {
+    memberId?: string;
+}
+
+//API - Member Register
 const registerMember = async (req: Request, res: Response):Promise<any> => {
     try {
         const {name,email,password} = req.body;
@@ -45,6 +51,7 @@ const registerMember = async (req: Request, res: Response):Promise<any> => {
     }
 };
 
+//API - Member Login
 const loginMember = async (req: Request, res: Response):Promise<any> =>{
     try {
         const {email,password} = req.body
@@ -73,6 +80,7 @@ const loginMember = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
+//API - Member Logout
 const logoutMember = async (req: Request, res: Response):Promise<any> =>{
     try {
         //clear token
@@ -85,4 +93,34 @@ const logoutMember = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-export {registerMember,loginMember,logoutMember};
+//API -  Get Member Profile Data
+const getProfile = async (req: CustomRequest, res: Response): Promise<void> => {
+    try {
+        const memberId = req.memberId;
+
+        // Check if memberId exists
+        if (!memberId) {
+            res.status(400).json({success: false, message: "User ID missing",});
+            return;
+        }
+
+        // Fetch member and exclude password
+        const memberData = await memberModel.findById(memberId).select("-password");
+
+        if (!memberData) {
+            res.status(404).json({success: false, message: "User not found",});
+            return;
+        }
+
+        // Return success response
+        res.status(200).json({success: true, memberData});
+        return ;
+
+    } catch (e: any) {
+        console.error(e);
+        res.status(500).json({success: false, message: e.message});
+        return ;
+    }
+};
+
+export {registerMember,loginMember,logoutMember,getProfile};
