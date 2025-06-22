@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 
 // Extend Request to add userId
 interface AuthenticatedRequest extends Request {
-    userId?: string;
+    memberId?: string;
 }
 
 const authUser = async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> => {
@@ -19,7 +19,7 @@ const authUser = async (req: AuthenticatedRequest, res: Response, next: NextFunc
             id: string;
         };
 
-        req.userId = token_decode.id;
+        req.memberId = token_decode.id;
 
         next();
     } catch (e: any) {
