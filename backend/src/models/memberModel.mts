@@ -4,11 +4,11 @@ const memberSchema = new mongoose.Schema({
     name:{type:String,required:true},
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    age: { type: String, default: "0" },
-    gender: { type: String, default: "" },
-    phone: { type: String, default: "xxxxxxxxxx" },
-    dob: { type: String, default: "xxxx/xx/xx" },
-})
+    age: { type: String,},
+    gender: { type: String},
+    phone: { type: String},
+    dob: { type: String},
+},{ timestamps: true })
 
 const Member = mongoose.model('member',memberSchema)
 export default Member
