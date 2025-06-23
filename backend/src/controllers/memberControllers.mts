@@ -2,7 +2,7 @@ import {Request,Response} from "express";
 import validator from "validator"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import userModel from "../models/userModel.mjs";
+import memberModel from "../models/memberModel.mjs";
 import * as mongoose from "mongoose";
 
 // Extend Request type to include `memberId`
@@ -30,6 +30,7 @@ const registerMember = async (req: Request, res: Response):Promise<any> => {
             return res.status(400).json({success:false,message:"Enter valid password!"})
         }
 
+
         //hashing password
         const salt = await bcrypt.genSalt(10)
         const hash_password = await bcrypt.hash(password,salt)
@@ -37,10 +38,10 @@ const registerMember = async (req: Request, res: Response):Promise<any> => {
         const memberData = {
             name,
             email,
-            password:hash_password
+            password:hash_password,
         }
         //save member data in db
-        const newMember = new userModel(memberData)
+        const newMember = new memberModel(memberData)
         const member = await newMember.save()
 
         const token = jwt.sign({id:member._id},process.env.JWT_SECRET as string)
@@ -58,7 +59,7 @@ const loginMember = async (req: Request, res: Response):Promise<any> =>{
         const {email,password} = req.body
 
         //find member in db
-        const member = await userModel.findOne({email})
+        const member = await memberModel.findOne({email})
 
         //is memer is not or here
         if (!member){
@@ -110,7 +111,7 @@ const getProfile = async (req: CustomRequest, res: Response): Promise<void> => {
         }
 
         // Fetch member and exclude password
-        const memberData = await userModel.findById(memberId).select("-password");
+        const memberData = await memberModel.findById(memberId).select("-password");
 
         if (!memberData) {
             res.status(404).json({success: false, message: "User not found",});
@@ -157,7 +158,7 @@ const updateProfile = async (req: CustomRequest, res: Response): Promise<void> =
         }
 
         // Update member data
-        const updatedMember = await userModel.findByIdAndUpdate(
+        const updatedMember = await memberModel.findByIdAndUpdate(
             memberId,
             { name, age, phone, dob, gender },
             { new: true }
@@ -173,11 +174,7 @@ const updateProfile = async (req: CustomRequest, res: Response): Promise<void> =
 
     } catch (error: any) {
         console.error(error);
-        res.status(500).json({
-            success: false,
-            message: "Something went wrong",
-            error: error.message,
-        });
+        res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
     }
 }
 

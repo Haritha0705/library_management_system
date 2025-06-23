@@ -1,23 +1,20 @@
-// import {Request, Response} from "express";
-// import adminService,{AdminService} from "../service/adminService.mjs";
-//
-// class AdminControllers{
-//
-//     private adminService :AdminService;
-//
-//     constructor(adminService:AdminService) {
-//         this.adminService = adminService
-//     }
-//
-//     getUser=(_:Request,res:Response):void=>{
-//         const users : string[]|null = this.adminService.getUsers(1,10);
-//         if (users === null){
-//             res.status(400).send('error')
-//         }
-//         res.status(200).json({
-//             data:users,
-//         })
-//     }
-// }
-//
-// export default new AdminControllers(adminService);
+import {Request,Response} from "express";
+import jwt from "jsonwebtoken";
+
+const loginAdmin = async (req: Request, res: Response):Promise<any> =>{
+    try {
+        const {email,password} = req.body;
+
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
+            const token = jwt.sign(email+password,process.env.JWT_SECRET as string);
+            return res.status(200).json({ success: true, token });
+        }else {
+            return res.status(400).json({ success: false, message: "Invalid Credentials!" });
+        }
+    } catch (error: any) {
+        console.error(error);
+        res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
+    }
+}
+export {loginAdmin}
+
