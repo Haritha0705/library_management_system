@@ -151,7 +151,8 @@ const updateProfile = async (req: CustomRequest, res: Response): Promise<void> =
         }
 
         // Check if memberId is a valid MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(memberId)) {res.status(400).json({success: false, message: "Invalid Member ID format",});
+        if (!mongoose.Types.ObjectId.isValid(memberId))
+        {res.status(400).json({success: false, message: "Invalid Member ID format",});
             return
         }
 
