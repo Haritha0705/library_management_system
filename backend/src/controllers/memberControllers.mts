@@ -3,6 +3,7 @@ import validator from "validator"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import memberModel from "../models/memberModel.mjs";
+import * as mongoose from "mongoose";
 
 // Extend Request type to include `memberId`
 interface CustomRequest extends Request {
@@ -47,7 +48,7 @@ const registerMember = async (req: Request, res: Response):Promise<any> => {
 
     }catch (e:any) {
         console.log(e)
-        return  res.status(500).json({success:true,message:e.message})
+        return  res.status(500).json({success:false,message:e.message})
     }
 };
 
@@ -76,7 +77,7 @@ const loginMember = async (req: Request, res: Response):Promise<any> =>{
 
     }catch (e:any){
         console.log(e)
-        res.status(500).json({success:true,message:e.message})
+        res.status(500).json({success:false,message:e.message})
     }
 }
 
@@ -84,12 +85,16 @@ const loginMember = async (req: Request, res: Response):Promise<any> =>{
 const logoutMember = async (req: Request, res: Response):Promise<any> =>{
     try {
         //clear token
-        res.clearCookie('token')
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
+        })
 
         return res.status(200).json({success: true, message: "Logout successful!"})
     }catch (e:any){
         console.log(e)
-        res.status(500).json({success:true,message:e.message})
+        res.status(500).json({success:false,message:e.message})
     }
 }
 
@@ -123,4 +128,56 @@ const getProfile = async (req: CustomRequest, res: Response): Promise<void> => {
     }
 };
 
-export {registerMember,loginMember,logoutMember,getProfile};
+interface CustomRequest extends Request {
+    body: {
+        memberId?: string;
+        name?: string;
+        age?: string;
+        phone?: string;
+        dob?: string;
+        gender?: string;
+    };
+}
+
+//API -  Update Member Profile Data
+const updateProfile = async (req: CustomRequest, res: Response): Promise<void> => {
+    try {
+        const { memberId, name, age, phone, dob, gender } = req.body;
+
+        // Check if memberId is provided
+        if (!memberId) {
+            res.status(400).json({success: false, message: "Member ID is required",});
+            return
+        }
+
+        // Check if memberId is a valid MongoDB ObjectId
+        if (!mongoose.Types.ObjectId.isValid(memberId)) {res.status(400).json({success: false, message: "Invalid Member ID format",});
+            return
+        }
+
+        // Update member data
+        const updatedMember = await memberModel.findByIdAndUpdate(
+            memberId,
+            { name, age, phone, dob, gender },
+            { new: true }
+        );
+
+        // If no member was found
+        if (!updatedMember) {res.status(404).json({success: false, message: "Member not found",});
+            return;
+        }
+
+        // Success
+        res.status(200).json({success: true, message: "Profile Updated", updatedMember,});
+
+    } catch (error: any) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong",
+            error: error.message,
+        });
+    }
+}
+
+export {registerMember,loginMember,logoutMember,getProfile,updateProfile};

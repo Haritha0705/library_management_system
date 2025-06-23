@@ -10,11 +10,13 @@ const authUser = async (req: AuthenticatedRequest, res: Response, next: NextFunc
     try {
         const token = req.headers.token as string | undefined;
 
+        //if check no token
         if (!token) {
             res.status(400).json({ success: false, message: "No token found" });
             return;
         }
 
+        //decode jwt
         const token_decode = jwt.verify(token, process.env.JWT_SECRET as string) as {
             id: string;
         };
