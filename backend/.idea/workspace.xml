@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add user model">
-      <change afterPath="$PROJECT_DIR$/src/models/librarianModel.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="fix bug and re create member , and librariyen collections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/adminControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/adminControllers.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/memberControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/memberControllers.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/userModel.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/memberModel.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/authAdmin.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/authAdmin.mts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/adminRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/adminRoutes.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +93,7 @@
       <workItem from="1750520503987" duration="9558000" />
       <workItem from="1750579003508" duration="71000" />
       <workItem from="1750602555990" duration="14287000" />
-      <workItem from="1750683041228" duration="14046000" />
+      <workItem from="1750683041228" duration="17027000" />
     </task>
     <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
       <option name="closed" value="true" />
@@ -315,14 +311,21 @@
       <option name="project" value="LOCAL" />
       <updated>1750695018232</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="fix bug and re create member , and librariyen collections">
+      <option name="closed" value="true" />
+      <created>1750700493154</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1750700493154</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add .env file and setup" />
     <MESSAGE value="add backend folder stature" />
     <MESSAGE value="add new files in route folder" />
     <MESSAGE value="add app.ts" />
@@ -347,6 +350,7 @@
     <MESSAGE value="add member model" />
     <MESSAGE value="add book model" />
     <MESSAGE value="add user model" />
-    <option name="LAST_COMMIT_MESSAGE" value="add user model" />
+    <MESSAGE value="fix bug and re create member , and librariyen collections" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug and re create member , and librariyen collections" />
   </component>
 </project>

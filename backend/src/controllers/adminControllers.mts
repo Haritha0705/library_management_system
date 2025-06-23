@@ -1,6 +1,11 @@
 import {Request,Response} from "express";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+import validator from "validator";
+import bcrypt from "bcrypt";
+import librarianModel from "../models/librarianModel.mjs";
 
+//API - Admin login
 const loginAdmin = async (req: Request, res: Response):Promise<any> =>{
     try {
         const {email,password} = req.body;
@@ -16,5 +21,50 @@ const loginAdmin = async (req: Request, res: Response):Promise<any> =>{
         res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
     }
 }
-export {loginAdmin}
+
+//API - librarian account create
+const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
+    try {
+        const {name,email,password,phone,address} = req.body;
+
+        //chacking all data add
+        if (!name || !email || !password || !phone || !address){
+            return  res.status(400).json({success: false, message: "Missing Details!"});
+        }
+
+        //validating email format
+        if (!validator.isEmail(email)){
+            return  res.status(400).json({success: false, message: "Please enter valid email!"});
+        }
+
+        //password is strong
+        if (password.length < 8){
+            return  res.status(400).json({success: false, message: "Please enter strong password!"});
+        }
+
+        //hashing doctor password
+        const salt =  await bcrypt.genSalt(10)
+        const hashPassword = await bcrypt.hash(password,salt)
+
+        const librarianData = {
+            name,
+            email,
+            password:hashPassword,
+            phone,
+            address,
+            joinedDate:Date.now()
+        }
+
+        const newLibrarian = new librarianModel(librarianData)
+        newLibrarian.save()
+
+        return  res.status(400).json({success: false, message: "Add Librarian"});
+
+    } catch (error: any) {
+        console.error(error);
+        return  res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
+    }
+}
+
+export {loginAdmin,addLibrarian}
 
