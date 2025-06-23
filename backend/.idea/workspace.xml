@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add member model">
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add book model">
+      <change afterPath="$PROJECT_DIR$/src/models/issueModel.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/userModel.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/memberControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/memberControllers.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/adminModel.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/categoryModel.mts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/bookModel.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bookModel.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/librarianModel.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/librarianModel.mts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/memberModel.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/memberModel.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +97,7 @@
       <workItem from="1750520503987" duration="9558000" />
       <workItem from="1750579003508" duration="71000" />
       <workItem from="1750602555990" duration="14287000" />
-      <workItem from="1750683041228" duration="7317000" />
+      <workItem from="1750683041228" duration="8351000" />
     </task>
     <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
       <option name="closed" value="true" />
@@ -293,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750693462312</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="add book model">
+      <option name="closed" value="true" />
+      <created>1750693585817</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1750693585817</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,8 +337,8 @@
     <MESSAGE value="add authMember" />
     <MESSAGE value="done api authMember" />
     <MESSAGE value="done api updateMemberProfile" />
-    <MESSAGE value="add book model" />
     <MESSAGE value="add member model" />
-    <option name="LAST_COMMIT_MESSAGE" value="add member model" />
+    <MESSAGE value="add book model" />
+    <option name="LAST_COMMIT_MESSAGE" value="add book model" />
   </component>
 </project>

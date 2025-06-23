@@ -13,5 +13,5 @@ const bookSchema = new mongoose.Schema({
     addedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Member", required: true },
 },{ timestamps: true })
 
-const Book = mongoose.model('book',bookSchema)
+const Book = mongoose.model('Book',bookSchema)
 export default Book
