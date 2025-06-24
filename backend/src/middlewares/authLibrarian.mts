@@ -8,7 +8,7 @@ interface AuthenticatedRequest extends Request {
 
 const authLibrarian = async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const ltoken = req.headers.token as string | undefined;
+        const ltoken = req.headers.ltoken as string | undefined;
 
         //if check no token
         if (!ltoken) {

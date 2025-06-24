@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="done in api delete-librarian" />
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="done in middlware authLibrarian">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/authLibrarian.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/authLibrarian.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bookModel.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bookModel.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,7 +96,7 @@
       <workItem from="1750602555990" duration="14287000" />
       <workItem from="1750683041228" duration="17550000" />
       <workItem from="1750770633763" duration="769000" />
-      <workItem from="1750772698065" duration="8445000" />
+      <workItem from="1750772698065" duration="12005000" />
     </task>
     <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
       <option name="closed" value="true" />
@@ -364,14 +370,21 @@
       <option name="project" value="LOCAL" />
       <updated>1750782991783</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="done in middlware authLibrarian">
+      <option name="closed" value="true" />
+      <created>1750783433348</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1750783433348</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="change all back end files ts to mts" />
     <MESSAGE value="fix bug and delete app.mjs" />
     <MESSAGE value="fix bug db.mjs" />
     <MESSAGE value="set up new back end project" />
@@ -396,6 +409,7 @@
     <MESSAGE value="done in api get all members" />
     <MESSAGE value="done in api get all librarian" />
     <MESSAGE value="done in api delete-librarian" />
-    <option name="LAST_COMMIT_MESSAGE" value="done in api delete-librarian" />
+    <MESSAGE value="done in middlware authLibrarian" />
+    <option name="LAST_COMMIT_MESSAGE" value="done in middlware authLibrarian" />
   </component>
 </project>
