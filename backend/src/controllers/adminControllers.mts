@@ -1,6 +1,5 @@
 import {Request,Response} from "express";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import librarianModel from "../models/librarianModel.mjs";

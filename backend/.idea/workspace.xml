@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add new file add and new chages">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="fix in bu admin router">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/adminControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/adminControllers.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/authControllers.mts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middlewares/authAdmin.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/authAdmin.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/authRoutes.mts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/memberRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/memberRoutes.mts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +96,7 @@
       <workItem from="1750602555990" duration="14287000" />
       <workItem from="1750683041228" duration="17550000" />
       <workItem from="1750770633763" duration="769000" />
-      <workItem from="1750772698065" duration="3574000" />
+      <workItem from="1750772698065" duration="5271000" />
     </task>
     <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
       <option name="closed" value="true" />
@@ -335,14 +330,21 @@
       <option name="project" value="LOCAL" />
       <updated>1750703325958</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix in bu admin router">
+      <option name="closed" value="true" />
+      <created>1750778265830</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1750778265830</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add new files in route folder" />
     <MESSAGE value="add app.ts" />
     <MESSAGE value="connent db" />
     <MESSAGE value="set up models" />
@@ -367,6 +369,7 @@
     <MESSAGE value="add user model" />
     <MESSAGE value="fix bug and re create member , and librariyen collections" />
     <MESSAGE value="add new file add and new chages" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new file add and new chages" />
+    <MESSAGE value="fix in bu admin router" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix in bu admin router" />
   </component>
 </project>
