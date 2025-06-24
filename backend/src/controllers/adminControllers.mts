@@ -88,5 +88,24 @@ const getAllLibrarian = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-export {loginAdmin,addLibrarian,getAllMemers,getAllLibrarian}
+//API - Delete Librarian
+const deleteLibrarian = async (req: Request, res: Response):Promise<any> =>{
+    try {
+        const librarianId = req.params.id;
+        const deleted = await librarianModel.findByIdAndDelete(librarianId);
+
+        //check is member in here
+        if (!deleted){
+            return res.status(404).json({ success: false, message: "Librarian not found" });
+        }
+
+        return res.status(200).json({ success: true, message: "Librarian deleted successfully" });
+
+    } catch (error: any) {
+        console.error(error);
+        return  res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
+    }
+}
+
+export {loginAdmin,addLibrarian,getAllMemers,getAllLibrarian,deleteLibrarian}
 
