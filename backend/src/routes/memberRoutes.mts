@@ -18,3 +18,4 @@ memberRouter.get("/get-profile",authMember,getProfile)
 memberRouter.put("/update-profile",authMember,updateProfile)
 
 export default memberRouter;
+

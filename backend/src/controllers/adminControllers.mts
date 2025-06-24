@@ -58,7 +58,7 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
         const newLibrarian = new librarianModel(librarianData)
         newLibrarian.save()
 
-        return  res.status(400).json({success: false, message: "Add Librarian"});
+        return  res.status(400).json({success: true, message: "Add Librarian"});
 
     } catch (error: any) {
         console.error(error);
