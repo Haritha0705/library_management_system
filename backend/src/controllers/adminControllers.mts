@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import librarianModel from "../models/librarianModel.mjs";
+import memberModel from "../models/memberModel.mjs";
 
 //API - Admin login
 const loginAdmin = async (req: Request, res: Response):Promise<any> =>{
@@ -65,5 +66,16 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-export {loginAdmin,addLibrarian}
+//API - view All Members
+const getAllMemers = async (req: Request, res: Response):Promise<any> =>{
+    try {
+        const members = await memberModel.find({}).select('-password')
+        return res.status(200).json({success:true,message:members})
+    } catch (error: any) {
+        console.error(error);
+        return  res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
+    }
+}
+
+export {loginAdmin,addLibrarian,getAllMemers}
 
