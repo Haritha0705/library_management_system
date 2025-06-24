@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
-// Extend Request to add userId
+// Extend Request to add memberId
 interface AuthenticatedRequest extends Request {
     memberId?: string;
 }
