@@ -140,7 +140,7 @@ interface CustomRequest extends Request {
     };
 }
 
-//API -  Update Member Profile Data
+//API - Update Member Profile Data
 const updateProfile = async (req: CustomRequest, res: Response): Promise<void> => {
     try {
         const { memberId, name, age, phone, dob, gender } = req.body;

@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import librarianModel from "../models/librarianModel.mjs";
 import bookModel from "../models/bookModel.mjs";
 import memberModel from "../models/memberModel.mjs";
+import mongoose from "mongoose";
 
 
 //API - Login Librarian
@@ -84,5 +85,57 @@ const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
+interface CustomRequest extends Request {
+    body: {
+        _id?:string;
+        title?: string;
+        author?: string;
+        isbn?: string;
+        category?: string;
+        description?: string;
+        publisher?: string;
+        publishYear?: number;
+        quantity?: number;
+        available?: number;
+    };
+}
+
+//API - Update Book
+const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
+    try {
+        const {_id,title, author, isbn, category, description, publisher, publishYear, quantity, available} = req.body;
+
+        // Check if memberId is provided
+        if (!_id){
+            res.status(400).json({success: false, message: "Book isbn is required",});
+            return
+        }
+
+        // Check if isbn is a valid MongoDB ObjectId
+        if (!mongoose.Types.ObjectId.isValid(_id))
+        {res.status(400).json({success: false, message: "Invalid isbn format",});
+            return
+        }
+
+        // Update book data
+        const updatedBook = await bookModel.findByIdAndUpdate(
+            _id,
+            { title, author,isbn, category, description, publisher, publishYear, quantity, available },
+            { new: true }
+        )
+
+        // If no isbn was found
+        if (!updatedBook) {res.status(404).json({success: false, message: "Book not found",});
+            return;
+        }
+
+        // Success
+        res.status(200).json({success: true, message: "Book Updated", updatedBook});
+
+    } catch (error: any) {
+        console.error(error);
+        res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
+    }
+}
 
 export {librarianLogin,addBook,getAllBooks}
