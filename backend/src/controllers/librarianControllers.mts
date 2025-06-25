@@ -138,4 +138,4 @@ const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
     }
 }
 
-export {librarianLogin,addBook,getAllBooks}
+export {librarianLogin,addBook,getAllBooks,updateBook}

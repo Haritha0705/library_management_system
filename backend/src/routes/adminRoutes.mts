@@ -15,6 +15,6 @@ adminRouter.post("/login",loginAdmin)
 adminRouter.post("/add-librarian",authAdmin,addLibrarian)
 adminRouter.get("/get-allMembers",authAdmin,getAllMemers)
 adminRouter.get("/get-allLibrarian",authAdmin,getAllLibrarian)
-adminRouter.delete("/delete-librarian/:id",authAdmin,deleteLibrarian)
+adminRouter.delete("/delete-librarian",authAdmin,deleteLibrarian)
 
 export default adminRouter;
