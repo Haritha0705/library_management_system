@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="done in api all books">
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="done in api update-book by id">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/adminRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/adminRoutes.mts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +97,7 @@
       <workItem from="1750772698065" duration="12580000" />
       <workItem from="1750821254898" duration="199000" />
       <workItem from="1750843205176" duration="517000" />
-      <workItem from="1750863495360" duration="6979000" />
+      <workItem from="1750863495360" duration="9434000" />
     </task>
     <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
       <option name="closed" value="true" />
@@ -404,7 +403,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750869376520</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="done in api update-book by id">
+      <option name="closed" value="true" />
+      <created>1750871356224</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1750871356224</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,7 +429,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="set up new back end project" />
     <MESSAGE value="add new files in back end" />
     <MESSAGE value="connet mongo db" />
     <MESSAGE value="create back end folder stcture" />
@@ -447,6 +453,7 @@
     <MESSAGE value="done in middlware authLibrarian" />
     <MESSAGE value="done in api add book" />
     <MESSAGE value="done in api all books" />
-    <option name="LAST_COMMIT_MESSAGE" value="done in api all books" />
+    <MESSAGE value="done in api update-book by id" />
+    <option name="LAST_COMMIT_MESSAGE" value="done in api update-book by id" />
   </component>
 </project>

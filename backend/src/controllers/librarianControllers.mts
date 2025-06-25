@@ -137,5 +137,22 @@ const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
         res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
     }
 }
+//API - Delete Book
+const deleteBook = async (req: Request, res: Response):Promise<any> =>{
+    try {
+        const {_id} = req.body;
+        const deleted = await bookModel.findByIdAndDelete(_id);
 
-export {librarianLogin,addBook,getAllBooks,updateBook}
+        //check is book in here
+        if (!deleted){
+            return res.status(404).json({ success: false, message: "Book not found" });
+        }
+
+        return res.status(200).json({ success: true, message: "Book deleted successfully" });
+
+    } catch (error: any) {
+        console.error(error);
+        res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
+    }
+}
+export {librarianLogin,addBook,getAllBooks,updateBook,deleteBook}

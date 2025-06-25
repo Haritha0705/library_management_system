@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {addBook, getAllBooks, librarianLogin, updateBook} from "../controllers/librarianControllers.mjs";
+import {addBook, deleteBook, getAllBooks, librarianLogin, updateBook} from "../controllers/librarianControllers.mjs";
 import authLibrarian from "../middlewares/authLibrarian.mjs";
 
 
@@ -9,5 +9,7 @@ librarianRouter.post("/login",librarianLogin)
 librarianRouter.post("/add-book",authLibrarian,addBook)
 librarianRouter.get("/get-allBooks",authLibrarian,getAllBooks)
 librarianRouter.put("/update-book",authLibrarian,updateBook)
+librarianRouter.delete("/delete-book",authLibrarian,deleteBook)
+
 
 export default librarianRouter;
