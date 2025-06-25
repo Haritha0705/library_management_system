@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import librarianModel from "../models/librarianModel.mjs";
 import bookModel from "../models/bookModel.mjs";
+import memberModel from "../models/memberModel.mjs";
 
 
 //API - Login Librarian
@@ -71,4 +72,17 @@ const addBook = async (req: AuthenticatedRequest, res: Response):Promise<any> =>
     }
 }
 
-export {librarianLogin,addBook}
+//API - view All Books
+const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
+    try {
+        const books = await memberModel.find({})
+        return res.status(200).json({success:true,message:books})
+
+    } catch (error: any) {
+        console.error(error);
+        res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
+    }
+}
+
+
+export {librarianLogin,addBook,getAllBooks}

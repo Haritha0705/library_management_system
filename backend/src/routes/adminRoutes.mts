@@ -13,8 +13,8 @@ const adminRouter = Router();
 adminRouter.post("/login",loginAdmin)
 
 adminRouter.post("/add-librarian",authAdmin,addLibrarian)
-adminRouter.get("/get-members",authAdmin,getAllMemers)
-adminRouter.get("/get-librarian",authAdmin,getAllLibrarian)
+adminRouter.get("/get-allMembers",authAdmin,getAllMemers)
+adminRouter.get("/get-allLibrarian",authAdmin,getAllLibrarian)
 adminRouter.delete("/delete-librarian/:id",authAdmin,deleteLibrarian)
 
 export default adminRouter;
