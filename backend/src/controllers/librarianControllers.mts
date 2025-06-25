@@ -137,18 +137,24 @@ const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
         res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
     }
 }
+
 //API - Delete Book
 const deleteBook = async (req: Request, res: Response):Promise<any> =>{
     try {
-        const {_id} = req.body;
-        const deleted = await bookModel.findByIdAndDelete(_id);
+        const { id } = req.params;
+        console.log("Deleting book with ID:", id);
 
-        //check is book in here
-        if (!deleted){
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ success: false, message: "Invalid book ID" });
+        }
+
+        const deleted = await bookModel.findByIdAndDelete(id);
+
+        if (!deleted) {
             return res.status(404).json({ success: false, message: "Book not found" });
         }
 
-        return res.status(200).json({ success: true, message: "Book deleted successfully" });
+        res.status(200).json({ success: true, message: "Book deleted successfully" });
 
     } catch (error: any) {
         console.error(error);

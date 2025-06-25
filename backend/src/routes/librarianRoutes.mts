@@ -9,7 +9,7 @@ librarianRouter.post("/login",librarianLogin)
 librarianRouter.post("/add-book",authLibrarian,addBook)
 librarianRouter.get("/get-allBooks",authLibrarian,getAllBooks)
 librarianRouter.put("/update-book",authLibrarian,updateBook)
-librarianRouter.delete("/delete-book",authLibrarian,deleteBook)
+librarianRouter.delete("/delete-book/:id",authLibrarian,deleteBook)
 
 
 export default librarianRouter;
