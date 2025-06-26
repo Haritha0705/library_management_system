@@ -99,23 +99,29 @@ const logoutMember = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-//API -  Get Member Profile Data
+//API -  Get Member Profile Data by id
 const getProfile = async (req: CustomRequest, res: Response): Promise<void> => {
     try {
-        const memberId = req.memberId;
+        const mId = req.params.id;
 
         // Check if memberId exists
-        if (!memberId) {
+        if (!mId) {
             res.status(400).json({success: false, message: "User ID missing",});
             return;
         }
 
         // Fetch member and exclude password
-        const memberData = await memberModel.findById(memberId).select("-password");
+        const memberData = await memberModel.findById(mId).select("-password");
 
         if (!memberData) {
             res.status(404).json({success: false, message: "User not found",});
             return;
+        }
+
+        // Check if memberId is provided
+        if (!mId) {
+            res.status(400).json({success: false, message: "Member ID is required",});
+            return
         }
 
         // Return success response
@@ -131,7 +137,6 @@ const getProfile = async (req: CustomRequest, res: Response): Promise<void> => {
 
 interface CustomRequest extends Request {
     body: {
-        memberId?: string;
         name?: string;
         age?: string;
         phone?: string;
@@ -140,26 +145,27 @@ interface CustomRequest extends Request {
     };
 }
 
-//API - Update Member Profile Data
+//API - Update Member Profile Data by id
 const updateProfile = async (req: CustomRequest, res: Response): Promise<void> => {
     try {
-        const { memberId, name, age, phone, dob, gender } = req.body;
+        const mId = req.params.id;
+        const { name, age, phone, dob, gender } = req.body;
 
         // Check if memberId is provided
-        if (!memberId) {
+        if (!mId) {
             res.status(400).json({success: false, message: "Member ID is required",});
             return
         }
 
         // Check if memberId is a valid MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(memberId))
+        if (!mongoose.Types.ObjectId.isValid(mId))
         {res.status(400).json({success: false, message: "Invalid Member ID format",});
             return
         }
 
         // Update member data
         const updatedMember = await memberModel.findByIdAndUpdate(
-            memberId,
+            mId,
             { name, age, phone, dob, gender },
             { new: true }
         );

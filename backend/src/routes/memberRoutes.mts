@@ -14,8 +14,8 @@ memberRouter.post("/register", registerMember);
 memberRouter.post("/login", loginMember);
 memberRouter.post("/logout", logoutMember);
 
-memberRouter.get("/get-profile",authMember,getProfile)
-memberRouter.put("/update-profile",authMember,updateProfile)
+memberRouter.get("/get-profile/:id",authMember,getProfile)
+memberRouter.put("/update-profile/:id",authMember,updateProfile)
 
 export default memberRouter;
 

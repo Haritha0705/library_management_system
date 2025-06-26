@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="done in api delete-book by id">
-      <change beforePath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" afterDir="false" />
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="done in api update-book by id in params">
+      <change afterPath="$PROJECT_DIR$/src/models/collectinosModel.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/memberControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/memberControllers.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/memberRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/memberRoutes.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +99,9 @@
       <workItem from="1750821254898" duration="199000" />
       <workItem from="1750843205176" duration="517000" />
       <workItem from="1750863495360" duration="11143000" />
+      <workItem from="1750909568988" duration="2895000" />
+      <workItem from="1750912982228" duration="36000" />
+      <workItem from="1750914563322" duration="3113000" />
     </task>
     <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
       <option name="closed" value="true" />
@@ -425,7 +431,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750875352064</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="done in api update-book by id in params">
+      <option name="closed" value="true" />
+      <created>1750912914829</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1750912914829</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,7 +457,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="connet mongo db" />
     <MESSAGE value="create back end folder stcture" />
     <MESSAGE value="add role of users" />
     <MESSAGE value="create member model in testing" />
@@ -468,6 +481,7 @@
     <MESSAGE value="done in api all books" />
     <MESSAGE value="done in api update-book by id" />
     <MESSAGE value="done in api delete-book by id" />
-    <option name="LAST_COMMIT_MESSAGE" value="done in api delete-book by id" />
+    <MESSAGE value="done in api update-book by id in params" />
+    <option name="LAST_COMMIT_MESSAGE" value="done in api update-book by id in params" />
   </component>
 </project>
