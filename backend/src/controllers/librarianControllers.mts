@@ -87,7 +87,7 @@ const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
 
 interface CustomRequest extends Request {
     body: {
-        _id?:string;
+        id?:string;
         title?: string;
         author?: string;
         isbn?: string;
@@ -103,23 +103,24 @@ interface CustomRequest extends Request {
 //API - Update Book
 const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
     try {
-        const {_id,title, author, isbn, category, description, publisher, publishYear, quantity, available} = req.body;
+        const { id } = req.params;
+        const {title, author, isbn, category, description, publisher, publishYear, quantity, available} = req.body;
 
         // Check if memberId is provided
-        if (!_id){
+        if (!id){
             res.status(400).json({success: false, message: "Book isbn is required",});
             return
         }
 
         // Check if isbn is a valid MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(_id))
+        if (!mongoose.Types.ObjectId.isValid(id))
         {res.status(400).json({success: false, message: "Invalid isbn format",});
             return
         }
 
         // Update book data
         const updatedBook = await bookModel.findByIdAndUpdate(
-            _id,
+            id,
             { title, author,isbn, category, description, publisher, publishYear, quantity, available },
             { new: true }
         )
@@ -142,7 +143,6 @@ const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
 const deleteBook = async (req: Request, res: Response):Promise<any> =>{
     try {
         const { id } = req.params;
-        console.log("Deleting book with ID:", id);
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ success: false, message: "Invalid book ID" });
