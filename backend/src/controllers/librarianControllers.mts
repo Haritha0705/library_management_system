@@ -161,4 +161,40 @@ const deleteBook = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-export {librarianLogin,addBook,getAllBooks,updateBook,deleteBook}
+
+//API -  Get in Book by id
+const getBook = async (req: CustomRequest, res: Response): Promise<void> => {
+    try {
+        const bId = req.params.id;
+
+        // Check if memberId exists
+        if (!bId) {
+            res.status(400).json({success: false, message: "User ID missing",});
+            return;
+        }
+
+        // Fetch member and exclude password
+        const bookData = await bookModel.findById(bId);
+
+        if (!bookData) {
+            res.status(404).json({success: false, message: "User not found",});
+            return;
+        }
+
+        // Check if memberId is provided
+        if (!bId) {
+            res.status(400).json({success: false, message: "Member ID is required",});
+            return
+        }
+
+        // Return success response
+        res.status(200).json({success: true, bookData});
+        return ;
+
+    } catch (e: any) {
+        console.error(e);
+        res.status(500).json({success: false, message: e.message});
+        return ;
+    }
+};
+export {librarianLogin,addBook,getAllBooks,updateBook,deleteBook,getBook}
