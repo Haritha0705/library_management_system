@@ -161,7 +161,6 @@ const deleteBook = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-
 //API -  Get in Book by id
 const getBook = async (req: CustomRequest, res: Response): Promise<void> => {
     try {

@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add labrarien in get member in id  members route">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add labrarien in get book in id">
       <change beforePath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/memberRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/memberRoutes.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +99,7 @@
       <workItem from="1750863495360" duration="11143000" />
       <workItem from="1750909568988" duration="2895000" />
       <workItem from="1750912982228" duration="36000" />
-      <workItem from="1750914563322" duration="4793000" />
+      <workItem from="1750914563322" duration="5101000" />
     </task>
     <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
       <option name="closed" value="true" />
@@ -470,7 +469,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750918850785</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="add labrarien in get book in id">
+      <option name="closed" value="true" />
+      <created>1750919658263</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1750919658263</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -488,7 +495,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="member login api done" />
     <MESSAGE value="member logout api done" />
     <MESSAGE value="add authMember" />
     <MESSAGE value="done api authMember" />
@@ -513,6 +519,7 @@
     <MESSAGE value="fix libarin api bug fix" />
     <MESSAGE value="add labrarien in get all members route" />
     <MESSAGE value="add labrarien in get member in id  members route" />
-    <option name="LAST_COMMIT_MESSAGE" value="add labrarien in get member in id  members route" />
+    <MESSAGE value="add labrarien in get book in id" />
+    <option name="LAST_COMMIT_MESSAGE" value="add labrarien in get book in id" />
   </component>
 </project>
