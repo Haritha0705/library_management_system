@@ -87,7 +87,6 @@ const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
 
 interface CustomRequest extends Request {
     body: {
-        id?:string;
         title?: string;
         author?: string;
         isbn?: string;
@@ -103,24 +102,24 @@ interface CustomRequest extends Request {
 //API - Update Book
 const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
     try {
-        const { id } = req.params;
+        const lId = req.params.id;
         const {title, author, isbn, category, description, publisher, publishYear, quantity, available} = req.body;
 
         // Check if memberId is provided
-        if (!id){
+        if (!lId){
             res.status(400).json({success: false, message: "Book isbn is required",});
             return
         }
 
         // Check if isbn is a valid MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(id))
+        if (!mongoose.Types.ObjectId.isValid(lId))
         {res.status(400).json({success: false, message: "Invalid isbn format",});
             return
         }
 
         // Update book data
         const updatedBook = await bookModel.findByIdAndUpdate(
-            id,
+            lId,
             { title, author,isbn, category, description, publisher, publishYear, quantity, available },
             { new: true }
         )
@@ -142,13 +141,13 @@ const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
 //API - Delete Book
 const deleteBook = async (req: Request, res: Response):Promise<any> =>{
     try {
-        const { id } = req.params;
+        const lId = req.params.id;
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
+        if (!mongoose.Types.ObjectId.isValid(lId)) {
             return res.status(400).json({ success: false, message: "Invalid book ID" });
         }
 
-        const deleted = await bookModel.findByIdAndDelete(id);
+        const deleted = await bookModel.findByIdAndDelete(lId);
 
         if (!deleted) {
             return res.status(404).json({ success: false, message: "Book not found" });
