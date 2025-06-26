@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="done in api update-book by id in params">
-      <change afterPath="$PROJECT_DIR$/src/models/collectinosModel.mts" afterDir="false" />
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="fix libarin api bug fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/memberControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/memberControllers.mts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/memberRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/memberRoutes.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/librarianControllers.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/librarianRoutes.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +100,7 @@
       <workItem from="1750863495360" duration="11143000" />
       <workItem from="1750909568988" duration="2895000" />
       <workItem from="1750912982228" duration="36000" />
-      <workItem from="1750914563322" duration="3113000" />
+      <workItem from="1750914563322" duration="3847000" />
     </task>
     <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
       <option name="closed" value="true" />
@@ -439,7 +438,23 @@
       <option name="project" value="LOCAL" />
       <updated>1750912914829</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="done in update-book api and delete book api bug fix">
+      <option name="closed" value="true" />
+      <created>1750917881954</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1750917881954</updated>
+    </task>
+    <task id="LOCAL-00044" summary="fix libarin api bug fix">
+      <option name="closed" value="true" />
+      <created>1750918119052</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1750918119052</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,8 +472,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create back end folder stcture" />
-    <MESSAGE value="add role of users" />
     <MESSAGE value="create member model in testing" />
     <MESSAGE value="member register api done" />
     <MESSAGE value="member login api done" />
@@ -482,6 +495,8 @@
     <MESSAGE value="done in api update-book by id" />
     <MESSAGE value="done in api delete-book by id" />
     <MESSAGE value="done in api update-book by id in params" />
-    <option name="LAST_COMMIT_MESSAGE" value="done in api update-book by id in params" />
+    <MESSAGE value="done in update-book api and delete book api bug fix" />
+    <MESSAGE value="fix libarin api bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix libarin api bug fix" />
   </component>
 </project>
