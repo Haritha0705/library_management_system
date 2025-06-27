@@ -13,7 +13,7 @@ import {getProfile} from "../controllers/memberControllers.mjs";
 
 const librarianRouter = Router();
 
-//Login Route
+//Auth Routes
 librarianRouter.post("/login",librarianLogin)
 
 //Book Routes

@@ -11,10 +11,12 @@ import {getBook} from "../controllers/librarianControllers.mjs";
 
 const memberRouter = Router();
 
+//Auth Routes
 memberRouter.post("/register", registerMember);
 memberRouter.post("/login", loginMember);
 memberRouter.post("/logout", logoutMember);
 
+//Member Routes
 memberRouter.get("/get-profile/:id",authMember,getProfile)
 memberRouter.put("/update-profile/:id",authMember,updateProfile)
 
