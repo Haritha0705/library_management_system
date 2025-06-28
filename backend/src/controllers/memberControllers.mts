@@ -266,7 +266,7 @@ const bookReturn = async (req: Request, res: Response): Promise<void> => {
         issue.status = "returned";
         issue.returnDate = new Date();
 
-        await issue.save(); //make sure this is awaited
+        await issue.save();
 
         if (issue.status === "returned"){
             res.status(400).json({ success: false, message: "Book already returned" });
@@ -290,4 +290,20 @@ const bookReturn = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookIssue,bookReturn};
+//API - Book Issue
+const issueBooks = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const issuedBooks = await issueModel.find({status:"issued"})
+            .populate("bookId")
+            .populate("memberId")
+            .populate("issuedBy");
+
+        res.status(200).json({success: true, message: "Book issued successfully.", count:issuedBooks.length,issuedBooks});
+
+    } catch (error: any) {
+        console.error("Issue error:", error);
+        res.status(500).json({success: false, message: "Something went wrong.", error: error.message,});
+    }
+};
+
+export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookIssue,bookReturn,issueBooks};

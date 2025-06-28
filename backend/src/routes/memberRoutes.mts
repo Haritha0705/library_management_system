@@ -1,7 +1,7 @@
 import {Router} from "express";
 import {
     bookIssue, bookReturn,
-    getProfile,
+    getProfile, issueBooks,
     loginMember,
     logoutMember,
     registerMember,
@@ -27,6 +27,8 @@ memberRouter.get("/get-book/:id",authMember,getBook)
 //Issue/Return book
 memberRouter.post("/book-issue",authMember,bookIssue)
 memberRouter.post("/book-return/:id",authMember,bookReturn)
+memberRouter.get("/issued-books",authMember,issueBooks)
+
 
 export default memberRouter;
 
