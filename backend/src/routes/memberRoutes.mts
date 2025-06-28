@@ -1,5 +1,6 @@
 import {Router} from "express";
 import {
+    bookIssue,
     getProfile,
     loginMember,
     logoutMember,
@@ -22,6 +23,9 @@ memberRouter.put("/update-profile/:id",authMember,updateProfile)
 
 //Book Route
 memberRouter.get("/get-book/:id",authMember,getBook)
+
+//Issue book
+memberRouter.post("/book-issue",authMember,bookIssue)
 
 export default memberRouter;
 

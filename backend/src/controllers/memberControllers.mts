@@ -6,6 +6,7 @@ import memberModel from "../models/memberModel.mjs";
 import * as mongoose from "mongoose";
 import bookModel from "../models/bookModel.mjs";
 import issueModel from "../models/issueModel.mjs";
+import librarianModel from "../models/librarianModel.mjs";
 
 // Extend Request type to include `memberId`
 interface CustomRequest extends Request {
@@ -186,75 +187,63 @@ const updateProfile = async (req: CustomRequest, res: Response): Promise<void> =
     }
 }
 
-// Custom Request Interface
-// interface CustomRequest extends Request {
-//     body: {
-//         bId?: string;
-//         mId?: string;
-//         issuedBy?: string;
-//         dueDate?: string;
-//     };
-// }
+//API - Book Issue
+const bookIssue = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { bookId, memberId, issuedBy, dueDate } = req.body;
 
-// API - Book Issue
-// const bookIssue = async (req: Request, res: Response): Promise<void> => {
-//     try {
-//         const { bId, mId, issuedBy, dueDate } = req.body;
-//
-//         // Validate required fields
-//         if (!bId || !mId || !issuedBy || !dueDate) {
-//             res.status(400).json({
-//                 success: false,
-//                 message: "All fields (bId, mId, issuedBy, dueDate) are required.",
-//             });
-//             return;
-//         }
-//
-//         // Check if book exists
-//         const book = await bookModel.findById(bId);
-//         if (!book) {
-//             res.status(404).json({ success: false, message: "Book not found." });
-//             return;
-//         }
-//
-//         // Check if member exists
-//         const member = await memberModel.findById(mId);
-//         if (!member) {
-//             res.status(404).json({ success: false, message: "Member not found." });
-//             return;
-//         }
-//
-//         // Check if issuer exists
-//         const issuer = await memberModel.findById(issuedBy); // Assumes issuer is also in member collection
-//         if (!issuer) {
-//             res.status(404).json({ success: false, message: "Issuer not found." });
-//             return;
-//         }
-//
-//         // Create and save issue document
-//         const newIssue = new issueModel({
-//             bId,
-//             mId,
-//             issuedBy,
-//             dueDate: new Date(dueDate),
-//         });
-//
-//         await newIssue.save();
-//
-//         res.status(201).json({
-//             success: true,
-//             message: "Book issued successfully.",
-//             data: newIssue,
-//         });
-//     } catch (error: any) {
-//         console.error("Issue error:", error);
-//         res.status(500).json({
-//             success: false,
-//             message: "Something went wrong.",
-//             error: error.message,
-//         });
-//     }
-// };
+        // Validate input
+        if (!bookId || !memberId || !issuedBy || !dueDate) {
+            res.status(400).json({ success: false, message: "All fields are required." });
+            return;
+        }
+
+        // Find Book
+        const book = await bookModel.findById(bookId);
+        if (!book) {
+            res.status(404).json({ success: false, message: "Book not found." });
+            return;
+        }
+
+        if (book.available < 1){
+            res.status(400).json({ success: false, message: "Book not available" });
+            return;
+        }
+
+        // Check Member
+        const member = await memberModel.findById(memberId);
+        if (!member) {
+            res.status(404).json({ success: false, message: "Member not found." });
+            return;
+        }
+
+        // Check Librarian (issuedBy)
+        const librarian = await librarianModel.findById(issuedBy);
+        if (!librarian) {
+            res.status(404).json({ success: false, message: "Librarian not found" });
+            return;
+        }
+
+        // Create issue record
+        const issueRecord = new issueModel({
+            bookId,
+            memberId,
+            issuedBy,
+            dueDate,
+        });
+
+        await issueRecord.save();
+
+        book.available-=1;
+        await book.save()
+
+        res.status(201).json({success: true, message: "Book issued successfully.", issue: issueRecord,});
+
+    } catch (error: any) {
+        console.error("Issue error:", error);
+        res.status(500).json({success: false, message: "Something went wrong.", error: error.message,});
+    }
+};
 
 
-export {registerMember,loginMember,logoutMember,getProfile,updateProfile};
+export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookIssue};

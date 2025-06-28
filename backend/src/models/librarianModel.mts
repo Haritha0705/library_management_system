@@ -6,7 +6,7 @@ const librarianSchema = new mongoose.Schema({
     password: { type: String, required: true },
     phone: { type: String },
     address: { type: String },
-    assignedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Member" }, // admin who created the librarian
+    assignedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Member" },
     joinedDate: { type: Date, default: Date.now }
 }, { timestamps: true });
 
