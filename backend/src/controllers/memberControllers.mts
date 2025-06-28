@@ -245,5 +245,49 @@ const bookIssue = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
+//API - Book Return
+const bookReturn = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const issueId = req.params.id;
 
-export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookIssue};
+        if (!issueId) {
+            res.status(400).json({ success: false, message: "Issue ID is required" });
+            return;
+        }
+
+        //Find the issue
+        const issue = await issueModel.findById(issueId)
+        if (!issue){
+            res.status(404).json({ success: false, message: "Issue not found" });
+            return;
+        }
+
+        // Update status and returnDate
+        issue.status = "returned";
+        issue.returnDate = new Date();
+
+        await issue.save(); //make sure this is awaited
+
+        if (issue.status === "returned"){
+            res.status(400).json({ success: false, message: "Book already returned" });
+            return;
+        }
+
+        const book = await bookModel.findById(issue.bookId)
+        if (book){
+            if (book.quantity > book.available){
+                book.available+=1
+                await book.save()
+            }
+        }
+
+
+        res.status(200).json({success: true, message: "Book return successfully.", issue: issue,});
+
+    } catch (error: any) {
+        console.error("Issue error:", error);
+        res.status(500).json({success: false, message: "Something went wrong.", error: error.message,});
+    }
+};
+
+export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookIssue,bookReturn};
