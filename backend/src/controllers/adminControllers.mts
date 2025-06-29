@@ -4,6 +4,7 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import librarianModel from "../models/librarianModel.mjs";
 import memberModel from "../models/memberModel.mjs";
+import {v2 as cloudinary} from "cloudinary"
 
 //API - Admin login
 const loginAdmin = async (req: Request, res: Response):Promise<any> =>{
@@ -27,8 +28,15 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
     try {
         const {name,email,password,phone,address} = req.body;
 
+        // Check if file exists first
+        if (!req.file) {
+            return res.status(400).json({ success: false, message: "Image file is required" });
+        }
+
+        const imageFile = req.file;
+
         //chacking all data add
-        if (!name || !email || !password || !phone || !address){
+        if (!name || !email || !password || !phone || !address ){
             return  res.status(400).json({success: false, message: "Missing Details!"});
         }
 
@@ -46,9 +54,14 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
         const salt =  await bcrypt.genSalt(10)
         const hashPassword = await bcrypt.hash(password,salt)
 
+        //upload image upload cloudinary
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path,{resource_type:"image"})
+        const imageUrl = imageUpload.secure_url
+
         const librarianData = {
             name,
             email,
+            image:imageUrl,
             password:hashPassword,
             phone,
             address,
@@ -56,7 +69,7 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
         }
 
         const newLibrarian = new librarianModel(librarianData)
-        newLibrarian.save()
+        await newLibrarian.save()
 
         return  res.status(400).json({success: true, message: "Add Librarian"});
 

@@ -4,6 +4,7 @@ const librarianSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
+    image: { type: String, required: true },
     phone: { type: String },
     address: { type: String },
     assignedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Member" },

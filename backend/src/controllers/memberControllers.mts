@@ -4,6 +4,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import memberModel from "../models/memberModel.mjs";
 import * as mongoose from "mongoose";
+import {v2 as cloudinary} from "cloudinary"
 import bookModel from "../models/bookModel.mjs";
 import issueModel from "../models/issueModel.mjs";
 import librarianModel from "../models/librarianModel.mjs";
@@ -143,6 +144,7 @@ interface CustomRequest extends Request {
         name?: string;
         age?: string;
         phone?: string;
+        image?:string;
         dob?: string;
         gender?: string;
     };
@@ -152,7 +154,8 @@ interface CustomRequest extends Request {
 const updateProfile = async (req: CustomRequest, res: Response): Promise<void> => {
     try {
         const mId = req.params.id;
-        const { name, age, phone, dob, gender } = req.body;
+        const { name, age, phone, dob, gender,image } = req.body;
+        const imageFile = req.file
 
         // Check if memberId is provided
         if (!mId) {
@@ -169,13 +172,21 @@ const updateProfile = async (req: CustomRequest, res: Response): Promise<void> =
         // Update member data
         const updatedMember = await memberModel.findByIdAndUpdate(
             mId,
-            { name, age, phone, dob, gender },
+            { name, age, phone, dob, gender,image },
             { new: true }
         );
 
         // If no member was found
         if (!updatedMember) {res.status(404).json({success: false, message: "Member not found",});
             return;
+        }
+
+        if (imageFile){
+            //upload ige to coudnary
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path,{resource_type:'image'})
+            const imageURL = imageUpload.secure_url
+
+            const imageUpdate = await memberModel.findByIdAndUpdate(mId,{image:imageURL},{ new: true })
         }
 
         // Success

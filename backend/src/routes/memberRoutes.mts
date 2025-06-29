@@ -9,6 +9,7 @@ import {
 } from "../controllers/memberControllers.mjs";
 import authMember from "../middlewares/authUser.mjs";
 import {getBook} from "../controllers/librarianControllers.mjs";
+import upload from "../middlewares/multer.mjs";
 
 const memberRouter = Router();
 
@@ -19,7 +20,7 @@ memberRouter.post("/logout", logoutMember);
 
 //Member Routes
 memberRouter.get("/get-profile/:id",authMember,getProfile)
-memberRouter.put("/update-profile/:id",authMember,updateProfile)
+memberRouter.put("/update-profile/:id",authMember,upload.single('image'),updateProfile)
 
 //Book Route
 memberRouter.get("/get-book/:id",authMember,getBook)
