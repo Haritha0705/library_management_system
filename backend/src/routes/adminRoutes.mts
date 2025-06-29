@@ -7,6 +7,7 @@ import {
     loginAdmin
 } from "../controllers/adminControllers.mjs";
 import authAdmin from "../middlewares/authAdmin.mjs";
+import upload from "../middlewares/multer.mjs";
 
 const adminRouter = Router();
 
@@ -17,7 +18,7 @@ adminRouter.post("/login",loginAdmin)
 adminRouter.get("/get-allMembers",authAdmin,getAllMemers)
 
 //Librarian Routes
-adminRouter.post("/add-librarian",authAdmin,addLibrarian)
+adminRouter.post("/add-librarian",authAdmin,upload.single('image'),addLibrarian)
 adminRouter.get("/get-allLibrarian",authAdmin,getAllLibrarian)
 adminRouter.delete("/delete-librarian",authAdmin,deleteLibrarian)
 

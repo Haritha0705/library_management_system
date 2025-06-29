@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add new api in overduebooks">
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add proer comet and add siome edits in backend">
+      <change afterPath="$PROJECT_DIR$/src/config/cloudinary.mts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/middlewares/multer.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/memberControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/memberControllers.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,15 +109,7 @@
       <workItem from="1750948770995" duration="765000" />
       <workItem from="1751013376086" duration="5594000" />
       <workItem from="1751123073998" duration="7793000" />
-      <workItem from="1751203495686" duration="4550000" />
-    </task>
-    <task id="LOCAL-00004" summary="add new files in route folder">
-      <option name="closed" value="true" />
-      <created>1750256095511</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1750256095511</updated>
+      <workItem from="1751203495686" duration="6355000" />
     </task>
     <task id="LOCAL-00005" summary="add app.ts">
       <option name="closed" value="true" />
@@ -497,7 +495,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751207523852</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="add proer comet and add siome edits in backend">
+      <option name="closed" value="true" />
+      <created>1751208767414</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1751208767414</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,7 +521,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add book model" />
     <MESSAGE value="add user model" />
     <MESSAGE value="fix bug and re create member , and librariyen collections" />
     <MESSAGE value="add new file add and new chages" />
@@ -540,6 +545,7 @@
     <MESSAGE value="done book return api" />
     <MESSAGE value="done get all issued book api" />
     <MESSAGE value="add new api in overduebooks" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new api in overduebooks" />
+    <MESSAGE value="add proer comet and add siome edits in backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="add proer comet and add siome edits in backend" />
   </component>
 </project>

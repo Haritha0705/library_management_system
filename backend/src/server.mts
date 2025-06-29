@@ -1,9 +1,10 @@
 import express from "express";
 import "dotenv/config"
-import connectDB from "./config/db.mjs";
 import memberRouter from "./routes/memberRoutes.mjs";
 import adminRouter from "./routes/adminRoutes.mjs";
 import librarianRouter from "./routes/librarianRoutes.mjs";
+import connectDB from "./config/db.mjs";
+import connectCloudinary from "./config/cloudinary.mjs";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,11 +16,18 @@ app.use("/api/v1/librarian",librarianRouter);
 app.use("/api/v1/member",memberRouter);
 
 // Start server
-connectDB().then(()=>{
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-}).catch((e)=>{
-    console.log(e)
-})
+const startServer = async () => {
+    try {
+        await connectDB();
+        await connectCloudinary();
 
+        app.listen(PORT, () => {
+            console.log(`Server running on http://localhost:${PORT}`);
+        });
+    } catch (error) {
+        console.error("Failed to start server:", error);
+        process.exit(1); // Exit process if startup fails
+    }
+};
+
+startServer();
