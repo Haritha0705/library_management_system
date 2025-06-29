@@ -24,11 +24,10 @@ memberRouter.put("/update-profile/:id",authMember,updateProfile)
 //Book Route
 memberRouter.get("/get-book/:id",authMember,getBook)
 
-//Issue/Return book
+//Issue/Return/Overdue book
 memberRouter.post("/book-issue",authMember,bookIssue)
 memberRouter.post("/book-return/:id",authMember,bookReturn)
 memberRouter.get("/issued-books",authMember,issueBooks)
-
 memberRouter.get("/borrowed-books",authMember,overdueBooks)
 
 

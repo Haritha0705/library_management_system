@@ -305,7 +305,7 @@ const issueBooks = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-//API - Book overdue
+//API - Overdue Books
 const overdueBooks = async (req: Request, res: Response): Promise<void> => {
     try {
         const today = new Date();
