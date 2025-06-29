@@ -281,7 +281,6 @@ const bookReturn = async (req: Request, res: Response): Promise<void> => {
             }
         }
 
-
         res.status(200).json({success: true, message: "Book return successfully.", issue: issue,});
 
     } catch (error: any) {
@@ -306,4 +305,32 @@ const issueBooks = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookIssue,bookReturn,issueBooks};
+//API - Book overdue
+const overdueBooks = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const today = new Date();
+        //Find the issue
+        const issueBooks = await issueModel.find({status:"issued"})
+
+        const updateOverDueBook = []
+
+        for (const book of issueBooks){
+            if (book.dueDate < today){
+                book.status = "overdue"
+                book.returnDate = new Date();
+                await book.save()
+                updateOverDueBook.push(book)
+            }
+        }
+
+        const overdueList = await issueModel.find({status:"overdue"})
+
+        res.status(200).json({success: true, message: "Overdue books updated and fetched successfully.", count: overdueList.length, overdueBooks: overdueList,});
+
+    } catch (error: any) {
+        console.error("Issue error:", error);
+        res.status(500).json({success: false, message: "Something went wrong.", error: error.message});
+    }
+}
+
+export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookIssue,bookReturn,issueBooks,overdueBooks};

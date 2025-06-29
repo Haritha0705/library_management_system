@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="add member route in get book in id">
+    <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/memberControllers.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/memberControllers.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/memberRoutes.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/memberRoutes.mts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,23 +103,8 @@
       <workItem from="1750914563322" duration="5360000" />
       <workItem from="1750948770995" duration="765000" />
       <workItem from="1751013376086" duration="5594000" />
-      <workItem from="1751123073998" duration="621000" />
-    </task>
-    <task id="LOCAL-00001" summary="set up nodejs add nodem and typesript">
-      <option name="closed" value="true" />
-      <created>1750179402578</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1750179402578</updated>
-    </task>
-    <task id="LOCAL-00002" summary="add .env file and setup">
-      <option name="closed" value="true" />
-      <created>1750221494315</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1750221494315</updated>
+      <workItem from="1751123073998" duration="7793000" />
+      <workItem from="1751203495686" duration="3848000" />
     </task>
     <task id="LOCAL-00003" summary="add backend folder stature">
       <option name="closed" value="true" />
@@ -487,7 +474,31 @@
       <option name="project" value="LOCAL" />
       <updated>1750919860882</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="done book issue api">
+      <option name="closed" value="true" />
+      <created>1751127981729</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1751127981729</updated>
+    </task>
+    <task id="LOCAL-00050" summary="done book return api">
+      <option name="closed" value="true" />
+      <created>1751130551216</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1751130551216</updated>
+    </task>
+    <task id="LOCAL-00051" summary="done get all issued book api">
+      <option name="closed" value="true" />
+      <created>1751131379331</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1751131379331</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,9 +516,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add authMember" />
-    <MESSAGE value="done api authMember" />
-    <MESSAGE value="done api updateMemberProfile" />
     <MESSAGE value="add member model" />
     <MESSAGE value="add book model" />
     <MESSAGE value="add user model" />
@@ -530,6 +538,9 @@
     <MESSAGE value="add labrarien in get member in id  members route" />
     <MESSAGE value="add labrarien in get book in id" />
     <MESSAGE value="add member route in get book in id" />
-    <option name="LAST_COMMIT_MESSAGE" value="add member route in get book in id" />
+    <MESSAGE value="done book issue api" />
+    <MESSAGE value="done book return api" />
+    <MESSAGE value="done get all issued book api" />
+    <option name="LAST_COMMIT_MESSAGE" value="done get all issued book api" />
   </component>
 </project>

@@ -3,7 +3,7 @@ import {
     bookIssue, bookReturn,
     getProfile, issueBooks,
     loginMember,
-    logoutMember,
+    logoutMember, overdueBooks,
     registerMember,
     updateProfile
 } from "../controllers/memberControllers.mjs";
@@ -28,6 +28,8 @@ memberRouter.get("/get-book/:id",authMember,getBook)
 memberRouter.post("/book-issue",authMember,bookIssue)
 memberRouter.post("/book-return/:id",authMember,bookReturn)
 memberRouter.get("/issued-books",authMember,issueBooks)
+
+memberRouter.get("/borrowed-books",authMember,overdueBooks)
 
 
 export default memberRouter;
