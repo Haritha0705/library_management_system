@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {assets} from "../assets/assets.ts";
 import {NavLink, useNavigate} from "react-router-dom";
-import {Hamburger, HamburgerIcon, Heart, Menu, ShoppingBag, SidebarClose, X} from "lucide-react";
+import { Heart, Menu, ShoppingBag, X } from "lucide-react";
 
 const NavBar:React.FC = () => {
 
     const [showMenu,setShowMenu] = useState(false)
-    const [token,setToken] = useState(false)
+    const [token,setToken] = useState(true)
     const navigate = useNavigate();
 
 
@@ -68,8 +68,8 @@ const NavBar:React.FC = () => {
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/books"}><p className={"px-4 py-2 rounded-full inline-block"}>All Books</p></NavLink>
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/about"}><p className={"px-4 py-2 rounded-full inline-block"}>About</p></NavLink>
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/contact"}><p className={"px-4 py-2 rounded-full inline-block"}>Contact</p></NavLink>
-                                <NavLink  onClick={()=>setShowMenu(false)} to={"/contact"}><p className={"px-4 py-2 rounded-full inline-block"}>Favourite</p></NavLink>
-                                <NavLink  onClick={()=>setShowMenu(false)} to={"/contact"}><p className={"px-4 py-2 rounded-full inline-block"}>Cart</p></NavLink>
+                                <NavLink  onClick={()=>setShowMenu(false)} to={"/favourite"}><p className={"px-4 py-2 rounded-full inline-block"}>Favourite</p></NavLink>
+                                <NavLink  onClick={()=>setShowMenu(false)} to={"/cart"}><p className={"px-4 py-2 rounded-full inline-block"}>Cart</p></NavLink>
                             </ul>
                             <button className={"bg-primary text-white py-2 px-4 rounded-full font-light"}
                                     onClick={()=>navigate("/logout")}>Logout
@@ -91,7 +91,6 @@ const NavBar:React.FC = () => {
                                 </button>
                             </div>
                 }
-
             </div>
         </div>
     )
