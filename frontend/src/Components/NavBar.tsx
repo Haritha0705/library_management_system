@@ -2,7 +2,7 @@ import React from 'react';
 
 const NavBar:React.FC = () => {
     return(
-        <div>
+        <div className={"w-full fixed top-0 left-0 right-0"}>
 
         </div>
     )
