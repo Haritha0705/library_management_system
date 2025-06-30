@@ -11,7 +11,7 @@ const NavBar:React.FC = () => {
 
 
     return(
-        <div className={"flex w-full fixed top-0 left-0 right-0 px-2 py-4 items-center justify-between"}>
+        <div className={"flex mb-5 py-4 items-center justify-between border-b border-b-gray-400"}>
             <div className={"flex gap-2"}>
                 <img onClick={()=>navigate("/")} src={assets.logo} className={"w-8 cursor-pointer"} alt={"logo"}/>
                 <p className={"text-primary font-semibold text-xl"}>Booklett</p>
