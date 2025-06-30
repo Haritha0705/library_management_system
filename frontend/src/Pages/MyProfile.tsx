@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Profile:React.FC = () => {
+const MyProfile:React.FC = () => {
     return(
         <>
         </>
     )
 }
 
-export default Profile;
+export default MyProfile;

@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Book:React.FC = () => {
+const MyOrder:React.FC = () => {
     return (
         <div>
-            
+
         </div>
     );
 };
 
-export default Book;
+export default MyOrder;

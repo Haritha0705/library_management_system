@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
-import Profile from "./Pages/Profile";
+import MyProfile from "./Pages/MyProfile.tsx";
 import React from "react";
 
 const App: React.FC = () => {
@@ -8,7 +8,7 @@ const App: React.FC = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={<MyProfile />} />
             </Routes>
         </Router>
     );
