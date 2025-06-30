@@ -15,8 +15,9 @@ import Thrill from "./Thrill icon.svg"
 import Poetry from "./Poetry icon.svg"
 import profilePic from "./profileImg.png"
 import coverImg from "./mainCover.jpg"
+import logo from "./Combo shape.svg"
 
-export const assets = {book1, book2, book3, book4, book5, book6, book7, book8, book9, profilePic, coverImg,Astronaut,Fiction,History,Non_Fiction,Poetry,Thrill}
+export const assets = {book1, book2, book3, book4, book5, book6, book7, book8, book9, profilePic, coverImg,Astronaut,Fiction,History,Non_Fiction,Poetry,Thrill,logo}
 
 export const CategoryData = [
     {
