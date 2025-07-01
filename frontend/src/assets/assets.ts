@@ -37,7 +37,7 @@ export const CategoryData = [
     },
     {
         category:'History',
-        image:history
+        image:History
     },
     {
         category:'Thrill',
