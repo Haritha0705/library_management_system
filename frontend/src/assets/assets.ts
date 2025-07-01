@@ -53,7 +53,7 @@ export const books = [
     {
         _id: 'b1',
         name: 'Dreams Lie Beneath',
-        image: 'https://m.media-amazon.com/images/I/81P59xfsJrL._SL1500_.jpg',
+        image: book1,
         category: 'Fiction',
         author: 'Rebecca Ross',
         des: 'A magical tale about vengeance and secrets under the surface.',
@@ -62,7 +62,7 @@ export const books = [
     {
         _id: 'b2',
         name: 'The Dragon’s Promise',
-        image: 'https://m.media-amazon.com/images/I/91FdyR5pGyL._SL1500_.jpg',
+        image: book9,
         category: 'Fantasy',
         author: 'Elizabeth Lim',
         des: 'A journey through kingdoms and mythical lands to fulfill a vow.',
@@ -71,7 +71,7 @@ export const books = [
     {
         _id: 'b3',
         name: 'Packing for Mars',
-        image: 'https://m.media-amazon.com/images/I/71-L-pCxQOL._SL1200_.jpg',
+        image: book3,
         category: 'Science',
         author: 'Mary Roach',
         des: 'Funny, strange, and informative stories about space travel.',
@@ -79,8 +79,8 @@ export const books = [
     },
     {
         _id: 'b4',
-        name: 'A People’s History of the United States',
-        image: 'https://m.media-amazon.com/images/I/81qjZ8oAp7L._SL1500_.jpg',
+        name: 'A People’s History',
+        image: book4,
         category: 'History',
         author: 'Howard Zinn',
         des: 'A bold retelling of American history from the bottom up.',
@@ -89,7 +89,7 @@ export const books = [
     {
         _id: 'b5',
         name: 'The Silent Patient',
-        image: 'https://m.media-amazon.com/images/I/71RpsEp2JIL._SL1500_.jpg',
+        image: book5,
         category: 'Thriller',
         author: 'Alex Michaelides',
         des: 'A woman’s shocking act of violence and the therapist obsessed with uncovering her motive.',
@@ -98,7 +98,7 @@ export const books = [
     {
         _id: 'b6',
         name: 'Verity',
-        image: 'https://m.media-amazon.com/images/I/81M7VQ8GNGL._SL1500_.jpg',
+        image: book6,
         category: 'Thriller',
         author: 'Colleen Hoover',
         des: 'A chilling psychological suspense filled with twists.',
@@ -107,7 +107,7 @@ export const books = [
     {
         _id: 'b7',
         name: 'Atomic Habits',
-        image: 'https://m.media-amazon.com/images/I/91bYsX41DVL._SL1500_.jpg',
+        image: book7,
         category: 'Self-Help',
         author: 'James Clear',
         des: 'An easy and proven way to build good habits and break bad ones.',
@@ -116,7 +116,7 @@ export const books = [
     {
         _id: 'b8',
         name: 'Milk and Honey',
-        image: 'https://m.media-amazon.com/images/I/71sBtM3Yi5L._SL1500_.jpg',
+        image: book4,
         category: 'Poetry',
         author: 'Rupi Kaur',
         des: 'A collection of poetry about love, loss, trauma, and healing.',
@@ -125,7 +125,7 @@ export const books = [
     {
         _id: 'b9',
         name: 'The Sun and Her Flowers',
-        image: 'https://m.media-amazon.com/images/I/71XtDks1HML._SL1500_.jpg',
+        image: book9,
         category: 'Poetry',
         author: 'Rupi Kaur',
         des: 'A vibrant and transcendent journey about growth and self-love.',
@@ -134,7 +134,7 @@ export const books = [
     {
         _id: 'b10',
         name: 'Pride and Prejudice',
-        image: 'https://m.media-amazon.com/images/I/91HHqVTAJQL._SL1500_.jpg',
+        image: book1,
         category: 'Romance',
         author: 'Jane Austen',
         des: 'A classic love story between Elizabeth Bennet and Mr. Darcy.',
@@ -143,7 +143,7 @@ export const books = [
     {
         _id: 'b11',
         name: 'The Notebook',
-        image: 'https://m.media-amazon.com/images/I/81ozPB+U7KL._SL1500_.jpg',
+        image: book2,
         category: 'Romance',
         author: 'Nicholas Sparks',
         des: 'A timeless romance that touches the heart.',
@@ -152,7 +152,7 @@ export const books = [
     {
         _id: 'b12',
         name: 'Sapiens: A Brief History of Humankind',
-        image: 'https://m.media-amazon.com/images/I/713jIoMO3UL._SL1200_.jpg',
+        image: book3,
         category: 'Non-Fiction',
         author: 'Yuval Noah Harari',
         des: 'An insightful look at the evolution of human beings.',
@@ -161,7 +161,7 @@ export const books = [
     {
         _id: 'b13',
         name: 'Educated',
-        image: 'https://m.media-amazon.com/images/I/81WojUxbbFL._SL1500_.jpg',
+        image: book4,
         category: 'Biography',
         author: 'Tara Westover',
         des: 'A powerful memoir about a woman who escapes her survivalist family.',
@@ -170,7 +170,7 @@ export const books = [
     {
         _id: 'b14',
         name: 'Becoming',
-        image: 'https://m.media-amazon.com/images/I/81h2gWPTYJL._SL1500_.jpg',
+        image: book5,
         category: 'Biography',
         author: 'Michelle Obama',
         des: 'An intimate, powerful, and inspiring memoir.',
@@ -179,7 +179,7 @@ export const books = [
     {
         _id: 'b15',
         name: 'The Martian',
-        image: 'https://m.media-amazon.com/images/I/81LBkTjKoaL._SL1500_.jpg',
+        image:book6,
         category: 'Science Fiction',
         author: 'Andy Weir',
         des: 'A stranded astronaut’s gripping fight for survival on Mars.',
@@ -188,7 +188,7 @@ export const books = [
     {
         _id: 'b16',
         name: 'Dune',
-        image: 'https://m.media-amazon.com/images/I/91N3lD++S3L._SL1500_.jpg',
+        image: book7,
         category: 'Science Fiction',
         author: 'Frank Herbert',
         des: 'A science fiction masterpiece set on the desert planet Arrakis.',
@@ -197,7 +197,7 @@ export const books = [
     {
         _id: 'b17',
         name: 'The Book Thief',
-        image: 'https://m.media-amazon.com/images/I/81MZpJ+c7qL._SL1500_.jpg',
+        image: book2,
         category: 'Historical Fiction',
         author: 'Markus Zusak',
         des: 'A story set in Nazi Germany told through the eyes of a book-loving girl.',
@@ -206,7 +206,7 @@ export const books = [
     {
         _id: 'b18',
         name: 'All the Light We Cannot See',
-        image: 'https://m.media-amazon.com/images/I/91-Tv8AaDSL._SL1500_.jpg',
+        image: book9,
         category: 'Historical Fiction',
         author: 'Anthony Doerr',
         des: 'A tale of two teenagers during World War II.',
@@ -215,7 +215,7 @@ export const books = [
     {
         _id: 'b19',
         name: 'The Subtle Art of Not Giving a F*ck',
-        image: 'https://m.media-amazon.com/images/I/71QKQ9mwV7L._SL1500_.jpg',
+        image: book1,
         category: 'Self-Help',
         author: 'Mark Manson',
         des: 'A brutally honest self-help guide that cuts through the clichés.',
@@ -224,10 +224,10 @@ export const books = [
     {
         _id: 'b20',
         name: '1984',
-        image: 'https://m.media-amazon.com/images/I/71kxa1-0mfL._SL1500_.jpg',
+        image: book2,
         category: 'Fiction',
         author: 'George Orwell',
         des: 'A dystopian novel about surveillance, control, and loss of freedom.',
         price: 50,
     }
-]
+];
