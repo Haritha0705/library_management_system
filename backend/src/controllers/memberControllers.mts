@@ -344,4 +344,48 @@ const overdueBooks = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
+//API - member get book
+const bookOder = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const {mId,bId} = req.body;
+        const bookData = await bookModel.findById(bId)
+
+        // Validate input
+        if (!mId || !bId) {
+            res.status(400).json({ message: "Member ID and Book ID are required." });
+            return;
+        }
+
+        // Find the book by ID
+        if (!bookData){
+            res.status(404).json({ message: "Book not found." });
+            return;
+        }
+
+        if (bookData.quantity <= 0 || bookData.available <= 0) {
+            res.status(400).json({ message: "Book is currently not available." });
+            return;
+        }
+
+        bookData.available -=1
+        await bookData.save()
+
+        res.status(200).json({
+            message: "Book successfully ordered.",
+            book: {
+                title: bookData.title,
+                author: bookData.author,
+                available: bookData.available,
+            },
+        });
+    }catch (e) {
+        console.error("Book order error:", e.message);
+        res.status(500).json({ message: "Internal server error." });
+    }
+
+
+
+}
+
+
 export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookIssue,bookReturn,issueBooks,overdueBooks};

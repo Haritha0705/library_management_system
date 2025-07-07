@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5b49993-b200-482f-8470-652bfbd2bdcd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/server.mts" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.mts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/TopBooks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Components/TopBooks.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Pages/Order.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Pages/Order.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +105,8 @@
       <workItem from="1751013376086" duration="5594000" />
       <workItem from="1751123073998" duration="7793000" />
       <workItem from="1751203495686" duration="10712000" />
+      <workItem from="1751379322315" duration="1404000" />
+      <workItem from="1751883680557" duration="598000" />
     </task>
     <task id="LOCAL-00007" summary="set up models">
       <option name="closed" value="true" />

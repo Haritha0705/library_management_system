@@ -1,6 +1,20 @@
-import * as mongoose from "mongoose";
+import mongoose, { Schema, Document, model } from "mongoose";
 
-const bookSchema = new mongoose.Schema({
+export interface IBook extends Document {
+    title: string;
+    author: string;
+    isbn: string;
+    category: string;
+    description: string;
+    publisher: string;
+    publishYear: number;
+    quantity: number;
+    available: number;
+    addedBy: mongoose.Types.ObjectId;
+}
+
+const bookSchema:Schema<IBook> = new mongoose.Schema(
+    {
     title:{type:String,required:true},
     author:{type:String,required:true},
     isbn:{type:String,required:true},
@@ -13,5 +27,5 @@ const bookSchema = new mongoose.Schema({
     addedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Librarian", required: true }
 },{ timestamps: true })
 
-const bookModel = mongoose.model('Book',bookSchema)
-export default bookModel
+const BookModel = model<IBook>('Book',bookSchema)
+export default BookModel

@@ -33,8 +33,6 @@ const TopBooks: React.FC = () => {
                             alt={item.name}
                             className="w-full h-96 object-cover bg-blue-50"
                         />
-
-                        {/* Heart Favorite Icon */}
                         <Heart
                             onClick={(e) => toggleFavorite(item._id, e)}
                             size={32}
