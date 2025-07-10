@@ -43,24 +43,19 @@ interface AuthenticatedRequest extends Request {
 //API - Add Book
 const addBook = async (req: AuthenticatedRequest, res: Response):Promise<any> =>{
     try {
-        const {title, author, isbn, category, description, publisher, publishYear, quantity, available} = req.body;
+        const {title, author, category, description,availableCopies} = req.body;
 
         //checking for all data to add book
-        if (!title || !author || !isbn ||  !category || !description || !publisher || !publishYear || !quantity || !available){
+        if (!title || !author ||  !category || !description || !availableCopies){
             return res.status(400).json({success:false,message:"Missing Details!"})
         }
 
         const bookData = {
             title,
             author,
-            isbn,
             category,
             description,
-            publisher,
-            publishYear,
-            quantity,
-            available,
-            addedBy: req.librarianId,
+            availableCopies
         }
         const newBook = new bookModel(bookData)
         await newBook.save()
@@ -89,13 +84,9 @@ interface CustomRequest extends Request {
     body: {
         title?: string;
         author?: string;
-        isbn?: string;
         category?: string;
         description?: string;
-        publisher?: string;
-        publishYear?: number;
-        quantity?: number;
-        available?: number;
+        availableCopies?: number;
     };
 }
 
@@ -103,7 +94,7 @@ interface CustomRequest extends Request {
 const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
     try {
         const lId = req.params.id;
-        const {title, author, isbn, category, description, publisher, publishYear, quantity, available} = req.body;
+        const {title, author, category, description, availableCopies} = req.body;
 
         // Check if memberId is provided
         if (!lId){
@@ -120,7 +111,7 @@ const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
         // Update book data
         const updatedBook = await bookModel.findByIdAndUpdate(
             lId,
-            { title, author,isbn, category, description, publisher, publishYear, quantity, available },
+            { title, author, category, description, availableCopies },
             { new: true }
         )
 
@@ -196,13 +187,5 @@ const getBook = async (req: CustomRequest, res: Response): Promise<void> => {
         return ;
     }
 };
-
-//API -
-const issueBook = async (req: CustomRequest, res: Response): Promise<void> => {
-
-}
-
-
-
 
 export {librarianLogin,addBook,getAllBooks,updateBook,deleteBook,getBook}

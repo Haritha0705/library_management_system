@@ -7,7 +7,6 @@ import * as mongoose from "mongoose";
 import {v2 as cloudinary} from "cloudinary"
 import bookModel from "../models/bookModel.mjs";
 import Issue from "../models/issueModel.mjs";
-import issueModel from "../models/issueModel.mjs";
 
 // Extend Request type to include `memberId`
 interface CustomRequest extends Request {
