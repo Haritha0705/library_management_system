@@ -6,8 +6,8 @@ import memberModel from "../models/memberModel.mjs";
 import * as mongoose from "mongoose";
 import {v2 as cloudinary} from "cloudinary"
 import bookModel from "../models/bookModel.mjs";
+import Issue from "../models/issueModel.mjs";
 import issueModel from "../models/issueModel.mjs";
-import librarianModel from "../models/librarianModel.mjs";
 
 // Extend Request type to include `memberId`
 interface CustomRequest extends Request {
@@ -198,194 +198,102 @@ const updateProfile = async (req: CustomRequest, res: Response): Promise<void> =
     }
 }
 
-//API - Book Issue
-const bookIssue = async (req: Request, res: Response): Promise<void> => {
+
+//API - Book Borrow
+const bookBorrow = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { bookId, memberId, issuedBy, dueDate } = req.body;
+        const { bId, mId } = req.params;
 
-        // Validate input
-        if (!bookId || !memberId || !issuedBy || !dueDate) {
-            res.status(400).json({ success: false, message: "All fields are required." });
+        //Check Book id is  missing
+        if (!bId || !mId){
+            res.status(400).json({success: false, message: "Book ID and  Member ID  required",});
+            return
+        }
+
+        const bookData = await bookModel.findById(bId)
+
+        if (!bookData){
+            res.status(404).json({success: false, message: "Book not found",});
             return;
         }
 
-        // Find Book
-        const book = await bookModel.findById(bookId);
-        if (!book) {
-            res.status(404).json({ success: false, message: "Book not found." });
+        if (bookData.availableCopies < 1){
+            res.status(400).json({success: false, message: "This Book Copies Not Available",});
             return;
         }
 
-        if (book.available < 1){
-            res.status(400).json({ success: false, message: "Book not available" });
-            return;
-        }
-
-        // Check Member
-        const member = await memberModel.findById(memberId);
-        if (!member) {
-            res.status(404).json({ success: false, message: "Member not found." });
-            return;
-        }
-
-        // Check Librarian (issuedBy)
-        const librarian = await librarianModel.findById(issuedBy);
-        if (!librarian) {
-            res.status(404).json({ success: false, message: "Librarian not found" });
-            return;
-        }
-
-        // Create issue record
-        const issueRecord = new issueModel({
-            bookId,
-            memberId,
-            issuedBy,
-            dueDate,
+        const newBorrow = new Issue({
+            memberId: mId,
+            bookId: bId,
+            issueDate: new Date(),
+            dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days ahead
+            status: 'issued'
         });
 
-        await issueRecord.save();
+        bookData.availableCopies-=1
+        await bookData.save()
 
-        book.available-=1;
-        await book.save()
+        await newBorrow.save()
 
-        res.status(201).json({success: true, message: "Book issued successfully.", issue: issueRecord,});
+        res.status(201).json({ success: true, message: "Book borrowed successfully", borrow: newBorrow });
 
     } catch (error: any) {
         console.error("Issue error:", error);
         res.status(500).json({success: false, message: "Something went wrong.", error: error.message,});
     }
 };
+
 
 //API - Book Return
 const bookReturn = async (req: Request, res: Response): Promise<void> => {
     try {
-        const issueId = req.params.id;
+        const { bId, mId } = req.params;
 
-        if (!issueId) {
-            res.status(400).json({ success: false, message: "Issue ID is required" });
-            return;
+        //Check Book id is  missing
+        if (!bId || !mId){
+            res.status(400).json({success: false, message: "Book ID and  Member ID  required",});
+            return
         }
 
-        //Find the issue
-        const issue = await issueModel.findById(issueId)
-        if (!issue){
-            res.status(404).json({ success: false, message: "Issue not found" });
-            return;
-        }
-
-        // Update status and returnDate
-        issue.status = "returned";
-        issue.returnDate = new Date();
-
-        await issue.save();
-
-        if (issue.status === "returned"){
-            res.status(400).json({ success: false, message: "Book already returned" });
-            return;
-        }
-
-        const book = await bookModel.findById(issue.bookId)
-        if (book){
-            if (book.quantity > book.available){
-                book.available+=1
-                await book.save()
-            }
-        }
-
-        res.status(200).json({success: true, message: "Book return successfully.", issue: issue,});
-
-    } catch (error: any) {
-        console.error("Issue error:", error);
-        res.status(500).json({success: false, message: "Something went wrong.", error: error.message,});
-    }
-};
-
-//API - Book Issue
-const issueBooks = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const issuedBooks = await issueModel.find({status:"issued"})
-            .populate("bookId")
-            .populate("memberId")
-            .populate("issuedBy");
-
-        res.status(200).json({success: true, message: "Book issued successfully.", count:issuedBooks.length,issuedBooks});
-
-    } catch (error: any) {
-        console.error("Issue error:", error);
-        res.status(500).json({success: false, message: "Something went wrong.", error: error.message,});
-    }
-};
-
-//API - Overdue Books
-const overdueBooks = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const today = new Date();
-        //Find the issue
-        const issueBooks = await issueModel.find({status:"issued"})
-
-        const updateOverDueBook = []
-
-        for (const book of issueBooks){
-            if (book.dueDate < today){
-                book.status = "overdue"
-                book.returnDate = new Date();
-                await book.save()
-                updateOverDueBook.push(book)
-            }
-        }
-
-        const overdueList = await issueModel.find({status:"overdue"})
-
-        res.status(200).json({success: true, message: "Overdue books updated and fetched successfully.", count: overdueList.length, overdueBooks: overdueList,});
-
-    } catch (error: any) {
-        console.error("Issue error:", error);
-        res.status(500).json({success: false, message: "Something went wrong.", error: error.message});
-    }
-}
-
-//API - member get book
-const bookOder = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const {mId,bId} = req.body;
         const bookData = await bookModel.findById(bId)
 
-        // Validate input
-        if (!mId || !bId) {
-            res.status(400).json({ message: "Member ID and Book ID are required." });
-            return;
-        }
-
-        // Find the book by ID
         if (!bookData){
-            res.status(404).json({ message: "Book not found." });
+            res.status(404).json({success: false, message: "Book not found",});
             return;
         }
 
-        if (bookData.quantity <= 0 || bookData.available <= 0) {
-            res.status(400).json({ message: "Book is currently not available." });
+        if (bookData.availableCopies < 1){
+            res.status(400).json({success: false, message: "This Book Copies Not Available",});
             return;
         }
 
-        bookData.available -=1
+        const issueRecord = await Issue.findOne({
+            memberId: mId,
+            bookId: bId,
+            status: 'issued'
+        })
+
+        if (!issueRecord) {
+            res.status(404).json({ success: false, message: "No active issued record found for this member and book." });
+            return;
+        }
+
+        //update book availability
+        bookData.availableCopies+=1
         await bookData.save()
 
-        res.status(200).json({
-            message: "Book successfully ordered.",
-            book: {
-                title: bookData.title,
-                author: bookData.author,
-                available: bookData.available,
-            },
-        });
-    }catch (e:any) {
-        console.error("Book order error:", e.message);
-        res.status(500).json({ message: "Internal server error." });
+        // Update the issue record
+        issueRecord.returnDate = new Date()
+        issueRecord.status = issueRecord.returnDate > issueRecord.dueDate ? "overdue" : "returned"
+        await issueRecord.save()
+
+        res.status(201).json({ success: true, message: "Book return successfully", borrow: issueRecord });
+
+    } catch (error: any) {
+        console.error("Issue error:", error);
+        res.status(500).json({success: false, message: "Something went wrong.", error: error.message,});
     }
+};
 
 
-
-}
-
-
-export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookIssue,bookReturn,issueBooks,overdueBooks};
+export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookBorrow,bookReturn};

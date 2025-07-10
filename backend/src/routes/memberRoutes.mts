@@ -1,9 +1,9 @@
 import {Router} from "express";
 import {
-    bookIssue, bookReturn,
-    getProfile, issueBooks,
+    bookBorrow, bookReturn,
+    getProfile,
     loginMember,
-    logoutMember, overdueBooks,
+    logoutMember,
     registerMember,
     updateProfile
 } from "../controllers/memberControllers.mjs";
@@ -26,11 +26,8 @@ memberRouter.put("/update-profile/:id",authMember,upload.single('image'),updateP
 memberRouter.get("/get-book/:id",authMember,getBook)
 
 //Issue/Return/Overdue book
-memberRouter.post("/book-issue",authMember,bookIssue)
-memberRouter.post("/book-return/:id",authMember,bookReturn)
-memberRouter.get("/issued-books",authMember,issueBooks)
-memberRouter.get("/borrowed-books",authMember,overdueBooks)
-
+memberRouter.post("/book/:bId/borrow/:mId",authMember,bookBorrow)
+memberRouter.post("/book/:bId/return/:mId",authMember,bookReturn)
 
 export default memberRouter;
 

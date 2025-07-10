@@ -196,4 +196,13 @@ const getBook = async (req: CustomRequest, res: Response): Promise<void> => {
         return ;
     }
 };
+
+//API -
+const issueBook = async (req: CustomRequest, res: Response): Promise<void> => {
+
+}
+
+
+
+
 export {librarianLogin,addBook,getAllBooks,updateBook,deleteBook,getBook}
