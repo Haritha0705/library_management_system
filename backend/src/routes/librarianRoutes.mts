@@ -27,4 +27,7 @@ librarianRouter.delete("/delete-book/:id",authLibrarian,deleteBook)
 librarianRouter.get("/get-allMembers",authLibrarian,getAllMemers)
 librarianRouter.get("/get-profile/:id",authLibrarian,getProfile)
 
+//get book
+
+
 export default librarianRouter;

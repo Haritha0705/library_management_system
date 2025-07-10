@@ -1,15 +1,23 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-const librarianSchema = new mongoose.Schema({
+export interface ILibrarian extends Document{
+    name: string
+    email: string
+    password: string
+    image?: string
+    phone?: string
+    address?: string
+}
+
+
+const librarianSchema = new Schema<ILibrarian>({
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    image: { type: String, required: true },
+    image: { type: String },
     phone: { type: String },
     address: { type: String },
-    assignedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Member" },
-    joinedDate: { type: Date, default: Date.now }
 }, { timestamps: true });
 
-const librarianModel = mongoose.model("Librarian", librarianSchema);
+const librarianModel = mongoose.model<ILibrarian>("Librarian", librarianSchema);
 export default librarianModel;

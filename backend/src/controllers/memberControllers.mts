@@ -378,7 +378,7 @@ const bookOder = async (req: Request, res: Response): Promise<void> => {
                 available: bookData.available,
             },
         });
-    }catch (e) {
+    }catch (e:any) {
         console.error("Book order error:", e.message);
         res.status(500).json({ message: "Internal server error." });
     }
