@@ -60,11 +60,7 @@ const Order: React.FC = () => {
                         <img
                             src={bookInfo.image}
                             alt={`Cover of ${bookInfo.name}`}
-                            className="w-full max-w-xs rounded-lg border shadow"
-                            onError={(e) => {
-                                (e.target as HTMLImageElement).src = 'https://placehold.co/300x450/dce8f3/333333?text=Book+Cover';
-                            }}
-                        />
+                            className="w-full max-w-xs rounded-lg border shadow"/>
                     </div>
 
                     {/* Details */}
