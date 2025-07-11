@@ -57,7 +57,10 @@ export const books = [
         category: 'Fiction',
         author: 'Rebecca Ross',
         des: 'A magical tale about vengeance and secrets under the surface.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
+
     },
     {
         _id: 'b2',
@@ -66,7 +69,9 @@ export const books = [
         category: 'Fantasy',
         author: 'Elizabeth Lim',
         des: 'A journey through kingdoms and mythical lands to fulfill a vow.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b3',
@@ -75,7 +80,9 @@ export const books = [
         category: 'Science',
         author: 'Mary Roach',
         des: 'Funny, strange, and informative stories about space travel.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b4',
@@ -84,7 +91,9 @@ export const books = [
         category: 'History',
         author: 'Howard Zinn',
         des: 'A bold retelling of American history from the bottom up.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b5',
@@ -93,7 +102,9 @@ export const books = [
         category: 'Thriller',
         author: 'Alex Michaelides',
         des: 'A woman’s shocking act of violence and the therapist obsessed with uncovering her motive.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b6',
@@ -102,7 +113,9 @@ export const books = [
         category: 'Thriller',
         author: 'Colleen Hoover',
         des: 'A chilling psychological suspense filled with twists.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b7',
@@ -111,7 +124,9 @@ export const books = [
         category: 'Self-Help',
         author: 'James Clear',
         des: 'An easy and proven way to build good habits and break bad ones.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b8',
@@ -120,7 +135,9 @@ export const books = [
         category: 'Poetry',
         author: 'Rupi Kaur',
         des: 'A collection of poetry about love, loss, trauma, and healing.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b9',
@@ -129,7 +146,9 @@ export const books = [
         category: 'Poetry',
         author: 'Rupi Kaur',
         des: 'A vibrant and transcendent journey about growth and self-love.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b10',
@@ -138,7 +157,9 @@ export const books = [
         category: 'Romance',
         author: 'Jane Austen',
         des: 'A classic love story between Elizabeth Bennet and Mr. Darcy.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b11',
@@ -147,7 +168,9 @@ export const books = [
         category: 'Romance',
         author: 'Nicholas Sparks',
         des: 'A timeless romance that touches the heart.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b12',
@@ -156,7 +179,9 @@ export const books = [
         category: 'Non-Fiction',
         author: 'Yuval Noah Harari',
         des: 'An insightful look at the evolution of human beings.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b13',
@@ -165,7 +190,9 @@ export const books = [
         category: 'Biography',
         author: 'Tara Westover',
         des: 'A powerful memoir about a woman who escapes her survivalist family.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b14',
@@ -174,7 +201,9 @@ export const books = [
         category: 'Biography',
         author: 'Michelle Obama',
         des: 'An intimate, powerful, and inspiring memoir.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b15',
@@ -183,7 +212,9 @@ export const books = [
         category: 'Science Fiction',
         author: 'Andy Weir',
         des: 'A stranded astronaut’s gripping fight for survival on Mars.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b16',
@@ -192,7 +223,9 @@ export const books = [
         category: 'Science Fiction',
         author: 'Frank Herbert',
         des: 'A science fiction masterpiece set on the desert planet Arrakis.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b17',
@@ -201,7 +234,9 @@ export const books = [
         category: 'Historical Fiction',
         author: 'Markus Zusak',
         des: 'A story set in Nazi Germany told through the eyes of a book-loving girl.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b18',
@@ -210,7 +245,9 @@ export const books = [
         category: 'Historical Fiction',
         author: 'Anthony Doerr',
         des: 'A tale of two teenagers during World War II.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b19',
@@ -219,7 +256,9 @@ export const books = [
         category: 'Self-Help',
         author: 'Mark Manson',
         des: 'A brutally honest self-help guide that cuts through the clichés.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     },
     {
         _id: 'b20',
@@ -228,6 +267,8 @@ export const books = [
         category: 'Fiction',
         author: 'George Orwell',
         des: 'A dystopian novel about surveillance, control, and loss of freedom.',
-        price: 50,
+        publication_Date :'May 15, 2022',
+        ISBN:'978-1-2345-6789-0',
+        availability:'Available'
     }
 ];

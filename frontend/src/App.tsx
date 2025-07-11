@@ -26,7 +26,7 @@ const App: React.FC = () => {
                 <Route path="/books" element={<Books />} />
                 <Route path="/books/:category" element={<Books />} />
                 <Route path="/my-profile" element={<MyProfile />} />
-                <Route path="/order/:id" element={<Order />} />
+                <Route path="/order/:bookId" element={<Order />} />
                 <Route path="/my-orders" element={<MyOrder />} />
                 <Route path="/favourite" element={<Favourite />} />
                 <Route path="/cart" element={<Cart />} />

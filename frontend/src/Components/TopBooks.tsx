@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { books } from "../assets/assets.ts";
-import { Heart, Star } from "lucide-react";
+import {  Star } from "lucide-react";
 
 const TopBooks: React.FC = () => {
     const navigate = useNavigate();
-    const [favBooks, setFavBooks] = useState<string[]>([]);
-
-    const toggleFavorite = (id: string, e: React.MouseEvent) => {
-        e.stopPropagation();
-        setFavBooks(prev =>
-            prev.includes(id) ? prev.filter(bookId => bookId !== id) : [...prev, id]
-        );
-    };
 
     return (
         <div className="flex flex-col items-center gap-6 text-gray-900 my-16 px-4 md:px-10">
@@ -26,23 +18,13 @@ const TopBooks: React.FC = () => {
                     <div
                         key={index}
                         onClick={() => navigate(`/order/${item._id}`)}
-                        className="relative border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 hover:shadow-md transition-all duration-300"
+                        className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 hover:shadow-md transition-all duration-300"
                     >
                         <img
                             src={item.image}
                             alt={item.name}
                             className="w-full h-96 object-cover bg-blue-50"
                         />
-                        <Heart
-                            onClick={(e) => toggleFavorite(item._id, e)}
-                            size={32}
-                            className={`absolute right-4 top-4 p-1.5 rounded-full cursor-pointer transition-colors duration-300 ${
-                                favBooks.includes(item._id)
-                                    ? 'fill-red-500 text-red-500 bg-white'
-                                    : 'bg-white text-gray-400'
-                            }`}
-                        />
-
                         <div className="p-4 flex flex-col items-start gap-2">
                             <div className="flex items-center justify-between w-full">
                                 <div className="flex items-center gap-2 px-3 py-1 bg-primary rounded-full">
