@@ -20,6 +20,6 @@ adminRouter.get("/get-allMembers",authAdmin,getAllMemers)
 //Librarian Routes
 adminRouter.post("/add-librarian",authAdmin,upload.single('image'),addLibrarian)
 adminRouter.get("/get-allLibrarian",authAdmin,getAllLibrarian)
-adminRouter.delete("/delete-librarian",authAdmin,deleteLibrarian)
+adminRouter.delete("/delete-librarian/:id",authAdmin,deleteLibrarian)
 
 export default adminRouter;
