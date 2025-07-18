@@ -9,7 +9,6 @@ export interface ILibrarian extends Document{
     address?: string
 }
 
-
 const librarianSchema = new Schema<ILibrarian>({
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },

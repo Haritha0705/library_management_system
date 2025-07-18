@@ -1,11 +1,5 @@
 import {Router} from "express";
-import {
-    addLibrarian,
-    deleteLibrarian,
-    getAllLibrarian,
-    getAllMemers,
-    loginAdmin
-} from "../controllers/adminControllers.mjs";
+import {addLibrarian, deleteLibrarian, getAllLibrarian, getAllMemers, loginAdmin} from "../controllers/adminControllers.mjs";
 import authAdmin from "../middlewares/authAdmin.mjs";
 import upload from "../middlewares/multer.mjs";
 

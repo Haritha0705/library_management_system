@@ -1,12 +1,5 @@
 import {Router} from "express";
-import {
-    bookBorrow, bookReturn,
-    getProfile,
-    loginMember,
-    logoutMember,
-    registerMember,
-    updateProfile
-} from "../controllers/memberControllers.mjs";
+import {bookBorrow, bookReturn, getProfile, loginMember, logoutMember, registerMember, updateProfile} from "../controllers/memberControllers.mjs";
 import authMember from "../middlewares/authUser.mjs";
 import {getBook} from "../controllers/librarianControllers.mjs";
 import upload from "../middlewares/multer.mjs";
