@@ -8,7 +8,7 @@ import {
 } from "../controllers/librarianControllers.mjs";
 import authLibrarian from "../middlewares/authLibrarian.mjs";
 import {getAllMemers} from "../controllers/adminControllers.mjs";
-import {getProfile} from "../controllers/memberControllers.mjs";
+// import {getProfile} from "../controllers/memberControllers.mjs";
 
 
 const librarianRouter = Router();
@@ -25,9 +25,6 @@ librarianRouter.delete("/delete-book/:id",authLibrarian,deleteBook)
 
 //Member Routes
 librarianRouter.get("/get-allMembers",authLibrarian,getAllMemers)
-librarianRouter.get("/get-profile/:id",authLibrarian,getProfile)
-
-//get book
-
+// librarianRouter.get("/get-profile/:id",authLibrarian,getProfile)
 
 export default librarianRouter;

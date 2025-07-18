@@ -11,7 +11,7 @@ import upload from "../middlewares/multer.mjs";
 
 const adminRouter = Router();
 
-//Auth Routes
+//Auth Routes{
 adminRouter.post("/login",loginAdmin)
 
 //Member Route

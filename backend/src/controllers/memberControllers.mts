@@ -86,7 +86,7 @@ const loginMember = async (req: Request, res: Response):Promise<any> =>{
 }
 
 //API - Member Logout
-const logoutMember = async (req: Request, res: Response):Promise<any> =>{
+const logoutMember = async (_: Request, res: Response):Promise<any> =>{
     try {
         //clear token
         res.clearCookie('token', {

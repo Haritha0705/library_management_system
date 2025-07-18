@@ -71,7 +71,7 @@ const addBook = async (req: AuthenticatedRequest, res: Response):Promise<any> =>
 //API - view All Books
 const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
     try {
-        const books = await memberModel.find({})
+        const books = await bookModel.find({})
         return res.status(200).json({success:true,message:books})
 
     } catch (error: any) {
