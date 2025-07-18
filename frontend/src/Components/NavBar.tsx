@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {assets} from "../assets/assets.ts";
 import {NavLink, useNavigate} from "react-router-dom";
-import { Heart, Menu, ShoppingBag, X } from "lucide-react";
+import { Menu, X,ChevronDown } from "lucide-react";
 
 const NavBar:React.FC = () => {
 
@@ -38,17 +38,19 @@ const NavBar:React.FC = () => {
                 {
                     token
                     ? <div className={"cursor-pointer flex items-center gap-5"}>
-                            <div className={"items-center justify-center p-2 border-2 border-primary rounded-full md:block hidden"}>
-                                <ShoppingBag/>
+                        <img className={"w-10 rounded-full"} src={assets.profilePic} onClick={()=>navigate("/my-profile")} alt={""}/>
+                        <div className={"cursor-pointer flex items-center gap-2 group relative"}>
+                            <ChevronDown/>
+                            <div className={"absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block"}>
+                                <div className={"min-w-48 bg-stone-100 rounded-xl flex flex-col gap-4 p-4"}>
+                                    <p onClick={()=>navigate("/my-profile")} className={"hover:text-black cursor-pointer"}>My Profile</p>
+                                    <p onClick={()=>navigate("/my-return-books")} className={"hover:text-black cursor-pointer "}>My Appointments</p>
+                                    <p onClick={()=>setToken(false)} className={"hover:text-black cursor-pointer"}>Logout</p>
+                                </div>
                             </div>
-                            <div className={"items-center justify-center  p-2 border-2 border-primary rounded-full md:block hidden"}>
-                                <Heart/>
-                            </div>
-                            <img className={"w-10 rounded-full"} src={assets.profilePic} onClick={()=>navigate("/my-profile")} alt={""}/>
-                            <button className={"bg-primary text-white py-3 px-8 rounded-full font-light hidden md:block "}
-                                    onClick={()=>navigate("/logout")}>Logout
-                            </button>
                         </div>
+
+                      </div>
                     : <button className={"bg-primary text-white py-3 px-8 rounded-full font-light hidden md:block "}
                               onClick={()=>navigate("/login")}>Create Account
                         </button>
@@ -56,7 +58,6 @@ const NavBar:React.FC = () => {
                 <Menu onClick={()=>setShowMenu(true)} className={"md:hidden"} size={40}/>
                 {/*Mobile Menu*/}
                 {
-
                     token
                         ? <div className={`${showMenu ? 'fixed w-full justify-between flex flex-col pb-5 p-3' : 'h-0 w-0'} md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}>
                             <div className={"flex items-center justify-between px-5 py-6"}>
@@ -68,8 +69,7 @@ const NavBar:React.FC = () => {
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/books"}><p className={"px-4 py-2 rounded-full inline-block"}>All Books</p></NavLink>
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/about"}><p className={"px-4 py-2 rounded-full inline-block"}>About</p></NavLink>
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/contact"}><p className={"px-4 py-2 rounded-full inline-block"}>Contact</p></NavLink>
-                                <NavLink  onClick={()=>setShowMenu(false)} to={"/favourite"}><p className={"px-4 py-2 rounded-full inline-block"}>Favourite</p></NavLink>
-                                <NavLink  onClick={()=>setShowMenu(false)} to={"/cart"}><p className={"px-4 py-2 rounded-full inline-block"}>Cart</p></NavLink>
+                                <NavLink  onClick={()=>setShowMenu(false)} to={"/return-books"}><p className={"px-4 py-2 rounded-full inline-block"}>Return books</p></NavLink>
                             </ul>
                             <button className={"bg-primary text-white py-2 px-4 rounded-full font-light"}
                                     onClick={()=>navigate("/logout")}>Logout

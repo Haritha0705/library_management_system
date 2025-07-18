@@ -104,10 +104,7 @@ const Order: React.FC = () => {
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-6">
                             <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition w-full sm:w-auto">
-                                Check Out
-                            </button>
-                            <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg transition w-full sm:w-auto">
-                                Edit Information
+                                Borrow Book
                             </button>
                         </div>
                     </div>

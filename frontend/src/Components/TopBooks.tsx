@@ -36,10 +36,6 @@ const TopBooks: React.FC = () => {
 
                             <p className="text-lg font-medium">{item.name}</p>
                             <p className="text-gray-500 text-sm">{item.category}</p>
-
-                            <button className="mt-2 w-full bg-black text-white py-2 px-4 rounded-full hover:opacity-90">
-                                Add to cart
-                            </button>
                         </div>
                     </div>
                 ))}

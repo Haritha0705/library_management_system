@@ -12,6 +12,7 @@ import MyOrder from "./Pages/MyOrder.tsx";
 import Books from "./Pages/Books.tsx";
 import Favourite from "./Pages/Favourite.tsx";
 import Cart from "./Pages/Cart.tsx";
+import NotFoundPage from "./Pages/NotFoundPage.tsx";
 // import { ToastContainer, toast } from 'react-toastify';
 
 const App: React.FC = () => {
@@ -30,7 +31,7 @@ const App: React.FC = () => {
                 <Route path="/my-orders" element={<MyOrder />} />
                 <Route path="/favourite" element={<Favourite />} />
                 <Route path="/cart" element={<Cart />} />
-
+                <Route path="*" element={<NotFoundPage/>} />
             </Routes>
             <Footer/>
         </div>
