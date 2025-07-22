@@ -71,22 +71,6 @@ const addBook = async (req: AuthenticatedRequest, res: Response):Promise<any> =>
 //API - view All Books
 const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
     try {
-        const { id } = req.params;
-
-        //Check Book id is  missing
-        if (!id){
-            res.status(400).json({success: false, message: "Member ID  required"});
-            return
-        }
-
-        // Fetch librian and exclude password
-        const librianData = await librarianModel.findById(id).select("-password");
-
-        if (!librianData) {
-            res.status(404).json({success: false, message: "User not found",});
-            return;
-        }
-
         const books = await bookModel.find({})
         return res.status(200).json({success:true,message:books})
 
@@ -171,26 +155,19 @@ const deleteBook = async (req: Request, res: Response):Promise<any> =>{
 //API -  Get in Book by id
 const getBook = async (req: CustomRequest, res: Response): Promise<void> => {
     try {
-        const bId = req.params.id;
+        const {bId} = req.params;
 
-        // Check if memberId exists
+        // Check if memberId is provided
         if (!bId) {
-            res.status(400).json({success: false, message: "User ID missing",});
-            return;
+            res.status(400).json({success: false, message: "Book ID is required",});
+            return
         }
-
         // Fetch member and exclude password
         const bookData = await bookModel.findById(bId);
 
         if (!bookData) {
-            res.status(404).json({success: false, message: "User not found",});
+            res.status(404).json({success: false, message: "Book not found",});
             return;
-        }
-
-        // Check if memberId is provided
-        if (!bId) {
-            res.status(400).json({success: false, message: "Member ID is required",});
-            return
         }
 
         // Return success response

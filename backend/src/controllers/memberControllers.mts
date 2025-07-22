@@ -8,6 +8,7 @@ import {v2 as cloudinary} from "cloudinary"
 import bookModel from "../models/bookModel.mjs";
 import Issue from "../models/issueModel.mjs";
 import librarianModel from "../models/librarianModel.mjs";
+import authMember from "../middlewares/authUser.mjs";
 
 // Extend Request type to include `memberId`
 interface CustomRequest extends Request {
@@ -327,33 +328,5 @@ const bookSearch = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-
-//API - view All Books
-const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
-    try {
-        const { id } = req.params;
-
-        //Check Book id is  missing
-        if (!id){
-            res.status(400).json({success: false, message: "Member ID  required"});
-            return
-        }
-
-        // Fetch librian and exclude password
-        const librianData = await librarianModel.findById(id).select("-password");
-
-        if (!librianData) {
-            res.status(404).json({success: false, message: "User not found",});
-            return;
-        }
-
-        const books = await bookModel.find({})
-        return res.status(200).json({success:true,message:books})
-
-    } catch (error: any) {
-        console.error(error);
-        res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
-    }
-}
 
 export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookBorrow,bookReturn,bookSearch};
