@@ -1,5 +1,14 @@
 import {Router} from "express";
-import {bookBorrow, bookReturn, getProfile, loginMember, logoutMember, registerMember, updateProfile} from "../controllers/memberControllers.mjs";
+import {
+    bookBorrow,
+    bookReturn,
+    bookSearch,
+    getProfile,
+    loginMember,
+    logoutMember,
+    registerMember,
+    updateProfile
+} from "../controllers/memberControllers.mjs";
 import authMember from "../middlewares/authUser.mjs";
 import {getBook} from "../controllers/librarianControllers.mjs";
 import upload from "../middlewares/multer.mjs";
@@ -21,6 +30,9 @@ memberRouter.get("/get-book/:id",authMember,getBook)
 //Issue/Return/Overdue book
 memberRouter.post("/book/:bId/borrow/:mId",authMember,bookBorrow)
 memberRouter.post("/book/:bId/return/:mId",authMember,bookReturn)
+
+//Search book
+memberRouter.get("/search-book/:id",authMember,bookSearch)
 
 export default memberRouter;
 

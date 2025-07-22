@@ -250,7 +250,7 @@ const bookReturn = async (req: Request, res: Response): Promise<void> => {
 
         //Check Book id is  missing
         if (!bId || !mId){
-            res.status(400).json({success: false, message: "Book ID and  Member ID  required",});
+            res.status(400).json({success: false, message: "Book ID and  Member ID  required"});
             return
         }
 
@@ -294,5 +294,37 @@ const bookReturn = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
+//API - Search book by title
+const bookSearch = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id } = req.params;
+        const { title } = req.query;
 
-export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookBorrow,bookReturn};
+        //Check Book id is  missing
+        if (!id){
+            res.status(400).json({success: false, message: "Member ID  required"});
+            return
+        }
+
+        if (!title || typeof title !== "string"){
+            res.status(400).json({success: false, message: "Book title is required as a query parameter",});
+            return;
+        }
+
+        const bookData = await bookModel.findOne({title:title.trim()})
+
+        if (!bookData){
+            res.status(404).json({success: false, message: "Book not found",});
+            return;
+        }
+
+        res.status(200).json({ success: true, data:bookData});
+
+    } catch (error: any) {
+        console.error("Issue error:", error);
+        res.status(500).json({success: false, message: "Something went wrong.", error: error.message,});
+    }
+}
+
+
+export {registerMember,loginMember,logoutMember,getProfile,updateProfile,bookBorrow,bookReturn,bookSearch};
