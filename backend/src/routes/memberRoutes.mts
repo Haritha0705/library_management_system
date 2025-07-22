@@ -32,7 +32,7 @@ memberRouter.post("/book/:bId/borrow/:mId",authMember,bookBorrow)
 memberRouter.post("/book/:bId/return/:mId",authMember,bookReturn)
 
 //Search book
-memberRouter.get("/search-book/:id",authMember,bookSearch)
+memberRouter.get("/search-book",authMember,bookSearch)
 
 //Get All Books
 memberRouter.get("/get-allBooks",authMember,getAllBooks)

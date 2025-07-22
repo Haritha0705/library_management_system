@@ -299,14 +299,7 @@ const bookReturn = async (req: Request, res: Response): Promise<void> => {
 //API - Search book by title
 const bookSearch = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { id } = req.params;
         const { title } = req.query;
-
-        //Check Book id is  missing
-        if (!id){
-            res.status(400).json({success: false, message: "Member ID  required"});
-            return
-        }
 
         if (!title || typeof title !== "string"){
             res.status(400).json({success: false, message: "Book title is required as a query parameter",});
