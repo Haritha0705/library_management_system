@@ -10,7 +10,7 @@ import {
     updateProfile
 } from "../controllers/memberControllers.mjs";
 import authMember from "../middlewares/authUser.mjs";
-import {getBook} from "../controllers/librarianControllers.mjs";
+import {getAllBooks, getBook} from "../controllers/librarianControllers.mjs";
 import upload from "../middlewares/multer.mjs";
 
 const memberRouter = Router();
@@ -33,6 +33,9 @@ memberRouter.post("/book/:bId/return/:mId",authMember,bookReturn)
 
 //Search book
 memberRouter.get("/search-book/:id",authMember,bookSearch)
+
+//Get All Books
+memberRouter.get("/get-allBooks/:id",authMember,getAllBooks)
 
 export default memberRouter;
 
