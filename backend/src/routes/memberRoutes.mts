@@ -35,7 +35,7 @@ memberRouter.post("/book/:bId/return/:mId",authMember,bookReturn)
 memberRouter.get("/search-book/:id",authMember,bookSearch)
 
 //Get All Books
-memberRouter.get("/get-allBooks/:id",authMember,getAllBooks)
+memberRouter.get("/get-allBooks:id",authMember,getAllBooks)
 
 export default memberRouter;
 

@@ -71,6 +71,22 @@ const addBook = async (req: AuthenticatedRequest, res: Response):Promise<any> =>
 //API - view All Books
 const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
     try {
+        const { id } = req.params;
+
+        //Check Book id is  missing
+        if (!id){
+            res.status(400).json({success: false, message: "Member ID  required"});
+            return
+        }
+
+        // Fetch librian and exclude password
+        const librianData = await librarianModel.findById(id).select("-password");
+
+        if (!librianData) {
+            res.status(404).json({success: false, message: "User not found",});
+            return;
+        }
+
         const books = await bookModel.find({})
         return res.status(200).json({success:true,message:books})
 

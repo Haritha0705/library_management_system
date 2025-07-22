@@ -11,7 +11,7 @@ librarianRouter.post("/login",librarianLogin)
 //Book Routes
 librarianRouter.post("/add-book",authLibrarian,addBook)
 librarianRouter.get("/get-book/:id",authLibrarian,getBook)
-librarianRouter.get("/get-allBooks",authLibrarian,getAllBooks)
+librarianRouter.get("/get-allBooks/:id",authLibrarian,getAllBooks)
 librarianRouter.put("/update-book/:id",authLibrarian,updateBook)
 librarianRouter.delete("/delete-book/:id",authLibrarian,deleteBook)
 
