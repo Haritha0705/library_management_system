@@ -25,7 +25,7 @@ memberRouter.get("/get-profile/:id",authMember,getProfile)
 memberRouter.put("/update-profile/:id",authMember,upload.single('image'),updateProfile)
 
 //Book Route
-memberRouter.get("/get-book/:id",authMember,getBook)
+memberRouter.get("/get-book/:bId",authMember,getBook)
 
 //Issue/Return/Overdue book
 memberRouter.post("/book/:bId/borrow/:mId",authMember,bookBorrow)

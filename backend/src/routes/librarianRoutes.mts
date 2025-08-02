@@ -15,7 +15,7 @@ librarianRouter.get("/get-allBooks",authLibrarian,getAllBooks)
 librarianRouter.put("/update-book/:id",authLibrarian,updateBook)
 librarianRouter.delete("/delete-book/:id",authLibrarian,deleteBook)
 
-//Member Routes
+//Librarian Routes
 librarianRouter.get("/get-allMembers",authLibrarian,getAllMemers)
 
 export default librarianRouter;
