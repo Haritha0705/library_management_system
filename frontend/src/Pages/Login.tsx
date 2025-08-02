@@ -1,25 +1,52 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const Login:React.FC = () => {
-    const [mode,setMode] = useState<'Sign Up' | 'Login'>('Sign Up')
+const Login: React.FC = () => {
+    const [mode, setMode] = useState<'Sign Up' | 'Login'>('Login');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [error, setError] = useState<string | null>(null);
 
-    const [email,setEmail] = useState("")
-    const [password,setPassword] = useState("")
-    const [name,setName] = useState("")
+    const navigate = useNavigate();
 
-    const onSubmitHandler= async(e: { preventDefault: () => void; }) => {
-        e.preventDefault()
-        try {
-            if (mode === 'Sign Up'){
-                console.log("sign up")
-            }else if (mode === "Login"){
-                console.log("sign up")
-            }
-        }catch (e) {
-            console.log(e)
-        }
-
+    interface LoginRequest {
+        email: string;
+        password: string;
     }
+
+    interface LoginResponse {
+        message: string;
+        token: string;
+    }
+
+    const onSubmitHandler = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            if (mode === 'Sign Up') {
+                console.log('Sign up logic here...');
+                // Optionally add your sign-up logic
+            } else if (mode === 'Login') {
+                const payload: LoginRequest = { email, password };
+
+                const response = await axios.post<LoginResponse>(
+                    'http://localhost:3000/api/v1/librarian/login',
+                    payload
+                );
+
+                const token = response.data.token;
+                localStorage.setItem('token', token);
+
+                console.log('Login success');
+                navigate('/');
+            }
+        } catch (err: any) {
+            console.error('Login error:', err);
+            setError(err.response?.data?.message || 'Login failed');
+        }
+    };
+
     return (
         <div className="min-h-[80vh] flex items-center justify-center px-4">
             <form
@@ -29,6 +56,12 @@ const Login:React.FC = () => {
                 <h2 className="text-lg font-semibold text-center">
                     {mode === 'Sign Up' ? 'Create an Account' : 'Login to Your Account'}
                 </h2>
+
+                {error && (
+                    <p className="text-sm text-red-600 text-center font-medium">
+                        {error}
+                    </p>
+                )}
 
                 <p className="text-sm text-center text-zinc-500">
                     Please {mode === 'Sign Up' ? 'sign up' : 'log in'} to continue
