@@ -2,6 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+// Types
+interface LoginRequest {
+    email: string;
+    password: string;
+}
+
+interface RegisterRequest extends LoginRequest {
+    name: string;
+}
+
+interface LoginResponse {
+    message: string;
+    token: string;
+}
+
 const Login: React.FC = () => {
     const [mode, setMode] = useState<'Sign Up' | 'Login'>('Login');
     const [email, setEmail] = useState('');
@@ -11,39 +26,35 @@ const Login: React.FC = () => {
 
     const navigate = useNavigate();
 
-    interface LoginRequest {
-        email: string;
-        password: string;
-    }
-
-    interface LoginResponse {
-        message: string;
-        token: string;
-    }
-
     const onSubmitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             if (mode === 'Sign Up') {
-                console.log('Sign up logic here...');
-                // Optionally add your sign-up logic
-            } else if (mode === 'Login') {
-                const payload: LoginRequest = { email, password };
+                const payload: RegisterRequest = { name, email, password };
 
                 const response = await axios.post<LoginResponse>(
-                    'http://localhost:3000/api/v1/librarian/login',
+                    'http://localhost:3000/api/v1/member/register',
                     payload
                 );
 
-                const token = response.data.token;
-                localStorage.setItem('token', token);
+                localStorage.setItem('token', response.data.token);
+                console.log('Sign Up success');
+                navigate('/');
+            } else {
+                const payload: LoginRequest = { email, password };
 
+                const response = await axios.post<LoginResponse>(
+                    'http://localhost:3000/api/v1/member/login',
+                    payload
+                );
+
+                localStorage.setItem('token', response.data.token);
                 console.log('Login success');
                 navigate('/');
             }
         } catch (err: any) {
-            console.error('Login error:', err);
-            setError(err.response?.data?.message || 'Login failed');
+            console.error('Auth error:', err);
+            setError(err.response?.data?.message || 'Something went wrong');
         }
     };
 
@@ -107,7 +118,8 @@ const Login: React.FC = () => {
 
                 <button
                     type="submit"
-                    className="bg-blue-600 hover:bg-blue-700 text-white w-full rounded-md text-base py-2 transition"
+                    disabled={!email || !password || (mode === 'Sign Up' && !name)}
+                    className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white w-full rounded-md text-base py-2 transition"
                 >
                     {mode === 'Sign Up' ? 'Create Account' : 'Login'}
                 </button>
