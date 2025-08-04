@@ -1,21 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-// Types
-interface LoginRequest {
-    email: string;
-    password: string;
-}
-
-interface RegisterRequest extends LoginRequest {
-    name: string;
-}
-
-interface LoginResponse {
-    message: string;
-    token: string;
-}
+import {loginUser, registerUser} from "../Services/authService.ts";
+import {saveToken} from "../Utils/tokenHelper.ts";
 
 const Login: React.FC = () => {
     const [mode, setMode] = useState<'Sign Up' | 'Login'>('Login');
@@ -30,26 +16,13 @@ const Login: React.FC = () => {
         e.preventDefault();
         try {
             if (mode === 'Sign Up') {
-                const payload: RegisterRequest = { name, email, password };
-
-                const response = await axios.post<LoginResponse>(
-                    'http://localhost:3000/api/v1/member/register',
-                    payload
-                );
-
-                localStorage.setItem('token', response.data.token);
-                console.log('Sign Up success');
+                await registerUser(name,email,password)
+                setError('Registered successfully!')
                 navigate('/');
-            } else {
-                const payload: LoginRequest = { email, password };
-
-                const response = await axios.post<LoginResponse>(
-                    'http://localhost:3000/api/v1/member/login',
-                    payload
-                );
-
-                localStorage.setItem('token', response.data.token);
-                console.log('Login success');
+            } else if (mode === 'Login'){
+                const data = await loginUser(email,password)
+                saveToken(data.token)
+                setError('Log in success')
                 navigate('/');
             }
         } catch (err: any) {
