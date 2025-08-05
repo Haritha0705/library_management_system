@@ -11,10 +11,6 @@ const NavBar:React.FC = () => {
     const [token,setToken] = useState(true)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const storedToken = getToken()
-        setToken(!!storedToken)
-    }, []);
 
     const logout = async ()=>{
         try {
@@ -27,7 +23,10 @@ const NavBar:React.FC = () => {
         }
     }
 
-
+    useEffect(() => {
+        const storedToken = getToken()
+        setToken(!!storedToken)
+    }, []);
     return(
         <div className={"flex mb-5 py-4 items-center justify-between border-b border-b-gray-400"}>
             <div className={"flex gap-2"}>
