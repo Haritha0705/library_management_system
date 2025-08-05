@@ -1,13 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {assets} from "../assets/assets.ts";
 import {NavLink, useNavigate} from "react-router-dom";
 import { Menu, X,ChevronDown } from "lucide-react";
+import {getToken, removeToken} from "../Utils/tokenHelper.ts";
+import {logoutUser} from "../Services/authService.ts";
 
 const NavBar:React.FC = () => {
 
     const [showMenu,setShowMenu] = useState(false)
     const [token,setToken] = useState(true)
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedToken = getToken()
+        setToken(!!storedToken)
+    }, []);
+
+    const logout = async ()=>{
+        try {
+            await logoutUser()
+            removeToken()
+            setToken(false)
+            navigate("/login")
+        }catch (e) {
+            console.log(e)
+        }
+    }
 
 
     return(
@@ -45,7 +63,7 @@ const NavBar:React.FC = () => {
                                 <div className={"min-w-48 bg-stone-100 rounded-xl flex flex-col gap-4 p-4"}>
                                     <p onClick={()=>navigate("/my-profile")} className={"hover:text-black cursor-pointer"}>My Profile</p>
                                     <p onClick={()=>navigate("/my-return-books")} className={"hover:text-black cursor-pointer "}>My Appointments</p>
-                                    <p onClick={()=>setToken(false)} className={"hover:text-black cursor-pointer"}>Logout</p>
+                                    <p onClick={logout} className={"hover:text-black cursor-pointer"}>Logout</p>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +90,7 @@ const NavBar:React.FC = () => {
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/return-books"}><p className={"px-4 py-2 rounded-full inline-block"}>Return books</p></NavLink>
                             </ul>
                             <button className={"bg-primary text-white py-2 px-4 rounded-full font-light"}
-                                    onClick={()=>navigate("/logout")}>Logout
+                                    onClick={logout}>Logout
                             </button>
                         </div>
                         : <div className={`${showMenu ? 'fixed w-full justify-between flex flex-col pb-5 p-3' : 'h-0 w-0'} md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}>

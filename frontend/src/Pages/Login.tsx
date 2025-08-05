@@ -92,7 +92,7 @@ const Login: React.FC = () => {
                 <button
                     type="submit"
                     disabled={!email || !password || (mode === 'Sign Up' && !name)}
-                    className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white w-full rounded-md text-base py-2 transition"
+                    className="bg-blue-600 hover:bg-blue-700 cursor-pointer disabled:opacity-50 text-white w-full rounded-md text-base py-2 transition"
                 >
                     {mode === 'Sign Up' ? 'Create Account' : 'Login'}
                 </button>

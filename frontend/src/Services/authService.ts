@@ -14,3 +14,6 @@ export const loginUser = async (email:string,password:string)=>{
     })
     return response.data
 }
+export const logoutUser = async ()=>{
+    await axios.post(`${API_URL}/member/logout`)
+}
