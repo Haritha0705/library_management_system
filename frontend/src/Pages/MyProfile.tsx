@@ -27,6 +27,7 @@ const MyProfile: React.FC = () => {
                 const data = await getProfile(userId);
                 setProfile(data);
             } catch (err: any) {
+                console.log(err)
                 setError("Failed to fetch profile. Please try again.");
             }
         };
