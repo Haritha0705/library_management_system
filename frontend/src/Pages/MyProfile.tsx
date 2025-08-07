@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getProfile } from "../Services/authService";
 import { getUserIdFromToken } from "../Utils/tokenHelper";
+import userimg from "../assets/userIcon.png"
+import {loginUser} from "../Services/login-managment.service.ts";
 
 export interface UserProfile {
     name: string;
@@ -35,6 +37,20 @@ const MyProfile: React.FC = () => {
         fetchProfile();
     }, []);
 
+    const handleAuth = ()=>{
+        try {
+            const res = await loginUser({email,password})
+            console.log("Login response", res);
+
+            if (res.token){
+                localStorage.setItem("token",res.token)
+
+            }
+        }catch (e:any) {
+            console.error("Login failed", error);
+        }
+    }
+
     if (error) {
         return (
             <div className="h-screen flex items-center justify-center text-red-500">
@@ -49,7 +65,7 @@ const MyProfile: React.FC = () => {
                 <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
                     <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md text-center">
                         <img
-                            src={profile.profilePic || "/default-profile.png"}
+                            src={profile?.profilePic && profile.profilePic.trim() !== "" ? profile.profilePic : userimg}
                             alt="Profile"
                             className="w-24 h-24 mx-auto rounded-full object-cover shadow-md"
                         />
@@ -59,7 +75,6 @@ const MyProfile: React.FC = () => {
                         {profile.bio && (
                             <p className="text-gray-700 text-base mt-4">{profile.bio}</p>
                         )}
-
                         <div className="mt-6">
                             <button className="px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition">
                                 Edit Profile
