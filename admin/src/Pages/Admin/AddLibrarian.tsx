@@ -35,9 +35,20 @@ const AddLibrarian: React.FC = () => {
             formData.append("address", address);
             formData.append("phone", phone);
 
-            await addLibrarian(formData, token);
+            const data = await addLibrarian(formData, token);
 
-            toast.success("Librarian added successfully!");
+            if (data && data.success){
+                toast.success(data.message || "Librarian added successfully!");
+                setLibImg(null);
+                setName("");
+                setEmail("");
+                setPassword("");
+                setAddress("");
+                setPhone("");
+            }else {
+                toast.error(data?.message || "Something went wrong!");
+            }
+
         } catch (error: any) {
             toast.error(error?.response?.data?.message || "Something went wrong!");
             console.error(error);
