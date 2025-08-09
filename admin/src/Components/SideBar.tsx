@@ -6,7 +6,6 @@ import appointmentLogo from "../assets/appointment_icon.svg"
 import peopleLogo from "../assets/people_icon.svg"
 import addLogo from "../assets/add_icon.svg"
 
-
 const SideBar:React.FC = () => {
 
     const adminContext = useContext(AdminContext);

@@ -1,6 +1,6 @@
 import type {LoginModel} from "../Models/login.model.ts";
 import AxiosService from "./axios-service.ts";
-import BackendEndpoints from "../Constants/backend-endpoints.ts";
+import BackendEndpoints from "../Constants/backend-endpoints.ts"
 
 export const loginAdmin = async (reqBody: LoginModel): Promise<LoginModel> => {
     try {

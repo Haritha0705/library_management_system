@@ -7,21 +7,26 @@ import memberModel from "../models/memberModel.mjs";
 import {v2 as cloudinary} from "cloudinary"
 
 //API - Admin login
-const loginAdmin = async (req: Request, res: Response):Promise<any> =>{
+const loginAdmin = async (req: Request, res: Response): Promise<any> => {
     try {
-        const {email,password} = req.body;
+        const { email, password } = req.body;
 
-        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
-            const token = jwt.sign(email+password,process.env.JWT_SECRET as string);
-            return res.status(200).json({ success: true, token });
-        }else {
-            return res.status(400).json({ success: false, message: "Invalid Credentials!" });
+        if (!email || !password) {
+            return res.status(400).json({ success: false, message: "Email and password are required" });
         }
+
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            const token = jwt.sign({ email }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+            return res.status(200).json({ success: true, token });
+        } else {
+            return res.status(401).json({ success: false, message: "Invalid Credentials!" });
+        }
+
     } catch (error: any) {
         console.error(error);
-        res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
+        return res.status(500).json({ success: false, message: "Something went wrong", error: error.message });
     }
-}
+};
 
 //API - librarian account create
 const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
@@ -33,7 +38,7 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
             return res.status(400).json({ success: false, message: "Image file is required" });
         }
 
-        const imageFile = req.file;
+
 
         //chacking all data add
         if (!name || !email || !password || !phone || !address ){
@@ -55,7 +60,7 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
         const hashPassword = await bcrypt.hash(password,salt)
 
         //upload image upload cloudinary
-        const imageUpload = await cloudinary.uploader.upload(imageFile.path,{resource_type:"image"})
+        const imageUpload = await cloudinary.uploader.upload(req.file.path,{resource_type:"image"})
         const imageUrl = imageUpload.secure_url
 
         const librarianData = {
@@ -68,10 +73,11 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
             joinedDate:Date.now()
         }
 
+
         const newLibrarian = new librarianModel(librarianData)
         await newLibrarian.save()
 
-        return  res.status(400).json({success: true, message: "Add Librarian"});
+        return  res.status(201).json({success: true, message: "Add Librarian"});
 
     } catch (error: any) {
         console.error(error);
