@@ -1,5 +1,5 @@
 export interface LibrarianModel {
-    id:string;
+    id:string | number;
     name: string;
     email: string;
     password: string;

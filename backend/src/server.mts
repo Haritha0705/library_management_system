@@ -6,12 +6,13 @@ import adminRouter from "./routes/adminRoutes.mjs";
 import librarianRouter from "./routes/librarianRoutes.mjs";
 import connectDB from "./config/db.mjs";
 import connectCloudinary from "./config/cloudinary.mjs";
+import authRouter from "./routes/authRoutes.mjs";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: 'http://localhost:5174',
+    origin: 'http://localhost:5173',
     credentials: true
 }));
 
@@ -21,6 +22,8 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use("/api/v1/admin",adminRouter);
 app.use("/api/v1/librarian",librarianRouter);
 app.use("/api/v1/member",memberRouter);
+
+app.use("/api/v1/auth",authRouter);
 
 // Start server
 const startServer = async () => {

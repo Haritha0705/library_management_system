@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import type { LibrarianModel } from "../../Models/librarian.model.ts";
+import type { LibrarianModel, LibrarianResponse } from "../../Models/librarian.model.ts";
 import { toast } from "react-toastify";
 import { getAllLibrarians } from "../../Service/librarians-list.service.ts";
 import { AdminContext } from "../../Context/AdminProvider.tsx";
@@ -21,17 +21,20 @@ const LibrariansList: React.FC = () => {
 
         const fetchData = async () => {
             try {
-                const res = await getAllLibrarians(token);
-                console.log(res);
+                const res: LibrarianResponse = await getAllLibrarians(token);
+                console.log("API response:", res);
 
-                if (res.token && res.success) {
+                if (res.token && res.success && res.token !== token) {
                     setToken(res.token);
                 }
 
-                if (Array.isArray(res.data)) {
+                if (res.success && Array.isArray(res.data)) {
                     setLibrariansList(res.data);
                 } else {
                     setLibrariansList([]);
+                    if (!res.success) {
+                        toast.error("API returned unsuccessful response");
+                    }
                 }
             } catch (apiError: any) {
                 toast.error(apiError.message || "Failed to fetch librarians");

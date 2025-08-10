@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DashBoard:React.FC = () => {
+const AdminDashBoard:React.FC = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const DashBoard:React.FC = () => {
     );
 };
 
-export default DashBoard;
+export default AdminDashBoard;

@@ -19,7 +19,7 @@ const SideBar:React.FC = () => {
             {
                 token && <ul className={"text-[#515151] mt-5 "}>
                 <NavLink className={({isActive})=>`flex items-center gap-3 py-3.5 px-3 md:min-w-72 cursor-pointer md:px-9 ${isActive ? 'bg-[#F2F3Ff] border-r-4 border-primary':''} `} to={'/admin-dashboard'}>
-                    <img src={homeLogo} alt={"DashBoard-logo"}/>
+                    <img src={homeLogo} alt={"AdminDashBoard-logo"}/>
                     <p>DashBoard</p>
                 </NavLink>
                     <NavLink className={({isActive})=>`flex items-center gap-3 py-3.5 px-3 md:min-w-72 cursor-pointer md:px-9 ${isActive ? 'bg-[#F2F3Ff] border-r-4 border-primary':''} `} to={'/all-borrowedBooks'}>
