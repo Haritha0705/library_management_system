@@ -1,12 +1,9 @@
 import {Router} from "express";
-import {addBook, deleteBook, getAllBooks, getBook, librarianLogin, updateBook} from "../controllers/librarianControllers.mjs";
+import {addBook, deleteBook, getAllBooks, getBook, updateBook} from "../controllers/librarianControllers.mjs";
 import authLibrarian from "../middlewares/authLibrarian.mjs";
 import {getAllMemers} from "../controllers/adminControllers.mjs";
 
 const librarianRouter = Router();
-
-//Auth Routes
-librarianRouter.post("/login",librarianLogin)
 
 //Book Routes
 librarianRouter.post("/add-book",authLibrarian,addBook)

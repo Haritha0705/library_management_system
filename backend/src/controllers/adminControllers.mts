@@ -6,28 +6,6 @@ import librarianModel from "../models/librarianModel.mjs";
 import memberModel from "../models/memberModel.mjs";
 import {v2 as cloudinary} from "cloudinary"
 
-//API - Admin login
-const loginAdmin = async (req: Request, res: Response): Promise<any> => {
-    try {
-        const { email, password } = req.body;
-
-        if (!email || !password) {
-            return res.status(400).json({ success: false, message: "Email and password are required" });
-        }
-
-        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-            const token = jwt.sign({ email }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
-            return res.status(200).json({ success: true, token });
-        } else {
-            return res.status(401).json({ success: false, message: "Invalid Credentials!" });
-        }
-
-    } catch (error: any) {
-        console.error(error);
-        return res.status(500).json({ success: false, message: "Something went wrong", error: error.message });
-    }
-};
-
 //API - librarian account create
 const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
     try {
@@ -126,5 +104,5 @@ const deleteLibrarian = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-export {loginAdmin,addLibrarian,getAllMemers,getAllLibrarian,deleteLibrarian}
+export {addLibrarian,getAllMemers,getAllLibrarian,deleteLibrarian}
 

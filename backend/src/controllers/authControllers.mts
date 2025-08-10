@@ -6,9 +6,8 @@ import memberModel from "../models/memberModel.mjs";
 import librarianModel from "../models/librarianModel.mjs";
 import memberProfileModel from "../models/memberProfileModel.mjs";
 
-
 // User Login
-const userLogin = async (req: Request, res: Response) => {
+const userLogin = async (req: Request, res: Response):Promise<any> => {
     try {
         const { email, password, role } = req.body;
 
@@ -60,7 +59,7 @@ const userLogin = async (req: Request, res: Response) => {
 };
 
 // User Register
-const userRegister = async (req: Request, res: Response) => {
+const userRegister = async (req: Request, res: Response):Promise<any> => {
     try {
         const { password, username, email, role } = req.body;
 

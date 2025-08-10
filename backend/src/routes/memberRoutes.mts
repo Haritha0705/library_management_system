@@ -4,9 +4,6 @@ import {
     bookReturn,
     bookSearch,
     getProfile,
-    loginMember,
-    logoutMember,
-    registerMember,
     updateProfile
 } from "../controllers/memberControllers.mjs";
 import authMember from "../middlewares/authUser.mjs";
@@ -14,11 +11,6 @@ import { getAllBooks,getBook} from "../controllers/librarianControllers.mjs";
 import upload from "../middlewares/multer.mjs";
 
 const memberRouter = Router();
-
-//Auth Routes
-memberRouter.post("/register", registerMember);
-memberRouter.post("/login", loginMember);
-memberRouter.post("/logout", logoutMember);
 
 //Member Routes
 memberRouter.get("/get-profile/:id",authMember,getProfile)
