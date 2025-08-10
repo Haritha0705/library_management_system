@@ -1,21 +1,19 @@
 import React, { useContext } from 'react';
-import { AdminContext } from "../Context/AdminContext.ts";
 import {useNavigate} from "react-router-dom";
 import logo from "../assets/Combo shape.svg"
+import {AdminContext} from "../Context/AdminProvider.tsx";
 
 const NavBar:React.FC = () => {
     const navigate = useNavigate();
     const adminContext = useContext(AdminContext);
 
-    if (!adminContext) {
-        throw new Error("Login must be used within an AdminProvider");
-    }
+    if (!adminContext) return null
 
     const { token,setToken } = adminContext;
 
     const logout = () => {
         navigate("/")
-        setToken('');
+        setToken('token');
         localStorage.removeItem('token');
     };
 

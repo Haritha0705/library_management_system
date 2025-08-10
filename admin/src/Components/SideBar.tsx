@@ -1,18 +1,16 @@
 import React, {useContext} from 'react';
 import {NavLink} from "react-router-dom";
-import {AdminContext} from "../Context/AdminContext.ts";
 import homeLogo from "../assets/home_icon.svg"
 import appointmentLogo from "../assets/appointment_icon.svg"
 import peopleLogo from "../assets/people_icon.svg"
 import addLogo from "../assets/add_icon.svg"
+import {AdminContext} from "../Context/AdminProvider.tsx";
 
 const SideBar:React.FC = () => {
 
     const adminContext = useContext(AdminContext);
 
-    if (!adminContext) {
-        throw new Error("Login must be used within an AdminProvider");
-    }
+    if (!adminContext) return null
 
     const { token } = adminContext;
 

@@ -9,7 +9,7 @@ export const loginAdmin = async (reqBody: LoginModel): Promise<LoginModel> => {
             reqBody
         )
         return apiResponse.data;
-    } catch (apiError:any) {
+    } catch (apiError) {
         throw apiError;
     }
 }

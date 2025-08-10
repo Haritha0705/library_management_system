@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { AdminContext } from "../../Context/AdminContext";
 import { toast } from "react-toastify";
 import uploadImg from "../../assets/upload_area.svg";
 import { addLibrarian } from "../../Service/submit-form.service";
+import {AdminContext} from "../../Context/AdminProvider.tsx";
 
 const AddLibrarian: React.FC = () => {
     const [libImg, setLibImg] = useState<File | null>(null);
@@ -14,9 +14,7 @@ const AddLibrarian: React.FC = () => {
 
     const adminContext = useContext(AdminContext);
 
-    if (!adminContext) {
-        throw new Error("Add Librarian must be used within an AdminProvider");
-    }
+    if (!adminContext) return null
 
     const { token } = adminContext;
 
