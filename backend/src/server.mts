@@ -6,7 +6,7 @@ import adminRouter from "./routes/adminRoutes.mjs";
 import librarianRouter from "./routes/librarianRoutes.mjs";
 import connectDB from "./config/db.mjs";
 import connectCloudinary from "./config/cloudinary.mjs";
-import authRouter from "./routes/authRoutes.mjs";
+import authRoutes from "./routes/authRoutes.mjs";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,7 +23,7 @@ app.use("/api/v1/admin",adminRouter);
 app.use("/api/v1/librarian",librarianRouter);
 app.use("/api/v1/member",memberRouter);
 
-app.use("/api/v1/auth",authRouter);
+app.use("/api/v1/auth",authRoutes);
 
 // Start server
 const startServer = async () => {
