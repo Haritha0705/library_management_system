@@ -1,10 +1,9 @@
 import {Request,Response} from "express";
-import jwt from "jsonwebtoken";
 import validator from "validator";
 import bcrypt from "bcrypt";
-import librarianModel from "../models/librarianModel.mjs";
-import memberModel from "../models/memberModel.mjs";
 import {v2 as cloudinary} from "cloudinary"
+import librarianModel from "../../models/librarianModel.mjs";
+import memberModel from "../../models/memberModel.mjs";
 
 //API - librarian account create
 const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
@@ -15,8 +14,6 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
         if (!req.file) {
             return res.status(400).json({ success: false, message: "Image file is required" });
         }
-
-
 
         //chacking all data add
         if (!name || !email || !password || !phone || !address ){
