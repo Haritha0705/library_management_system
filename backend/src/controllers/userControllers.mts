@@ -47,7 +47,7 @@ const getProfile = async (req: CustomRequest, _: Response):Promise<any> => {
 };
 
 // API - Update User Profile
-const updateProfile = async (req: CustomRequest) => {
+const updateProfile = async (req: CustomRequest):Promise<any> => {
     try {
         const { userId, role } = req.params;
 
@@ -148,7 +148,7 @@ const updateProfile = async (req: CustomRequest) => {
 };
 
 // API - Delete User Profile
-const deleteProfile = async (req: Request) => {
+const deleteProfile = async (req: Request):Promise<any> => {
     try {
         const { userId, role } = req.params;
 
