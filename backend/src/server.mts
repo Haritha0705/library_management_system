@@ -8,6 +8,7 @@ import connectDB from "./config/db.mjs";
 import connectCloudinary from "./config/cloudinary.mjs";
 import authRoutes from "./routes/authRoutes.mjs";
 import bookRoutes from "./routes/bookRoutes.mjs";
+import userRoutes from "./routes/userRoutes.mjs";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.use("/api/v1/auth",authRoutes);
 app.use("/api/v1/book",bookRoutes);
+app.use("/api/v1/user",userRoutes);
 
 // Start server
 const startServer = async () => {

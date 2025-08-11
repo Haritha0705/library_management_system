@@ -6,7 +6,7 @@ import memberModel from "../models/memberModel.mjs";
 import librarianModel from "../models/librarianModel.mjs";
 import memberProfileModel from "../models/memberProfileModel.mjs";
 
-// User Login
+//API - User Login
 const userLogin = async (req: Request, res: Response):Promise<any> => {
     try {
         const { email, password, role } = req.body;
@@ -58,64 +58,81 @@ const userLogin = async (req: Request, res: Response):Promise<any> => {
     }
 };
 
-// User Register
-const userRegister = async (req: Request, res: Response):Promise<any> => {
+//API - User Register
+const userRegister = async (req: Request, res: Response): Promise<any> => {
     try {
         const { password, username, email, role } = req.body;
 
+        // Validate required fields
         if (!password || !email || !username || !role) {
-            return res.status(400).json({ success: false, message: "Missing some required fields" });
+            return res.status(400).json({ success: false, message: "Missing required fields" });
         }
 
+
+        // Validate email format
         if (!validator.isEmail(email)) {
-            return res.status(400).json({ success: false, message: "Enter a valid email!" });
+            return res.status(400).json({ success: false, message: "Enter a valid email" });
         }
 
+        // Validate password length
         if (password.length < 8) {
             return res.status(400).json({ success: false, message: "Password must be at least 8 characters long" });
         }
 
+        // Check if user already exists by email or username
         const existingUser = await memberModel.findOne({ $or: [{ email }, { username }] });
         if (existingUser) {
             return res.status(409).json({ success: false, message: "User already exists" });
         }
 
+        // Hash password securely
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        let newUser, newProfile, userType;
-
-        if (role === "member") {
-            userType = "member";
-            newUser = await memberModel.create({
-                email,
-                username,
-                password: hashedPassword
-            });
-
-            newProfile = await memberProfileModel.create({
-                studentId: newUser._id,
-                full_name: "",
-                bio: "",
-                phone: "",
-                address: "",
-                profilePic: "",
-            });
-        } else {
+        // Only supporting 'member' role here — extend logic for others if needed
+        if (role !== "member") {
             return res.status(400).json({ success: false, message: "Invalid role" });
         }
 
-        const token = jwt.sign({ id: newUser._id, role: userType }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
+        // Create new user document
+        const newUser = await memberModel.create({
+            email,
+            username,
+            password: hashedPassword,
+        });
+
+        // Create empty profile linked to new user
+        const newProfile = await memberProfileModel.create({
+            member: newUser._id,
+            full_name: "",
+            bio: "",
+            phone: "",
+            address: "",
+            profilePic: "",
+        });
+
+        // Generate JWT token
+        const token = jwt.sign(
+            { id: newUser._id, role: role },
+            process.env.JWT_SECRET as string,
+            { expiresIn: "1d" }
+        );
 
         return res.status(201).json({
             success: true,
-            message: `${userType.charAt(0).toUpperCase() + userType.slice(1)} register successful`,
-            user: newUser,
-            token
+            message: "Member registration successful",
+            user: {
+                id: newUser._id,
+                email: newUser.email,
+                username: newUser.username,
+                role: role,
+            },
+            token,
         });
     } catch (e: any) {
         console.error(e);
         return res.status(500).json({ success: false, message: "Something went wrong", error: e.message });
     }
 };
+
 
 export { userLogin, userRegister };

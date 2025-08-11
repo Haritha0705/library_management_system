@@ -1,21 +1,17 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, {Document, Schema, Types} from "mongoose";
 
 export interface ILibrarian extends Document{
-    name: string
+    username: string
     email: string
     password: string
-    image?: string
-    phone?: string
-    address?: string
+    profile:Types.ObjectId
 }
 
 const librarianSchema = new Schema<ILibrarian>({
-    name: { type: String, required: true },
+    profile: { type: Schema.Types.ObjectId, ref: "LibrarianProfile" },
+    username: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    image: { type: String },
-    phone: { type: String },
-    address: { type: String },
 }, { timestamps: true });
 
 const librarianModel = mongoose.model<ILibrarian>("Librarian", librarianSchema);
