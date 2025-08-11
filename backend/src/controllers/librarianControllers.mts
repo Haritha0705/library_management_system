@@ -123,33 +123,4 @@ const deleteBook = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-//API -  Get in Book by id
-const getBook = async (req: CustomRequest, res: Response): Promise<void> => {
-    try {
-        const {bId} = req.params;
-
-        // Check if memberId is provided
-        if (!bId) {
-            res.status(400).json({success: false, message: "Book ID is required",});
-            return
-        }
-        // Fetch member and exclude password
-        const bookData = await bookModel.findById(bId);
-
-        if (!bookData) {
-            res.status(404).json({success: false, message: "Book not found",});
-            return;
-        }
-
-        // Return success response
-        res.status(200).json({success: true, bookData});
-        return ;
-
-    } catch (e: any) {
-        console.error(e);
-        res.status(500).json({success: false, message: e.message});
-        return ;
-    }
-};
-
-export {addBook,getAllBooks,updateBook,deleteBook,getBook}
+export {addBook,getAllBooks,updateBook,deleteBook}

@@ -6,18 +6,17 @@ import {
     getProfile,
     updateProfile
 } from "../controllers/memberControllers.mjs";
-import authMember from "../middlewares/authUser.mjs";
-import { getAllBooks,getBook} from "../controllers/librarianControllers.mjs";
+import {authMember} from "../middlewares/authMiddlewares.mjs";
+import { getAllBooks} from "../controllers/librarianControllers.mjs";
 import upload from "../middlewares/multer.mjs";
 
 const memberRouter = Router();
 
 //Member Routes
-memberRouter.get("/get-profile/:id",authMember,getProfile)
 memberRouter.put("/update-profile/:id",authMember,upload.single('image'),updateProfile)
 
 //Book Route
-memberRouter.get("/get-book/:bId",authMember,getBook)
+
 
 //Issue/Return/Overdue book
 memberRouter.post("/book/:bId/borrow/:mId",authMember,bookBorrow)
@@ -30,4 +29,3 @@ memberRouter.get("/search-book",authMember,bookSearch)
 memberRouter.get("/get-allBooks",authMember,getAllBooks)
 
 export default memberRouter;
-
