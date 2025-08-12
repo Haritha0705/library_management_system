@@ -1,6 +1,7 @@
 export interface LoginModel {
     email?:string,
     password?:string,
+    role?:string
 }
 
 export interface LoginResponse {

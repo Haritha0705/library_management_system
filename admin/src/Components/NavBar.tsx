@@ -9,7 +9,7 @@ const NavBar:React.FC = () => {
 
     if (!adminContext) return null
 
-    const { token,setToken } = adminContext;
+    const { setToken,role } = adminContext;
 
     const logout = () => {
         navigate("/")
@@ -22,7 +22,7 @@ const NavBar:React.FC = () => {
             <div className="flex items-center gap-2 text-xs">
                 <img className="cursor-pointer h-8 sm:w-40" src={logo} alt="Admin Logo" />
                 <p className="border px-2 py-0.5 rounded-full border-gray-500 to-gray-600">
-                    {token ? 'Admin' : 'Doctor'}
+                    {role ? 'admin' : 'librarian'}
                 </p>
             </div>
             <button
