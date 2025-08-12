@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import memberModel from "../models/memberModel.mjs";
 import librarianModel from "../models/librarianModel.mjs";
-import memberProfileModel from "../models/memberProfileModel.mjs";
 
 //API - User Login
 const userLogin = async (req: Request, res: Response):Promise<any> => {
@@ -68,7 +67,6 @@ const userRegister = async (req: Request, res: Response): Promise<any> => {
             return res.status(400).json({ success: false, message: "Missing required fields" });
         }
 
-
         // Validate email format
         if (!validator.isEmail(email)) {
             return res.status(400).json({ success: false, message: "Enter a valid email" });
@@ -88,7 +86,6 @@ const userRegister = async (req: Request, res: Response): Promise<any> => {
         // Hash password securely
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Only supporting 'member' role here — extend logic for others if needed
         if (role !== "member") {
             return res.status(400).json({ success: false, message: "Invalid role" });
         }
@@ -100,22 +97,8 @@ const userRegister = async (req: Request, res: Response): Promise<any> => {
             password: hashedPassword,
         });
 
-        // Create empty profile linked to new user
-        const newProfile = await memberProfileModel.create({
-            member: newUser._id,
-            full_name: "",
-            bio: "",
-            phone: "",
-            address: "",
-            profilePic: "",
-        });
-
         // Generate JWT token
-        const token = jwt.sign(
-            { id: newUser._id, role: role },
-            process.env.JWT_SECRET as string,
-            { expiresIn: "1d" }
-        );
+        const token = jwt.sign({ id: newUser._id, role: role }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
 
         return res.status(201).json({
             success: true,
@@ -133,6 +116,5 @@ const userRegister = async (req: Request, res: Response): Promise<any> => {
         return res.status(500).json({ success: false, message: "Something went wrong", error: e.message });
     }
 };
-
 
 export { userLogin, userRegister };

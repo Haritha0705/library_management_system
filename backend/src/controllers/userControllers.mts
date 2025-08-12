@@ -2,188 +2,193 @@ import { Request, Response } from "express";
 import memberModel from "../models/memberModel.mjs";
 import mongoose from "mongoose";
 import { v2 as cloudinary } from "cloudinary";
-import memberProfileModel from "../models/memberProfileModel.mjs";
-import librarianProfileModel from "../models/librarianProfileModel.mjs";
 import issueModel from "../models/issueModel.mjs";
 import librarianModel from "../models/librarianModel.mjs";
 
 interface CustomRequest extends Request {
-    user?: { id: string; role: string };
+    params: {
+        id?: string;
+        role?: string;
+    };
 }
 
 // API - Get User Profile
-const getProfile = async (req: CustomRequest, _: Response):Promise<any> => {
+const getProfile = async (req: CustomRequest, res: Response):Promise<void> => {
     try {
-        const { userId, role } = req.params;
+        const { id, role } = req.params;
 
-        let profile;
+        let profile = null;
 
         // check in userId enter
-        if (!userId) {
-            return { success: false, status: 400, message: "Missing User ID" };
+        if (!id) {
+            res.status(400).json({ success: false, message: "Missing User ID" });
+            return
         }
 
         if (!role) {
-            return { success: false, status: 400, message: "Missing User role" };
+            res.status(400).json({ success: false, status: 400, message: "Missing User role" });
+            return
         }
 
         if (role === "member") {
-            profile = await memberProfileModel.findOne({ member: userId });
+            profile = await memberModel.findById(id);
         } else if (role === "librarian") {
-            profile = await librarianProfileModel.findOne({ librarian: userId });
+            profile = await librarianModel.findById(id);
         } else {
-            return { success: false, message: "Invalid role" };
+            res.json({ success: false, message: "Invalid role" })
+            return
         }
 
         if (!profile) {
-            return { success: false, message: "Profile not found" };
+            res.json({ success: false, message: "Profile not found" });
+            return
         }
 
-        return { success: true, status: 200, profile };
+        res.status(200).json({ success: true, profile });
     } catch (e: any) {
         console.log(e);
-        return { success: false, status: 500, message: "Internal server error", error: e.message };
+        res.status(500).json({ success: false, message: "Internal server error", error: e.message })
+        return
     }
 };
 
 // API - Update User Profile
-const updateProfile = async (req: CustomRequest):Promise<any> => {
+const updateProfile = async (req: CustomRequest, res: Response): Promise<void> => {
     try {
-        const { userId, role } = req.params;
+        const { id, role } = req.params;
 
-        let updatedProfile: any = null;
-
-        // check in id enter
-        if (!userId) {
-            return { success: false, status: 400, message: "Missing User ID" };
+        if (!id) {
+            res.status(400).json({ success: false, message: "Missing User ID" });
+            return;
         }
 
         if (!role) {
-            return { success: false, status: 400, message: "Missing User role" };
+            res.status(400).json({ success: false, message: "Missing User role" });
+            return;
         }
 
+        const { full_name, bio, phone, address } = req.body;
+        const imageFile = (req as any).file;
+
+        let updatedProfile = null;
+
         if (role === "member") {
-            const { profilePic, full_name, bio, phone, address } = req.body;
-            const imageFile = (req as any).file;
-
-            // Check if profile exists before updating
-            const existingProfile = await memberProfileModel.findOne({ member: userId });
-
+            const existingProfile = await memberModel.findById(id);
             if (!existingProfile) {
-                return { success: false, status: 404, message: "User profile not found" };
+                res.status(404).json({ success: false, message: "User profile not found" });
+                return;
             }
 
-            // update fields (use $set)
-            const updateResult = await memberProfileModel.updateMany(
-                { member: userId },
-                {
-                    $set: {
-                        profilePic,
-                        full_name,
-                        bio,
-                        phone,
-                        address,
-                    },
-                }
-            );
-
-            // fetch updated profile(s)
-            updatedProfile = await memberProfileModel.findOne({ member: userId });
-
-            if (!updatedProfile) {
-                return { success: false, status: 404, message: "Member not found" };
-            }
+            let imageURL = existingProfile.image || null;
 
             if (imageFile) {
-                // upload image to cloudinary
-                const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
-                const imageURL = imageUpload.secure_url;
-
-                // update member's image (use userId as id)
-                await memberModel.findByIdAndUpdate(userId, { image: imageURL }, { new: true });
-            }
-        } else if (role === "librarian") {
-            const { profilePic, full_name, bio, phone, address } = req.body;
-            const imageFile = (req as any).file;
-
-            // Check if profile exists before updating
-            const existingProfile = await librarianProfileModel.findOne({ librarian: userId });
-
-            if (!existingProfile) {
-                return { success: false, status: 404, message: "User profile not found" };
+                const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
+                    resource_type: "image",
+                });
+                imageURL = imageUpload.secure_url;
             }
 
-            // Update by the profile document _id (so we avoid assuming _id === userId)
-            const profileIdToUpdate = existingProfile._id;
-
-            const updateResult = await librarianProfileModel.findByIdAndUpdate(
-                profileIdToUpdate,
-                { profilePic, full_name, bio, phone, address },
+            updatedProfile = await memberModel.findByIdAndUpdate(
+                id,
+                {
+                    full_name,
+                    phone,
+                    address,
+                    image: imageURL,
+                },
                 { new: true }
             );
 
-            updatedProfile = updateResult;
-
             if (!updatedProfile) {
-                return { success: false, status: 404, message: "Librarian not found" };
+                res.status(404).json({ success: false, message: "Member not found" });
+                return;
             }
+
+        } else if (role === "librarian") {
+            const existingProfile = await librarianModel.findById(id);
+            if (!existingProfile) {
+                res.status(404).json({ success: false, message: "User profile not found" });
+                return;
+            }
+
+            let imageURL = existingProfile.image || null;
 
             if (imageFile) {
-                // upload image to cloudinary
-                const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
-                const imageURL = imageUpload.secure_url;
-
-                // update memberModel image if applicable (use userId)
-                await memberModel.findByIdAndUpdate(userId, { image: imageURL }, { new: true });
+                const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
+                    resource_type: "image",
+                });
+                imageURL = imageUpload.secure_url;
             }
+
+            updatedProfile = await librarianModel.findByIdAndUpdate(
+                existingProfile._id,
+                {
+                    full_name,
+                    phone,
+                    address,
+                    image: imageURL,
+                },
+                { new: true }
+            );
+
+            if (!updatedProfile) {
+                res.status(404).json({ success: false, message: "Librarian not found" });
+                return;
+            }
+
         } else {
-            return { success: false, message: "Invalid role" };
+            res.status(400).json({ success: false, message: "Invalid role" });
+            return;
         }
 
-        return { success: true, status: 200, updateProfile: updatedProfile };
+        res.status(200).json({ success: true, updatedProfile });
     } catch (e: any) {
-        console.log(e);
-        return { success: false, status: 500, message: "Internal server error", error: e.message };
+        console.error(e);
+        res.status(500).json({ success: false, message: "Internal server error", error: e.message });
     }
 };
 
-// API - Delete User Profile
-const deleteProfile = async (req: Request):Promise<any> => {
-    try {
-        const { userId, role } = req.params;
 
-        // check in id enter
-        if (!userId) {
-            return { success: false, status: 400, message: "Missing User ID" };
+// API - Delete User Profile
+const deleteProfile = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id, role } = req.params;
+
+        if (!id) {
+            res.status(400).json({ success: false, message: "Missing User ID" });
+            return;
         }
 
         if (!role) {
-            return { success: false, status: 400, message: "Missing User role" };
+            res.status(400).json({ success: false, message: "Missing User role" });
+            return;
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400).json({ success: false, message: "Invalid User ID format" });
+            return;
         }
 
         if (role === "member") {
-            // Delete student's issues (enrollments)
-            await issueModel.deleteMany({ _id: new mongoose.Types.ObjectId(userId) });
+            // Delete issues related to this member
+            await issueModel.deleteMany({ memberId: new mongoose.Types.ObjectId(id) });
 
-            // Delete student profile
-            await memberProfileModel.deleteMany({ member: userId });
+            // Delete the member profile
+            const deleteResult = await memberModel.deleteOne({ _id: id });
 
-            // Delete Student (by _id)
-            await memberModel.deleteMany({ _id: userId });
-        } else if (role === "librarian") {
-            // Delete Instructor profile
-            await librarianProfileModel.deleteMany({ librarian: userId });
-
-            // Delete Instructor (by _id)
-            await librarianModel.deleteMany({ _id: userId });
+            if (deleteResult.deletedCount === 0) {
+                res.status(404).json({ success: false, message: "Member profile not found" });
+                return;
+            }
         } else {
-            return { success: false, message: "Invalid role" };
+            res.status(400).json({ success: false, message: "Invalid role" });
+            return;
         }
 
-        return { success: true, status: 200, message: `${role} profile deleted successfully` };
+        res.status(200).json({ success: true, message: `${role} profile deleted successfully` });
     } catch (e: any) {
-        console.log(e);
-        return { success: false, status: 500, message: "Internal server error", error: e.message };
+        console.error(e);
+        res.status(500).json({ success: false, message: "Internal server error", error: e.message });
     }
 };
 

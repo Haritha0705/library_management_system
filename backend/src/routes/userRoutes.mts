@@ -8,8 +8,8 @@ const userRoutes = Router();
 
 //User Routes
 
-userRoutes.get("/get-profile/:role/:userId",authMiddleware,roleMiddleware("librarian","member"),getProfile)
-userRoutes.patch("/update-profile/:role/:userId",authMiddleware,roleMiddleware("librarian","member"),upload.single('image'),updateProfile)
-userRoutes.delete("/get-profile/:role/:userId",authMiddleware,roleMiddleware("librarian","member"),deleteProfile)
+userRoutes.get("/get-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),getProfile)
+userRoutes.patch("/update-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),upload.single('image'),updateProfile)
+userRoutes.delete("/delete-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),deleteProfile)
 
 export default userRoutes

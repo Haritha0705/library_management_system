@@ -1,12 +1,12 @@
 const BackendEndpoints = {
     //auth
-    Login_Admin:"api/v1/admin/login",
+    Login_Admin:"api/v1/auth/login",
 
     //add Librarian
-    ADD_LIBRARIAN:"api/v1/admin/add-librarian",
+    ADD_LIBRARIAN:"api/v1/dashboard/add-librarian",
 
     //get all Librarian
-    ALL_LIBRARIANS:"api/v1/admin/get-allLibrarian"
+    ALL_LIBRARIANS:"api/v1/dashboard/get-allLibrarian"
 }
 
 export default BackendEndpoints

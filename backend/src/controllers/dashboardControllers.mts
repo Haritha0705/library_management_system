@@ -2,21 +2,23 @@ import {Request,Response} from "express";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import {v2 as cloudinary} from "cloudinary"
-import librarianModel from "../../models/librarianModel.mjs";
-import memberModel from "../../models/memberModel.mjs";
+import librarianModel from "../models/librarianModel.mjs";
+import memberModel from "../models/memberModel.mjs";
 
 //API - librarian account create
 const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
     try {
-        const {name,email,password,phone,address} = req.body;
+        const {username,full_name,email,password,phone,address} = req.body;
+
+        const imageFile = req.file
 
         // Check if file exists first
-        if (!req.file) {
+        if (!imageFile) {
             return res.status(400).json({ success: false, message: "Image file is required" });
         }
 
         //chacking all data add
-        if (!name || !email || !password || !phone || !address ){
+        if (!username || !full_name || !email || !password || !phone || !address ){
             return  res.status(400).json({success: false, message: "Missing Details!"});
         }
 
@@ -35,11 +37,12 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
         const hashPassword = await bcrypt.hash(password,salt)
 
         //upload image upload cloudinary
-        const imageUpload = await cloudinary.uploader.upload(req.file.path,{resource_type:"image"})
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path,{resource_type:"image"})
         const imageUrl = imageUpload.secure_url
 
         const librarianData = {
-            name,
+            username,
+            full_name,
             email,
             image:imageUrl,
             password:hashPassword,
@@ -47,7 +50,6 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
             address,
             joinedDate:Date.now()
         }
-
 
         const newLibrarian = new librarianModel(librarianData)
         await newLibrarian.save()
@@ -61,7 +63,7 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
 }
 
 //API - view All Members
-const getAllMemers = async (req: Request, res: Response):Promise<any> =>{
+const getAllMembers = async (_: Request, res: Response):Promise<any> =>{
     try {
         const members = await memberModel.find({}).select('-password')
         return res.status(200).json({success:true,message:members})
@@ -101,5 +103,5 @@ const deleteLibrarian = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-export {addLibrarian,getAllMemers,getAllLibrarian,deleteLibrarian}
+export {addLibrarian,getAllMembers,getAllLibrarian,deleteLibrarian}
 

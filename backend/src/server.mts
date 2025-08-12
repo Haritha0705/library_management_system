@@ -1,33 +1,28 @@
 import express from "express";
 import cors from 'cors';
 import "dotenv/config"
-// import memberRouter from "./routes/memberRoutes.mjs";
-// import adminRouter from "./routes/adminRoutes.mjs";
-// import librarianRouter from "./routes/librarianRoutes.mjs";
 import connectDB from "./config/db.mjs";
 import connectCloudinary from "./config/cloudinary.mjs";
 import authRoutes from "./routes/authRoutes.mjs";
 import bookRoutes from "./routes/bookRoutes.mjs";
 import userRoutes from "./routes/userRoutes.mjs";
+import dashboardRoutes from "./routes/dashboardRoutes.mjs";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:5174',
     credentials: true
 }));
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// app.use("/api/v1/admin",adminRouter);
-// app.use("/api/v1/librarian",librarianRouter);
-// app.use("/api/v1/member",memberRouter);
-
 app.use("/api/v1/auth",authRoutes);
 app.use("/api/v1/book",bookRoutes);
 app.use("/api/v1/user",userRoutes);
+app.use("/api/v1/dashboard",dashboardRoutes);
 
 // Start server
 const startServer = async () => {
@@ -43,4 +38,5 @@ const startServer = async () => {
         process.exit(1);
     }
 };
+
 startServer();
