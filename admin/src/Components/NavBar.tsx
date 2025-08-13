@@ -20,9 +20,9 @@ const NavBar:React.FC = () => {
     return (
         <div className="flex justify-between items-center bg-white px-4 sm:px-10 py-3 border-b">
             <div className="flex items-center gap-2 text-xs">
-                <img className="cursor-pointer h-8 sm:w-40" src={logo} alt="Admin Logo" />
+                <img className="cursor-pointer h-8 sm:w-40" src={logo} alt="Logo" />
                 <p className="border px-2 py-0.5 rounded-full border-gray-500 to-gray-600">
-                    {role ? 'admin' : 'librarian'}
+                    {role}
                 </p>
             </div>
             <button
