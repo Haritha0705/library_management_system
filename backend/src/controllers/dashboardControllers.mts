@@ -66,7 +66,7 @@ const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
 const getAllMembers = async (_: Request, res: Response):Promise<any> =>{
     try {
         const members = await memberModel.find({}).select('-password')
-        return res.status(200).json({success:true,message:members})
+        return res.status(200).json({success:true,data:members})
     } catch (error: any) {
         console.error(error);
         return  res.status(500).json({success: false, message: "Something went wrong", error: error.message,});

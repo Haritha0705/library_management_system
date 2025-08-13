@@ -49,7 +49,7 @@ const LibrariansList: React.FC = () => {
     }
 
     if (librariansList.length === 0) {
-        return <div className="p-4 text-gray-600">No Users</div>;
+        return <div className="p-4 text-gray-600">No librarians</div>;
     }
 
     return (
@@ -59,7 +59,6 @@ const LibrariansList: React.FC = () => {
                     key={librarian._id}
                     className="flex items-center justify-between bg-white px-6 py-8 rounded-lg shadow-md border border-gray-200"
                 >
-                    {/* User Info */}
                     <div className="flex items-center space-x-4">
                         {librarian.image && typeof librarian.image === "string" ? (
                             <img
@@ -81,7 +80,6 @@ const LibrariansList: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Delete Button */}
                     <button
                         onClick={() => handleDelete(librarian._id)}
                         className="px-6 py-3 bg-red-500 hover:bg-red-600 cursor-pointer text-white rounded-lg text-sm font-medium transition"

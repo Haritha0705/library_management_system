@@ -9,7 +9,10 @@ const BackendEndpoints = {
     ALL_LIBRARIANS:"api/v1/dashboard/get-allLibrarian",
 
     //delete Librarian
-    DELETE_LIBRARIAN:"api/v1/dashboard/delete-librarian"
+    DELETE_LIBRARIAN:"api/v1/dashboard/delete-librarian",
+
+    //get all Members
+    ALL_Members:"api/v1/dashboard/get-allMembers",
 
 }
 
