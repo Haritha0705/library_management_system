@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import type { LibrarianModel, LibrarianResponse } from "../../Models/librarian.model.ts";
+import type { LibrarianModel, LibrarianResponse } from "../../Models/librarian.model";
 import { toast } from "react-toastify";
-import { getAllLibrarians } from "../../Service/librarians-list.service.ts";
-import { AdminContext } from "../../Context/AdminProvider.tsx";
+import { deleteLibrarian, getAllLibrarians } from "../../Service/librarians.service";
+import { AdminContext } from "../../Context/AdminProvider";
 
 const LibrariansList: React.FC = () => {
     const [librariansList, setLibrariansList] = useState<LibrarianModel[]>([]);
@@ -18,21 +18,31 @@ const LibrariansList: React.FC = () => {
             setLoading(false);
             return;
         }
-
-        const fetchData = async () => {
-            try {
-                const res: LibrarianResponse = await getAllLibrarians(token);
-                setLibrariansList(res.data || []);
-            } catch (apiError: any) {
-                toast.error(apiError.message || "Failed to fetch librarians");
-                console.error("Error fetching librarians:", apiError);
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchData();
     }, [token]);
+
+    const fetchData = async () => {
+        try {
+            const res: LibrarianResponse = await getAllLibrarians(token);
+            setLibrariansList(res.data || []);
+        } catch (apiError: any) {
+            toast.error(apiError.message || "Failed to fetch librarians");
+            console.error("Error fetching librarians:", apiError);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleDelete = async (id: string) => {
+        try {
+            await deleteLibrarian(id, token);
+            toast.success("Librarian deleted successfully");
+            setLibrariansList((prev) => prev.filter((lib) => lib._id !== id));
+        } catch (apiError: any) {
+            toast.error(apiError.message || "Failed to delete librarian");
+            console.error("Error deleting librarian:", apiError);
+        }
+    };
 
     if (loading) {
         return <div className="p-4 text-gray-600">Loading librarians...</div>;
@@ -44,9 +54,9 @@ const LibrariansList: React.FC = () => {
 
     return (
         <div className="h-screen overflow-y-auto p-4 space-y-4 bg-gray-50 w-full">
-            {librariansList.map((librarian, index) => (
+            {librariansList.map((librarian) => (
                 <div
-                    key={index}
+                    key={librarian._id}
                     className="flex items-center justify-between bg-white px-6 py-8 rounded-lg shadow-md border border-gray-200"
                 >
                     {/* User Info */}
@@ -73,7 +83,7 @@ const LibrariansList: React.FC = () => {
 
                     {/* Delete Button */}
                     <button
-                        // onClick={() => handleDelete(librarian._id)}
+                        onClick={() => handleDelete(librarian._id)}
                         className="px-6 py-3 bg-red-500 hover:bg-red-600 cursor-pointer text-white rounded-lg text-sm font-medium transition"
                     >
                         Delete

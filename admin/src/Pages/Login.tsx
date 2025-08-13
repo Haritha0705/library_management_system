@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import type { LoginModel,LoginResponse } from "../Models/login.model";
-import { loginAdmin } from "../Service/login-management.service.ts";
+import { loginAdmin } from "../Service/auth.service.ts";
 import {AdminContext} from "../Context/AdminProvider.tsx";
 
 const Login: React.FC = () => {

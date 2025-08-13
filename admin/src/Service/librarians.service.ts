@@ -13,3 +13,15 @@ export const getAllLibrarians = async (token:string): Promise<LibrarianResponse[
         throw apiError;
     }
 };
+
+export const deleteLibrarian = async (id:string,token:string):Promise<any>=>{
+    try {
+        const apiResponse = await AxiosService.delete(
+            `${BackendEndpoints.DELETE_LIBRARIAN}/${id}`,
+            {headers: {Authorization: `Bearer ${token}`}}
+        );
+        return apiResponse.data;
+    }catch (apiError) {
+        throw apiError;
+    }
+}

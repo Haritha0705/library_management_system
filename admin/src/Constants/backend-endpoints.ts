@@ -6,7 +6,11 @@ const BackendEndpoints = {
     ADD_LIBRARIAN:"api/v1/dashboard/add-librarian",
 
     //get all Librarian
-    ALL_LIBRARIANS:"api/v1/dashboard/get-allLibrarian"
+    ALL_LIBRARIANS:"api/v1/dashboard/get-allLibrarian",
+
+    //delete Librarian
+    DELETE_LIBRARIAN:"api/v1/dashboard/delete-librarian"
+
 }
 
 export default BackendEndpoints
