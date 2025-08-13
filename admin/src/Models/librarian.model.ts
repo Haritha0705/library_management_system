@@ -9,7 +9,6 @@ export interface LibrarianModel {
 }
 
 export interface LibrarianResponse {
-    token?:string;
     success:boolean;
     data:LibrarianModel[]
 }

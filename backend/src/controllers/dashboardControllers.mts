@@ -77,7 +77,7 @@ const getAllMembers = async (_: Request, res: Response):Promise<any> =>{
 const getAllLibrarian = async (req: Request, res: Response):Promise<any> =>{
     try {
         const librarians = await librarianModel.find({}).select('-password')
-        return res.status(200).json({success:true,message:librarians})
+        return res.status(200).json({success:true,data:librarians})
     } catch (error: any) {
         console.error(error);
         return  res.status(500).json({success: false, message: "Something went wrong", error: error.message,});

@@ -23,7 +23,7 @@ const Login: React.FC = () => {
         const reqBody: LoginModel = { email, password, role:state.toLowerCase() };
 
         try {
-            const response: LoginResponse = await loginAdmin(reqBody);
+            const response: LoginResponse = await loginAdmin(reqBody) as LoginResponse;
 
             if (response?.success && response.token) {
                 localStorage.setItem("token", response.token);

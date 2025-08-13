@@ -21,8 +21,6 @@ const App:React.FC = ()=> {
   if (!adminContext) return null
 
   const {token,role} = adminContext
-    console.log(role)
-
 
   return token ?(
     <div className={"bg-[#F8F9FD]"}>
