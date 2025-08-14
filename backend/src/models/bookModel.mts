@@ -4,7 +4,7 @@ export interface IBook extends Document {
     title: string;
     author: string;
     category: string;
-    image?: string;
+    image: string;
     description:string;
     availableCopies: number;
 }

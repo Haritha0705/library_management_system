@@ -14,6 +14,9 @@ const BackendEndpoints = {
     //get all Members
     ALL_Members:"api/v1/dashboard/get-allMembers",
 
+    //add Book
+    ADD_BOOK:"api/v1/book/add-book"
+
 }
 
 export default BackendEndpoints
