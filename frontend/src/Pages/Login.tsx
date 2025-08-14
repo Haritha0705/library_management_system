@@ -1,14 +1,14 @@
 import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {loginMember} from "../Services/authService.ts";
+import {loginMember, registerMember} from "../Services/authService.ts";
 import {AdminContext} from "../Context/AdminProvider.tsx";
-import type {LoginModel, LoginResponse} from "../Model/login.model.ts";
+import type {LoginModel, LoginResponse, RegisterModel, RegisterResponse} from "../Model/auth.model.ts";
 
 const Login: React.FC = () => {
     const [mode, setMode] = useState<'Sign Up' | 'Login'>('Login');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [error, setError] = useState<string | null>(null);
 
     const navigate = useNavigate();
@@ -20,25 +20,28 @@ const Login: React.FC = () => {
 
     const onSubmitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
-        const reqBody: LoginModel = { email, password, role:"member" };
+        const reqLoginBody: LoginModel = { email, password, role:"member" };
+        const reqRegisterBody: RegisterModel = { username,email, password, role:"member" };
 
         try {
             if (mode === 'Sign Up') {
-                // await registerUser(name,email,password)
-                // setError('Registered successfully!')
-                navigate('/');
-            } else if (mode === 'Login'){
-                const response: LoginResponse = await loginMember(reqBody) as LoginResponse;
-
-                if (response?.success && response.token) {
-                    localStorage.setItem("token", response.token);
-                    setToken(response.token);
+                const res:LoginResponse = await registerMember(reqRegisterBody)
+                if (res.token && res.success){
+                    localStorage.setItem("token", res.token);
+                    setToken(res.token);
                     navigate('/');
-                } else {
-                    toast.error(response?.message || "Login failed");
                 }
+            } else if (mode === 'Login') {
+                const res:RegisterResponse = await loginMember(reqLoginBody);
+                if (res.token && res.success){
+                    localStorage.setItem("token", res.token);
+                    setToken(res.token);
+                    navigate('/');
+                }
+            } else {
+                    toast.error(response?.message || "Login failed");
             }
-        } catch (err: any) {
+        } catch (err) {
             console.error('Auth error:', err);
             setError(err.response?.data?.message || 'Something went wrong');
         }
@@ -70,9 +73,9 @@ const Login: React.FC = () => {
                         <input
                             type="text"
                             className="border border-zinc-300 w-full rounded-lg p-2"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="John Doe"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Enter Username"
                             required
                         />
                     </div>
@@ -104,8 +107,8 @@ const Login: React.FC = () => {
 
                 <button
                     type="submit"
-                    disabled={!email || !password || (mode === 'Sign Up' && !name)}
-                    className="bg-blue-600 hover:bg-blue-700 cursor-pointer disabled:opacity-50 text-white w-full rounded-md text-base py-2 transition"
+                    disabled={!email || !password || (mode === 'Sign Up' && !username)}
+                    className="bg-primary hover:bg-blue-700 cursor-pointer disabled:opacity-50 text-white w-full rounded-md text-base py-2 transition"
                 >
                     {mode === 'Sign Up' ? 'Create Account' : 'Login'}
                 </button>
