@@ -11,6 +11,7 @@ import {
     bookBorrow,
     bookReturn
 } from "../controllers/bookControllers.mjs";
+import upload from "../middlewares/multer.mjs";
 
 const bookRoutes = Router();
 
@@ -23,7 +24,7 @@ bookRoutes.get("/search-book",authMiddleware,roleMiddleware("member"),bookSearch
 bookRoutes.post("/:bookId/borrow/:memberId",authMiddleware,roleMiddleware("member"),bookBorrow)
 bookRoutes.post("/:bookId/return/:memberId",authMiddleware,roleMiddleware("member"),bookReturn)
 
-bookRoutes.post("/add-book",authMiddleware,roleMiddleware("librarian"),addBook)
+bookRoutes.post("/add-book",authMiddleware,roleMiddleware("librarian"),upload.single('image'),addBook)
 bookRoutes.patch("/update-book/:id",authMiddleware,roleMiddleware("librarian"),updateBook)
 bookRoutes.delete("/delete-book/:id",authMiddleware,roleMiddleware("librarian"),deleteBook)
 

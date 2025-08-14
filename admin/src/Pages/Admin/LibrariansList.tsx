@@ -13,14 +13,6 @@ const LibrariansList: React.FC = () => {
 
     const { token } = adminContext;
 
-    useEffect(() => {
-        if (!token) {
-            setLoading(false);
-            return;
-        }
-        fetchData();
-    }, [token]);
-
     const fetchData = async () => {
         try {
             const res: LibrarianResponse = await getAllLibrarians(token);
@@ -32,6 +24,14 @@ const LibrariansList: React.FC = () => {
             setLoading(false);
         }
     };
+    useEffect(() => {
+        if (!token) {
+            setLoading(false);
+            return;
+        }
+        fetchData();
+    }, [token]);
+
 
     const handleDelete = async (id: string) => {
         try {

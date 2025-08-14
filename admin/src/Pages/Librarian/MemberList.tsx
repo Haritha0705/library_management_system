@@ -13,14 +13,6 @@ const MemberList:React.FC = () => {
 
     const { token } = adminContext;
 
-    useEffect(() => {
-        if (!token) {
-            setLoading(false);
-            return;
-        }
-        fetchData();
-    }, [token]);
-
     const fetchData = async () => {
         try {
             const res: MemberResponse = await getAllMembers(token);
@@ -32,6 +24,15 @@ const MemberList:React.FC = () => {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (!token) {
+            setLoading(false);
+            return;
+        }
+        fetchData();
+    }, [token]);
+
 
     if (loading) {
         return <div className="p-4 text-gray-600">Loading Members...</div>;
@@ -63,7 +64,7 @@ const MemberList:React.FC = () => {
                             </div>
                         )}
                         <div>
-                            <p className="font-semibold text-xl text-gray-800">{member.name}</p>
+                            <p className="font-semibold text-xl text-gray-800">{member.username}</p>
                             <p className="text-sm text-gray-500">{member.email}</p>
                         </div>
                     </div>

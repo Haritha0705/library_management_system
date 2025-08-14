@@ -2,6 +2,7 @@ import {Request,Response} from "express";
 import bookModel from "../models/bookModel.mjs";
 import mongoose from "mongoose";
 import Issue from "../models/issueModel.mjs";
+import {v2 as cloudinary} from "cloudinary"
 
 interface CustomRequest extends Request {
     body: {
@@ -51,14 +52,26 @@ const addBook = async (req: AuthenticatedRequest, res: Response):Promise<any> =>
     try {
         const {title, author, category, description,availableCopies} = req.body;
 
+        const imageFile = req.file
+
+        // Check if file exists first
+        if (!imageFile) {
+            return res.status(400).json({ success: false, message: "Image file is required" });
+        }
+
         //checking for all data to add book
         if (!title || !author ||  !category || !description || !availableCopies){
             return res.status(400).json({success:false,message:"Missing Details!"})
         }
 
+        //upload image upload cloudinary
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path,{resource_type:"image"})
+        const imageUrl = imageUpload.secure_url
+
         const bookData = {
             title,
             author,
+            image:imageUrl,
             category,
             description,
             availableCopies
