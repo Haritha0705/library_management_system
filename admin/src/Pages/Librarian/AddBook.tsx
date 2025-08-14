@@ -68,6 +68,7 @@ const AddBook: React.FC = () => {
                         onChange={(e) => e.target.files && setImage(e.target.files[0])}
                         type="file"
                         id="lib-img"
+                        required
                         hidden
                     />
                     <p className="text-lg font-medium">

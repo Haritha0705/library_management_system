@@ -1,32 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {assets} from "../assets/assets.ts";
 import {NavLink, useNavigate} from "react-router-dom";
 import { Menu, X,ChevronDown } from "lucide-react";
-import {getToken, removeToken} from "../Utils/tokenHelper.ts";
-import {logoutUser} from "../Services/authService.ts";
+import {AdminContext} from "../Context/AdminProvider.tsx";
 
 const NavBar:React.FC = () => {
 
     const [showMenu,setShowMenu] = useState(false)
-    const [token,setToken] = useState(true)
     const navigate = useNavigate();
 
+    const adminContext = useContext(AdminContext);
+
+    if (!adminContext) return null;
+
+    const { token } = adminContext;
 
     const logout = async ()=>{
-        try {
-            await logoutUser()
-            removeToken()
-            setToken(false)
-            navigate("/login")
-        }catch (e) {
-            console.log(e)
-        }
+        console.log("adsf")
     }
 
-    useEffect(() => {
-        const storedToken = getToken()
-        setToken(!!storedToken)
-    }, []);
     return(
         <div className={"flex mb-5 py-4 items-center justify-between border-b border-b-gray-400"}>
             <div className={"flex gap-2"}>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {loginUser, registerUser} from "../Services/authService.ts";
-import {saveToken} from "../Utils/tokenHelper.ts";
+import {loginMember} from "../Services/authService.ts";
+import {AdminContext} from "../Context/AdminProvider.tsx";
+import type {LoginModel, LoginResponse} from "../Model/login.model.ts";
 
 const Login: React.FC = () => {
     const [mode, setMode] = useState<'Sign Up' | 'Login'>('Login');
@@ -11,19 +12,31 @@ const Login: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
 
     const navigate = useNavigate();
+    const adminContext = useContext(AdminContext);
+
+    if (!adminContext) return null
+
+    const { setToken } = adminContext;
 
     const onSubmitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
+        const reqBody: LoginModel = { email, password, role:"member" };
+
         try {
             if (mode === 'Sign Up') {
-                await registerUser(name,email,password)
-                setError('Registered successfully!')
+                // await registerUser(name,email,password)
+                // setError('Registered successfully!')
                 navigate('/');
             } else if (mode === 'Login'){
-                const data = await loginUser(email,password)
-                saveToken(data.token)
-                setError('Log in success')
-                navigate('/');
+                const response: LoginResponse = await loginMember(reqBody) as LoginResponse;
+
+                if (response?.success && response.token) {
+                    localStorage.setItem("token", response.token);
+                    setToken(response.token);
+                    navigate('/');
+                } else {
+                    toast.error(response?.message || "Login failed");
+                }
             }
         } catch (err: any) {
             console.error('Auth error:', err);

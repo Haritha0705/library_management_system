@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { getProfile } from "../Services/authService";
-import { getUserIdFromToken } from "../Utils/tokenHelper";
+import React, { useState } from "react";
 import userimg from "../assets/userIcon.png"
-import {loginUser} from "../Services/login-managment.service.ts";
 
 export interface UserProfile {
     name: string;
@@ -16,48 +13,48 @@ const MyProfile: React.FC = () => {
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchProfile = async () => {
-            try {
-                const userId: string | null = getUserIdFromToken();
+    // useEffect(() => {
+    //     const fetchProfile = async () => {
+    //         try {
+    //             const userId: string | null = getUserIdFromToken();
+    //
+    //             if (!userId) {
+    //                 setError("User ID not found. Please log in again.");
+    //                 return;
+    //             }
+    //
+    //             const data = await getProfile(userId);
+    //             setProfile(data);
+    //         } catch (err: any) {
+    //             console.log(err)
+    //             setError("Failed to fetch profile. Please try again.");
+    //         }
+    //     };
+    //
+    //     fetchProfile();
+    // }, []);
 
-                if (!userId) {
-                    setError("User ID not found. Please log in again.");
-                    return;
-                }
-
-                const data = await getProfile(userId);
-                setProfile(data);
-            } catch (err: any) {
-                console.log(err)
-                setError("Failed to fetch profile. Please try again.");
-            }
-        };
-
-        fetchProfile();
-    }, []);
-
-    const handleAuth = ()=>{
-        try {
-            const res = await loginUser({email,password})
-            console.log("Login response", res);
-
-            if (res.token){
-                localStorage.setItem("token",res.token)
-
-            }
-        }catch (e:any) {
-            console.error("Login failed", error);
-        }
-    }
-
-    if (error) {
-        return (
-            <div className="h-screen flex items-center justify-center text-red-500">
-                {error}
-            </div>
-        );
-    }
+    // const handleAuth = ()=>{
+    //     try {
+    //         const res = await loginUser({email,password})
+    //         console.log("Login response", res);
+    //
+    //         if (res.token){
+    //             localStorage.setItem("token",res.token)
+    //
+    //         }
+    //     }catch (e:any) {
+    //         console.error("Login failed", error);
+    //     }
+    // }
+    //
+    // if (error) {
+    //     return (
+    //         <div className="h-screen flex items-center justify-center text-red-500">
+    //             {error}
+    //         </div>
+    //     );
+    // }
 
     return (
         <>
