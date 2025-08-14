@@ -13,10 +13,11 @@ const NavBar:React.FC = () => {
 
     if (!adminContext) return null;
 
-    const { token } = adminContext;
+    const { token,setToken } = adminContext;
 
-    const logout = async ()=>{
-        console.log("adsf")
+    const logout = () =>{
+        localStorage.removeItem("token")
+        setToken("");
     }
 
     return(
