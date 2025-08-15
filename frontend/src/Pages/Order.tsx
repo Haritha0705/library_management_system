@@ -1,34 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { books } from "../assets/assets.ts";
-
-interface Book {
-    _id: string;
-    name: string;
-    image: string;
-    category: string;
-    author: string;
-    des: string;
-    publication_Date: string;
-    ISBN: string;
-    availability: string;
-}
+import { AdminContext } from "../Context/AdminProvider.tsx";
+import type { BookModel, BookResponse } from "../Model/book.model.ts";
+import { toast } from "react-toastify";
+import { bookById } from "../Services/book.Service.ts";
 
 const Order: React.FC = () => {
-    const { bookId } = useParams<{ bookId: string }>();
-    const [bookInfo, setBookInfo] = useState<Book | null>(null);
+    const adminContext = useContext(AdminContext);
+    if (!adminContext) return null;
+
+    const { token } = adminContext;
+    const { id } = useParams<{ id: string }>();
+
+    const [bookInfo, setBookInfo] = useState<BookModel | null>(null);
+
+    const fetchBook = async () => {
+        try {
+            if (!id) return;
+            const res: BookResponse = await bookById(id, token);
+            setBookInfo(res.data);
+        } catch (apiError: any) {
+            toast.error(apiError.message || "Failed to fetch book");
+            console.error("Error fetching book:", apiError);
+        }
+    };
 
     useEffect(() => {
-        if (!books || books.length === 0) return;
-        const foundBook = books.find(book => book._id === bookId);
-        if (foundBook) {
-            setBookInfo(foundBook);
-        } else {
-            console.warn("Book not found with id:", bookId);
-        }
-    }, [bookId]);
+        if (!token) return;
 
-    if (!bookInfo) return <p className="text-center mt-10 text-gray-600">Loading or Book not found...</p>;
+        fetchBook().catch(() => {
+            // fallback to local data if API fails
+            const foundBook = books.find(book => book._id === id);
+            if (foundBook) {
+                setBookInfo(foundBook);
+            }
+        });
+    }, [id, token]);
+
+    if (!bookInfo) {
+        return <div className="p-6 text-center">Loading...</div>;
+    }
 
     return (
         <div className="bg-gray-50 min-h-screen">
@@ -49,7 +61,7 @@ const Order: React.FC = () => {
                                 <path d="m1 9 4-4-4-4" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                             </svg>
                         </li>
-                        <li className="text-gray-500">{bookInfo.name}</li>
+                        <li className="text-gray-500">{bookInfo.title}</li>
                     </ol>
                 </nav>
 
@@ -59,21 +71,21 @@ const Order: React.FC = () => {
                     <div className="flex justify-center items-start">
                         <img
                             src={bookInfo.image}
-                            alt={`Cover of ${bookInfo.name}`}
+                            alt={`Cover of ${bookInfo.title}`}
                             className="w-full max-w-xs rounded-lg border shadow"/>
                     </div>
 
                     {/* Details */}
                     <div className="lg:col-span-2 space-y-6">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-800">{bookInfo.name}</h1>
+                            <h1 className="text-3xl font-bold text-gray-800">{bookInfo.title}</h1>
                             <p className="text-lg text-gray-600 mt-1">by {bookInfo.author}</p>
                         </div>
 
                         {/* Synopsis */}
                         <div>
                             <h2 className="text-2xl font-semibold text-gray-800 border-b pb-2">Synopsis</h2>
-                            <p className="text-gray-700 mt-2 leading-relaxed">{bookInfo.des}</p>
+                            <p className="text-gray-700 mt-2 leading-relaxed">{bookInfo.description}</p>
                         </div>
 
                         {/* Metadata */}
@@ -84,19 +96,25 @@ const Order: React.FC = () => {
                                     <span className="w-40 font-medium text-gray-600">Genre</span>
                                     <span className="text-gray-800">{bookInfo.category}</span>
                                 </div>
-                                <div className="flex flex-col sm:flex-row sm:items-center">
-                                    <span className="w-40 font-medium text-gray-600">Publication Date</span>
-                                    <span className="text-gray-800">{bookInfo.publication_Date}</span>
-                                </div>
-                                <div className="flex flex-col sm:flex-row sm:items-center">
-                                    <span className="w-40 font-medium text-gray-600">ISBN</span>
-                                    <span className="text-gray-800">{bookInfo.ISBN}</span>
-                                </div>
+                                {/*<div className="flex flex-col sm:flex-row sm:items-center">*/}
+                                {/*    <span className="w-40 font-medium text-gray-600">Publication Date</span>*/}
+                                {/*    <span className="text-gray-800">{bookInfo.publication_Date}</span>*/}
+                                {/*</div>*/}
+                                {/*<div className="flex flex-col sm:flex-row sm:items-center">*/}
+                                {/*    <span className="w-40 font-medium text-gray-600">ISBN</span>*/}
+                                {/*    <span className="text-gray-800">{bookInfo.ISBN}</span>*/}
+                                {/*</div>*/}
                                 <div className="flex flex-col sm:flex-row sm:items-center">
                                     <span className="w-40 font-medium text-gray-600">Availability</span>
-                                    <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${bookInfo.availability === 'Available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                        {bookInfo.availability}
-                                    </span>
+                                    <span
+                                        className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${
+                                            bookInfo.availableCopies > 0
+                                                ? 'bg-green-100 text-green-700'
+                                                : 'bg-red-100 text-red-700'
+                                        }`}
+                                    >
+                                        {bookInfo.availableCopies > 0 ? 'Available' : 'Not Available'})
+                                        </span>
                                 </div>
                             </div>
                         </div>
