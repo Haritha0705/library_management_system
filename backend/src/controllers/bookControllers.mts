@@ -11,6 +11,7 @@ interface CustomRequest extends Request {
         category?: string;
         description?: string;
         availableCopies?: number;
+        image?:string
     };
 }
 

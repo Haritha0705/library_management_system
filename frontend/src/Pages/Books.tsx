@@ -3,28 +3,10 @@ import { books } from "../assets/assets.ts";
 import { useNavigate } from "react-router-dom";
 
 const Books: React.FC = () => {
-    const [searchVal, setSearchVal] = useState('');
-    const [filteredBooks, setFilteredBooks] = useState(books);
-    const [selectedAuthor, setSelectedAuthor] = useState('')
+
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const lowercasedSearchTerm = searchVal.toLowerCase();
-        const currentFilteredBooks = books.filter(book =>
-            book.name.toLowerCase().includes(lowercasedSearchTerm) ||
-            book.author.toLowerCase().includes(lowercasedSearchTerm)
-        );
-        setFilteredBooks(currentFilteredBooks);
-    }, [searchVal]); // Removed `books` since it's a static import
-
-    const searchBooks = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchVal(e.target.value);
-    };
-
-    const handleChange = (e:any) => {
-        setSelectedAuthor(e.target.value)
-    }
 
 
     return (
@@ -46,8 +28,8 @@ const Books: React.FC = () => {
                                 </svg>
                             </span>
                             <input
-                                onChange={searchBooks}
-                                value={searchVal}
+                                // onChange={}
+                                // value={}
                                 type="search"
                                 className="input w-full pl-10 pr-4 py-3"
                                 placeholder="Search by title, author, or keyword..."
@@ -56,7 +38,9 @@ const Books: React.FC = () => {
 
                         <div className="flex flex-wrap items-center gap-4">
                             <span className="text-sm font-medium">Filter by:</span>
-                            <select onChange={handleChange} value={selectedAuthor}>
+                            <select
+                                // onChange={handleChange} value={selectedAuthor}
+                            >
                                 <option value="">Author</option>
                                 {books.map((book) => (
                                     <option key={book._id} value={book.author}>

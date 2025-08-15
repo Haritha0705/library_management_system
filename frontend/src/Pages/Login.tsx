@@ -1,8 +1,9 @@
 import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {loginMember, registerMember} from "../Services/authService.ts";
+import {loginMember, registerMember} from "../Services/auth.Service.ts";
 import {AdminContext} from "../Context/AdminProvider.tsx";
 import type {LoginModel, LoginResponse, RegisterModel, RegisterResponse} from "../Model/auth.model.ts";
+import {toast} from "react-toastify";
 
 const Login: React.FC = () => {
     const [mode, setMode] = useState<'Sign Up' | 'Login'>('Login');
@@ -39,11 +40,11 @@ const Login: React.FC = () => {
                     navigate('/');
                 }
             } else {
-                    toast.error(response?.message || "Login failed");
+                    toast.error("Login failed");
             }
         } catch (err) {
             console.error('Auth error:', err);
-            setError(err.response?.data?.message || 'Something went wrong');
+            setError(err.res?.data?.message || 'Something went wrong');
         }
     };
 
