@@ -13,3 +13,15 @@ export const getAllBooks = async (token:string):Promise<BookResponse>=>{
         throw apiError;
     }
 }
+
+export const bookById = async (id:string,token:string):Promise<BookResponse>=>{
+    try {
+        const apiResponse = await AxiosService.get<BookResponse>(
+            `${BackendEndpoints.Fetch_Books}/${id}`,
+            {headers: {Authorization: `Bearer ${token}`}}
+        )
+        return apiResponse.data
+    }catch (apiError) {
+        throw apiError;
+    }
+}

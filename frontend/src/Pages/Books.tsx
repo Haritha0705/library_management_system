@@ -22,7 +22,6 @@ const Books: React.FC = () => {
         try {
             const res: BookResponse = await getAllBooks(token);
             setBook(res.data);
-            console.log(res.data)
         }catch (apiError: any) {
             toast.error(apiError.message || "Failed to fetch librarians");
             console.error("Error fetching librarians:", apiError);
