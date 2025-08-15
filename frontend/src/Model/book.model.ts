@@ -5,7 +5,7 @@ export interface BookModel {
     image:string
     category:string
     description:string
-    availableCopies:string
+    availableCopies:number
 }
 
 export interface BookResponse {

@@ -22,6 +22,7 @@ const Books: React.FC = () => {
         try {
             const res: BookResponse = await getAllBooks(token);
             setBook(res.data);
+            console.log(res.data)
         }catch (apiError: any) {
             toast.error(apiError.message || "Failed to fetch librarians");
             console.error("Error fetching librarians:", apiError);
@@ -108,14 +109,15 @@ const Books: React.FC = () => {
                                     <div className="mt-4 flex items-center justify-between">
                                         <span
                                             className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${
-                                                book.availableCopies.length > 0
+                                                book.availableCopies > 0
                                                     ? 'bg-green-100 text-green-700'
                                                     : 'bg-red-100 text-red-700'
                                             }`}
                                         >
-                                        {book.availableCopies.length > 0 ? 'Available' : 'Not Available'}
+                                        {book.availableCopies > 0 ? 'Available' : 'Not Available'})
                                         </span>
-                                        <p className="text-blue-600 text-sm font-medium hover:underline">Count 10</p>
+
+                                        <p className="text-blue-600 text-sm font-medium hover:underline">Count {book.availableCopies}</p>
                                     </div>
                                 </div>
                             </div>
