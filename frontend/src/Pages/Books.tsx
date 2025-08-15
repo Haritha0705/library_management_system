@@ -1,12 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { books } from "../assets/assets.ts";
 import { useNavigate } from "react-router-dom";
+import {AdminContext} from "../Context/AdminProvider.tsx";
+import {toast} from "react-toastify";
+import type {BookModel, BookResponse} from "../Model/book.model.ts";
+import {getAllBooks} from "../Services/book.Service.ts";
 
 const Books: React.FC = () => {
+    const [book,setBook] = useState<BookModel[]>([])
+    const [loading,setLoading] = useState<boolean>(true)
 
 
     const navigate = useNavigate();
 
+    const adminContext = useContext(AdminContext);
+    if (!adminContext) return null;
+
+    const { token } = adminContext;
+
+    const fetchBooks = async ()=>{
+        try {
+            const res: BookResponse = await getAllBooks(token);
+            setBook(res.data);
+        }catch (apiError: any) {
+            toast.error(apiError.message || "Failed to fetch librarians");
+            console.error("Error fetching librarians:", apiError);
+        }finally {
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        if (!token) {
+            setLoading(false);
+            return;
+        }
+        fetchBooks()
+    }, [token]);
+
+    if (loading) {
+        return <div className="p-4 text-gray-600">Loading Books...</div>;
+    }
+
+    if (book.length === 0) {
+        return <div className="p-4 text-gray-600">No Books</div>;
+    }
 
 
     return (
@@ -52,7 +90,7 @@ const Books: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-6 py-6">
-                        {filteredBooks.map((book, index) => (
+                        {book.map((book, index) => (
                             <div
                                 key={index}
                                 onClick={() => navigate(`/order/${book._id}`)}
@@ -60,19 +98,23 @@ const Books: React.FC = () => {
                             >
                                 <img
                                     src={book.image}
-                                    alt={`Book cover for ${book.name}`}
+                                    alt={`Book cover for ${book.title}`}
                                     className="aspect-[3/4] w-full object-cover bg-gray-100"
                                 />
                                 <div className="p-4 flex flex-1 flex-col gap-2">
-                                    <h3 className="text-lg font-semibold text-gray-800">{book.name}</h3>
+                                    <h3 className="text-lg font-semibold text-gray-800">{book.title}</h3>
                                     <p className="text-sm text-gray-500">{book.author}</p>
-                                    <p className="text-sm text-gray-600 flex-1 line-clamp-3">{book.des}</p>
+                                    <p className="text-sm text-gray-600 flex-1 line-clamp-3">{book.description}</p>
                                     <div className="mt-4 flex items-center justify-between">
-                                        <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${
-                                            book.availability === 'Available'
-                                                ? 'bg-green-100 text-green-700'
-                                                : 'bg-red-100 text-red-700'
-                                        }`}>{book.availability}</span>
+                                        <span
+                                            className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${
+                                                book.availableCopies.length > 0
+                                                    ? 'bg-green-100 text-green-700'
+                                                    : 'bg-red-100 text-red-700'
+                                            }`}
+                                        >
+                                        {book.availableCopies.length > 0 ? 'Available' : 'Not Available'}
+                                        </span>
                                         <p className="text-blue-600 text-sm font-medium hover:underline">Count 10</p>
                                     </div>
                                 </div>

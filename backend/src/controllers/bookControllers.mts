@@ -92,7 +92,7 @@ const addBook = async (req: AuthenticatedRequest, res: Response):Promise<any> =>
 const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
     try {
         const books = await bookModel.find({})
-        return res.status(200).json({success:true,message:books})
+        return res.status(200).json({success:true,data:books})
 
     } catch (error: any) {
         console.error(error);

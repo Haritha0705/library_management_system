@@ -6,6 +6,6 @@ const BackendEndpoints = {
     LOGIN_USER:"/api/v1/auth/login",
 
     //Get All Books
-    Fetch_Books:"/api/v1/auth/get-allBooks"
+    Fetch_Books:"/api/v1/book/get-allBooks"
 }
 export default BackendEndpoints
