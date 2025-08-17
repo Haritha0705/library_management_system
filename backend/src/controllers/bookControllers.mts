@@ -18,15 +18,15 @@ interface CustomRequest extends Request {
 //API -  Get in Book by id
 const getBook = async (req: CustomRequest, res: Response) => {
     try {
-        const {id} = req.params;
+        const {bookId} = req.params;
 
         // Check if memberId is provided
-        if (!id) {
+        if (!bookId) {
             res.status(400).json({success: false, message: "Book ID is required",});
             return
         }
         // Fetch member and exclude password
-        const bookData = await bookModel.findById(id);
+        const bookData = await bookModel.findById(bookId);
 
         if (!bookData) {
             res.status(404).json({success: false, message: "Book not found",});

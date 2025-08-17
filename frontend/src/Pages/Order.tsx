@@ -3,23 +3,23 @@ import { useParams } from "react-router-dom";
 import { AdminContext } from "../Context/AdminProvider.tsx";
 import type {BookModel, BookResponse} from "../Model/book.model.ts";
 import { toast } from "react-toastify";
-import { bookById } from "../Services/book.Service.ts";
+import {bookById, borrowBookById} from "../Services/book.Service.ts";
 
 const Order: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+    const { bookId } = useParams<{ bookId: string }>();
     const [book, setBook] = useState<BookModel | null>(null);
     const [loading, setLoading] = useState(true);
 
     const adminContext = useContext(AdminContext);
     if (!adminContext) return null;
 
-    const { token } = adminContext;
+    const { token,memberId } = adminContext;
 
     const fetchBook = async () => {
         try {
-            if (!id || !token) return;
+            if (!bookId || !token) return;
 
-            const result: BookResponse = await bookById(id, token);
+            const result: BookResponse = await bookById(bookId, token);
             console.log("API response:", result);
             if (result.success && result.bookData) {
                 setBook(result.bookData);
@@ -38,10 +38,28 @@ const Order: React.FC = () => {
         }
     };
 
+    const handleBorrowBook = async () => {
+        try {
+            if (!bookId || !memberId || !token) return;
+
+            const result: BorrowResponse = await borrowBookById(bookId, memberId, token);
+
+            if (result.success) {
+                toast.success(result.message || "Book borrowed successfully");
+            } else {
+                toast.error(result.message || "Failed to borrow book");
+            }
+        } catch (apiError: any) {
+            toast.error(apiError.response?.data?.message || apiError.message || "Failed to borrow book");
+            console.error("Error borrowing book:", apiError);
+        }
+    };
+
+
 
     useEffect(() => {
         fetchBook();
-    }, [id, token]);
+    }, [bookId, token]);
 
     if (loading) {
         return <div className="p-6 text-center">Loading...</div>;
@@ -111,10 +129,10 @@ const Order: React.FC = () => {
                             <p className="text-lg text-gray-600 mt-1">by {book.author}</p>
                         </div>
 
-                        {/* Synopsis */}
+                        {/* Description */}
                         <div>
                             <h2 className="text-2xl font-semibold text-gray-800 border-b pb-2">
-                                Synopsis
+                                Description
                             </h2>
                             <p className="text-gray-700 mt-2 leading-relaxed">
                                 {book.description}
@@ -128,7 +146,7 @@ const Order: React.FC = () => {
                             </h2>
                             <div className="space-y-3">
                                 <div className="flex flex-col sm:flex-row sm:items-center">
-                                    <span className="w-40 font-medium text-gray-600">Genre</span>
+                                    <span className="w-40 font-medium text-gray-600">Category</span>
                                     <span className="text-gray-800">{book.category}</span>
                                 </div>
 
@@ -157,7 +175,9 @@ const Order: React.FC = () => {
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition w-full sm:w-auto">
+                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition w-full sm:w-auto cursor-pointer"
+                            onClick={handleBorrowBook}
+                            >
                                 Borrow Book
                             </button>
                         </div>

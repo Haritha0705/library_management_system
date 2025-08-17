@@ -17,11 +17,11 @@ const bookRoutes = Router();
 
 //Book Routes
 
-bookRoutes.get("/get-book/:id",authMiddleware,roleMiddleware("librarian","member"),getBook)
+bookRoutes.get("/get-book/:bookId",authMiddleware,roleMiddleware("librarian","member"),getBook)
 bookRoutes.get("/get-allBooks",authMiddleware,roleMiddleware("librarian","member"),getAllBooks)
 
 bookRoutes.get("/search-book",authMiddleware,roleMiddleware("member"),bookSearchByTitle)
-bookRoutes.post("/:bookId/borrow/:memberId",authMiddleware,roleMiddleware("member"),bookBorrow)
+bookRoutes.post("/borrow/:bookId/:memberId",authMiddleware,roleMiddleware("member"),bookBorrow)
 bookRoutes.post("/:bookId/return/:memberId",authMiddleware,roleMiddleware("member"),bookReturn)
 
 bookRoutes.post("/add-book",authMiddleware,roleMiddleware("librarian"),upload.single('image'),addBook)
