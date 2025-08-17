@@ -209,15 +209,21 @@ const bookBorrow = async (req: Request, res: Response): Promise<void> => {
             return
         }
 
+
+        // // Check if the member has already borrowed this specific book
+        // const alreadyIssuedBook = await issueModel.findOne({
+        //     memberId,
+        //     bookId,
+        //     status: "issued"
+        // });
+        //
+        // if (alreadyIssuedBook) {
+        //      res.status(400).json({success: false, message: "You have already borrowed this book. Please return it before borrowing again."});
+        //     return
+        // }
+
+
         const bookData = await bookModel.findById(bookId)
-
-        // Check if the member has already borrowed a book
-        const alreadyIssuedBook = await issueModel.findOne({ memberId, status: "issued" });
-
-        if (alreadyIssuedBook) {
-            res.status(400).json({success: false, message: "You already have a borrowed book. Please return it before borrowing a new one."});
-            return
-        }
 
         if (!bookData){
             res.status(404).json({success: false, message: "Book not found",});
@@ -228,6 +234,7 @@ const bookBorrow = async (req: Request, res: Response): Promise<void> => {
             res.status(400).json({success: false, message: "This Book Copies Not Available",});
             return;
         }
+
 
         const newBorrow = new Issue({
             memberId: memberId,
@@ -294,7 +301,7 @@ const bookReturn = async (req: Request, res: Response): Promise<void> => {
         issueRecord.status = issueRecord.returnDate > issueRecord.dueDate ? "overdue" : "returned"
         await issueRecord.save()
 
-        res.status(201).json({ success: true, message: "Book return successfully", borrow: issueRecord });
+        res.status(201).json({ success: true, message: "Book return successfully", return: issueRecord });
 
     } catch (error: any) {
         console.error("Issue error:", error);

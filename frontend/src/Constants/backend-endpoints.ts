@@ -11,7 +11,10 @@ const BackendEndpoints = {
     //Book By id
     BOOK_BY_ID:"/api/v1/book/get-book",
 
-    //Borrow And Return Book
-    BORROW_BOOK:"api/v1/book/borrow"
+    //Borrow Book
+    BORROW_BOOK:"api/v1/book/borrow",
+
+    //Return Book
+    RETURN_BOOK:"api/v1/book/return",
 }
 export default BackendEndpoints

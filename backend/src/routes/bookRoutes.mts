@@ -22,7 +22,7 @@ bookRoutes.get("/get-allBooks",authMiddleware,roleMiddleware("librarian","member
 
 bookRoutes.get("/search-book",authMiddleware,roleMiddleware("member"),bookSearchByTitle)
 bookRoutes.post("/borrow/:bookId/:memberId",authMiddleware,roleMiddleware("member"),bookBorrow)
-bookRoutes.post("/:bookId/return/:memberId",authMiddleware,roleMiddleware("member"),bookReturn)
+bookRoutes.post("/return/:bookId/:memberId",authMiddleware,roleMiddleware("member"),bookReturn)
 
 bookRoutes.post("/add-book",authMiddleware,roleMiddleware("librarian"),upload.single('image'),addBook)
 bookRoutes.patch("/update-book/:id",authMiddleware,roleMiddleware("librarian"),updateBook)
