@@ -3,14 +3,15 @@ import { useParams } from "react-router-dom";
 import { AdminContext } from "../Context/AdminProvider.tsx";
 import type {BookModel, BookResponse} from "../Model/book.model.ts";
 import { toast } from "react-toastify";
-import {bookById, borrowBookById, returnBookById} from "../Services/book.Service.ts";
+import {bookById, returnBookById} from "../Services/book.Service.ts";
 import type {ReturnResponse} from "../Model/return-book.model.ts";
+import BorrowButton from "../Components/BorrowButton.tsx";
+import ReturnButton from "../Components/ReturnButton.tsx";
 
 const Order: React.FC = () => {
     const { bookId } = useParams<{ bookId: string }>();
     const [book, setBook] = useState<BookModel | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    const [borrow, setBorrow] = useState<boolean>(false);
 
     const adminContext = useContext(AdminContext);
     if (!adminContext) return null;
@@ -22,7 +23,6 @@ const Order: React.FC = () => {
             if (!bookId || !token) return;
 
             const result: BookResponse = await bookById(bookId, token);
-            console.log("API response:", result);
             if (result.success && result.bookData) {
                 setBook(result.bookData);
             } else {
@@ -36,41 +36,6 @@ const Order: React.FC = () => {
             setBook(null);
         } finally {
             setLoading(false);
-        }
-    };
-
-    const handleBorrowBook = async () => {
-        try {
-            if (!bookId || !memberId || !token) return;
-
-            const result: BorrowResponse = await borrowBookById(bookId, memberId, token);
-
-            if (result.success) {
-                toast.success(result.message || "Book borrowed successfully");
-                setBorrow(true);
-            } else {
-                toast.error(result.message || "Failed to borrow book");
-            }
-        } catch (apiError: any) {
-            toast.error(apiError.response?.data?.message || apiError.message || "Failed to borrow book");
-            console.error("Error borrowing book:", apiError);
-        }
-    };
-
-    const handleReturnBook = async () => {
-        try {
-            if (!bookId || !memberId || !token) return;
-
-            const result: ReturnResponse = await returnBookById(bookId, memberId, token);
-
-            if (result.success) {
-                toast.success(result.message || "Book return successfully");
-            } else {
-                toast.error(result.message || "Failed to return book");
-            }
-        } catch (apiError: any) {
-            toast.error(apiError.response?.data?.message || apiError.message || "Failed to return book");
-            console.error("Error returning book:", apiError);
         }
     };
 
@@ -183,32 +148,19 @@ const Order: React.FC = () => {
                                     : "Not Available"}
                                     </span>
                                 </div>
-                                <div className="flex flex-col sm:flex-row sm:items-center">
-                                    <span className="w-40 font-medium text-gray-600">Book Count</span>
-                                    <span className="text-gray-800">{book.availableCopies}</span>
-                                </div>
+                                {book.availableCopies > 0 && (
+                                    <div className="flex flex-col sm:flex-row sm:items-center">
+                                        <span className="w-40 font-medium text-gray-600">Book Count</span>
+                                        <span className="text-gray-800">{book.availableCopies}</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                            <button
-                                className={`px-6 py-2 rounded-lg w-full sm:w-auto transition
-                                ${borrow
-                                    ? "bg-gray-400 cursor-not-allowed text-white"
-                                    : "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
-                                }`}
-                                disabled={borrow}
-                                onClick={handleBorrowBook}
-                            >
-                                {borrow ? "Borrowed" : "Borrow Book"}
-                            </button>
-                            <button
-                                className={`px-6 py-2 rounded-lg w-full sm:w-auto transition bg-blue-600 hover:bg-blue-700 text-white cursor-pointer`}
-                                onClick={handleReturnBook}
-                            >
-                                Return Book
-                            </button>
+                            <BorrowButton token={token} memberId={memberId} bookId={bookId}/>
+                            <ReturnButton token={token} memberId={memberId} bookId={bookId}/>
                         </div>
                     </div>
                 </div>

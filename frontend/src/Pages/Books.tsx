@@ -114,8 +114,9 @@ const Books: React.FC = () => {
                                         >
                                         {book.availableCopies > 0 ? 'Available' : 'Not Available'}
                                         </span>
-
-                                        <p className="text-blue-600 text-sm font-medium hover:underline">Count {book.availableCopies}</p>
+                                        {book.availableCopies > 0 && (
+                                            <p className="text-blue-600 text-sm font-medium hover:underline">Count {book.availableCopies}</p>
+                                        )}
                                     </div>
                                 </div>
                             </div>
