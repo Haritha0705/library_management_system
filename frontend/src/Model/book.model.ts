@@ -8,7 +8,12 @@ export interface BookModel {
     availableCopies:number
 }
 
-export interface BookResponse {
+export interface BooksResponse {
     success:boolean;
     data:BookModel[]
+}
+
+export interface BookResponse {
+    success: boolean;
+    bookData?: BookModel;
 }

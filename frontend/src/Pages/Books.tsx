@@ -1,10 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { books } from "../assets/assets.ts";
 import { useNavigate } from "react-router-dom";
 import {AdminContext} from "../Context/AdminProvider.tsx";
 import {toast} from "react-toastify";
-import type {BookModel, BookResponse} from "../Model/book.model.ts";
-import {getAllBooks} from "../Services/book.Service.ts";
+import type {BookModel, BooksResponse} from "../Model/book.model.ts";
+import { getAllBooks} from "../Services/book.Service.ts";
 
 const Books: React.FC = () => {
     const [book,setBook] = useState<BookModel[]>([])
@@ -20,7 +19,7 @@ const Books: React.FC = () => {
 
     const fetchBooks = async ()=>{
         try {
-            const res: BookResponse = await getAllBooks(token);
+            const res: BooksResponse = await getAllBooks(token);
             setBook(res.data);
         }catch (apiError: any) {
             toast.error(apiError.message || "Failed to fetch librarians");
@@ -80,7 +79,7 @@ const Books: React.FC = () => {
                                 // onChange={handleChange} value={selectedAuthor}
                             >
                                 <option value="">Author</option>
-                                {books.map((book) => (
+                                {book.map((book) => (
                                     <option key={book._id} value={book.author}>
                                         {book.author}
                                     </option>
@@ -113,7 +112,7 @@ const Books: React.FC = () => {
                                                     : 'bg-red-100 text-red-700'
                                             }`}
                                         >
-                                        {book.availableCopies > 0 ? 'Available' : 'Not Available'})
+                                        {book.availableCopies > 0 ? 'Available' : 'Not Available'}
                                         </span>
 
                                         <p className="text-blue-600 text-sm font-medium hover:underline">Count {book.availableCopies}</p>

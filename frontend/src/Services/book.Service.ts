@@ -1,10 +1,10 @@
-import type {BookResponse} from "../Model/book.model.ts";
+import type {BookResponse,BooksResponse} from "../Model/book.model.ts";
 import AxiosService from "./axios.service.ts";
 import BackendEndpoints from "../Constants/backend-endpoints.ts";
 
-export const getAllBooks = async (token:string):Promise<BookResponse>=>{
+export const getAllBooks = async (token:string):Promise<BooksResponse>=>{
     try {
-        const apiResponse = await AxiosService.get<BookResponse>(
+        const apiResponse = await AxiosService.get<BooksResponse>(
             BackendEndpoints.Fetch_Books,
             {headers: {Authorization: `Bearer ${token}`}}
         )
