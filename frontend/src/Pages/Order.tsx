@@ -9,6 +9,7 @@ const Order: React.FC = () => {
     const { bookId } = useParams<{ bookId: string }>();
     const [book, setBook] = useState<BookModel | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isBorrowing, setIsBorrowing] = useState(false);
 
     const adminContext = useContext(AdminContext);
     if (!adminContext) return null;
@@ -38,9 +39,12 @@ const Order: React.FC = () => {
         }
     };
 
+
     const handleBorrowBook = async () => {
         try {
             if (!bookId || !memberId || !token) return;
+
+            setIsBorrowing(true);
 
             const result: BorrowResponse = await borrowBookById(bookId, memberId, token);
 
@@ -54,6 +58,7 @@ const Order: React.FC = () => {
             console.error("Error borrowing book:", apiError);
         }
     };
+
 
 
 
@@ -175,11 +180,16 @@ const Order: React.FC = () => {
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition w-full sm:w-auto cursor-pointer"
-                            onClick={handleBorrowBook}
+                            <button
+                                className={`bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition w-full sm:w-auto ${
+                                    isBorrowing ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                                }`}
+                                onClick={handleBorrowBook}
+                                disabled={isBorrowing}
                             >
-                                Borrow Book
+                                {isBorrowing ? "Borrowed" : "Borrow Book"}
                             </button>
+
                         </div>
                     </div>
                 </div>

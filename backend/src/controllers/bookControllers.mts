@@ -3,6 +3,7 @@ import bookModel from "../models/bookModel.mjs";
 import mongoose from "mongoose";
 import Issue from "../models/issueModel.mjs";
 import {v2 as cloudinary} from "cloudinary"
+import issueModel from "../models/issueModel.mjs";
 
 interface CustomRequest extends Request {
     body: {
@@ -210,6 +211,14 @@ const bookBorrow = async (req: Request, res: Response): Promise<void> => {
 
         const bookData = await bookModel.findById(bookId)
 
+        // Check if the member has already borrowed a book
+        const alreadyIssuedBook = await issueModel.findOne({ memberId, status: "issued" });
+
+        if (alreadyIssuedBook) {
+            res.status(400).json({success: false, message: "You already have a borrowed book. Please return it before borrowing a new one."});
+            return
+        }
+
         if (!bookData){
             res.status(404).json({success: false, message: "Book not found",});
             return;
@@ -224,7 +233,7 @@ const bookBorrow = async (req: Request, res: Response): Promise<void> => {
             memberId: memberId,
             bookId: bookId,
             issueDate: new Date(),
-            dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days ahead
+            dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             status: 'issued'
         });
 
