@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { assets } from '../assets/assets.ts';
+import Img from '../../assets/img-girl.png';
 
 const Header: React.FC = () => {
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
 
             {/* Right Side */}
             <div className="flex justify-center items-end w-full lg:w-[50%] mt-10 lg:mt-0">
-                <img className="w-full max-w-md h-auto rounded-lg" src={assets.bookWithGirl} alt="Book with Girl"/>
+                <img className="w-full max-w-md h-auto rounded-lg" src={Img} alt="Book with Girl"/>
             </div>
         </div>
     );

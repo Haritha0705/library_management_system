@@ -3,10 +3,9 @@ import { useParams } from "react-router-dom";
 import { AdminContext } from "../Context/AdminProvider.tsx";
 import type {BookModel, BookResponse} from "../Model/book.model.ts";
 import { toast } from "react-toastify";
-import {bookById, returnBookById} from "../Services/book.Service.ts";
-import type {ReturnResponse} from "../Model/return-book.model.ts";
-import BorrowButton from "../Components/BorrowButton.tsx";
-import ReturnButton from "../Components/ReturnButton.tsx";
+import {bookById} from "../Services/book.Service.ts";
+import BorrowButton from "../Components/Order Page/BorrowButton.tsx";
+import ReturnButton from "../Components/Order Page/ReturnButton.tsx";
 
 const Order: React.FC = () => {
     const { bookId } = useParams<{ bookId: string }>();

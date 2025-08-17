@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { books } from "../assets/assets.ts";
 import {  Star } from "lucide-react";
+import {books} from "../../assets/assets.ts";
 
 const TopBooks: React.FC = () => {
     const navigate = useNavigate();

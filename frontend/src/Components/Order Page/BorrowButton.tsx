@@ -1,5 +1,5 @@
 import React from 'react';
-import {borrowBookById} from "../Services/book.Service.ts";
+import {borrowBookById} from "../../Services/book.Service.ts";
 import {toast} from "react-toastify";
 
 interface ButtonProps {

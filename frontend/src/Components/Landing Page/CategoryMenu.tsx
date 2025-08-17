@@ -1,5 +1,5 @@
 import React from 'react';
-import {CategoryData} from "../assets/assets.ts";
+import {CategoryData} from "../../assets/assets.ts";
 import {Link} from "react-router-dom";
 
 const CategoryMenu:React.FC = () => {

@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react';
-import {assets} from "../assets/assets.ts";
+import {assets} from "../../assets/assets.ts";
 import {NavLink, useNavigate} from "react-router-dom";
 import { Menu, X,ChevronDown } from "lucide-react";
-import {AdminContext} from "../Context/AdminProvider.tsx";
+import {AdminContext} from "../../Context/AdminProvider.tsx";
 
 const NavBar:React.FC = () => {
 

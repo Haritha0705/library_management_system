@@ -1,6 +1,6 @@
 import React from 'react';
 import type {ReturnResponse} from "../Model/return-book.model.ts";
-import {returnBookById} from "../Services/book.Service.ts";
+import {returnBookById} from "../../Services/book.Service.ts";
 import {toast} from "react-toastify";
 
 interface ButtonProps {
