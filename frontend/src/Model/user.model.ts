@@ -4,6 +4,9 @@ export interface UserModel {
     username:string
     email:string
     status:string
+    phone?:string
+    full_name?:string
+    address?:string
 }
 
 export interface UserResponse {

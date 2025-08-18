@@ -67,7 +67,7 @@ const updateProfile = async (req: CustomRequest, res: Response): Promise<void> =
             return;
         }
 
-        const { full_name, bio, phone, address } = req.body;
+        const { full_name, phone, address } = req.body;
         const imageFile = (req as any).file;
 
         let updatedProfile = null;
