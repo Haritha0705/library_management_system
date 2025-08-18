@@ -44,7 +44,7 @@ const getProfile = async (req: CustomRequest, res: Response):Promise<void> => {
             return
         }
 
-        res.status(200).json({ success: true, profile });
+        res.status(200).json({ success: true, data:profile });
     } catch (e: any) {
         console.log(e);
         res.status(500).json({ success: false, message: "Internal server error", error: e.message })

@@ -9,7 +9,7 @@ import React, {
 import {jwtDecode} from "jwt-decode";
 
 interface CustomJwtPayload {
-    memberId?: string;
+    id?: string;
     role?: string;
 }
 
