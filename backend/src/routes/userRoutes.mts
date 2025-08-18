@@ -9,7 +9,7 @@ const userRoutes = Router();
 //User Routes
 
 userRoutes.get("/get-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),getProfile)
-userRoutes.patch("/update-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),upload.single('image'),updateProfile)
+userRoutes.put("/update-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),upload.single('image'),updateProfile)
 userRoutes.delete("/delete-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),deleteProfile)
 
 export default userRoutes

@@ -17,8 +17,11 @@ const BackendEndpoints = {
     //Return Book
     RETURN_BOOK:"api/v1/book/return",
 
-    //User Profile
-    GET_USER_PROFILE:"api/v1/user/get-profile"
+    //Get User Profile
+    GET_USER_PROFILE:"api/v1/user/get-profile/member",
+
+    //Update User Profile
+    UPDATE_USER_PROFILE:"api/v1/user/update-profile/member",
 }
 export default BackendEndpoints
 
