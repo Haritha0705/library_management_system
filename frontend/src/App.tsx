@@ -15,6 +15,7 @@ import Cart from "./Pages/Cart.tsx";
 import NotFoundPage from "./Pages/NotFoundPage.tsx";
 import { ToastContainer } from "react-toastify";
 import { AdminContext } from "./Context/AdminProvider.tsx";
+import Category from "./Pages/Category.tsx";
 
 const App: React.FC = () => {
     const adminContext = useContext(AdminContext);
@@ -34,7 +35,7 @@ const App: React.FC = () => {
                         <Route path="/about" element={<About />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/books" element={<Books />} />
-                        <Route path="/books/:category" element={<Books />} />
+                        <Route path="/books/:category" element={<Category />} />
                         <Route path="/my-profile" element={<MyProfile />} />
                         <Route path="/order/:bookId" element={<Order />} />
                         <Route path="/my-orders" element={<MyOrder />} />
