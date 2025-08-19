@@ -183,14 +183,17 @@ const bookSearchByTitle = async (req: Request, res: Response): Promise<void> => 
             return;
         }
 
-        const bookData = await bookModel.findOne({title:title.trim()})
+        // Regex for case-insensitive partial match
+        const regex = new RegExp(title.trim(), "i");
 
-        if (!bookData){
-            res.status(404).json({success: false, message: "Book not found",});
+        const bookData = await bookModel.find({ title: { $regex: regex } }).limit(10);
+
+        if (!bookData || bookData.length === 0) {
+            res.status(404).json({ success: false, message: "Book not found" });
             return;
         }
 
-        res.status(200).json({ success: true, data:bookData});
+        res.status(200).json({ success: true, data: bookData });
 
     } catch (error: any) {
         console.error("Issue error:", error);
