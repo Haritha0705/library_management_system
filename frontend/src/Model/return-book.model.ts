@@ -14,3 +14,7 @@ export interface ReturnResponse {
     return?:ReturnModel
 }
 
+export interface BookReturnResponse {
+    success:boolean
+    message:string
+}

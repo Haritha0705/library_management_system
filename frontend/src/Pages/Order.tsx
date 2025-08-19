@@ -158,8 +158,10 @@ const Order: React.FC = () => {
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                            <BorrowButton token={token} memberId={memberId} bookId={bookId}/>
-                            {/*<ReturnButton token={token} memberId={memberId} bookId={bookId}/>*/}
+                            {book.availableCopies > 0 && (
+                                <BorrowButton token={token} memberId={memberId} bookId={bookId}/>
+                            )}
+                            <ReturnButton token={token} memberId={memberId} bookId={bookId}/>
                         </div>
                     </div>
                 </div>
