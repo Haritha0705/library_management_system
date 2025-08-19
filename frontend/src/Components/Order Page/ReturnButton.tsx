@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import type {ReturnResponse} from "../../Model/return-book.model.ts";
+import type {BookReturnResponse, ReturnResponse} from "../../Model/return-book.model.ts";
 import {checkBookBorrow, returnBookById} from "../../Services/book.Service.ts";
 import {toast} from "react-toastify";
-import type {BookBorrowResponse} from "../../Model/borrow-book.model.ts";
 
 interface ButtonProps {
     token?:string
@@ -34,7 +33,7 @@ const ReturnButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
         try {
             if (!bookId || !memberId || !token) return;
 
-            const result: BookBorrowResponse = await checkBookBorrow(bookId, memberId, token);
+            const result: BookReturnResponse = await checkBookBorrow(bookId, memberId, token);
 
             if (result.success) {
                 setBookReturn(false)

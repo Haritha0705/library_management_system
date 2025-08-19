@@ -67,3 +67,15 @@ export const checkBookBorrow =  async (bookId:string,memberId:string,token:strin
         throw apiError;
     }
 }
+
+export const searchBookByTitle =  async (query:string,token:string): Promise<SearchResponse>=>{
+    try {
+        const apiResponse = await AxiosService.get<SearchResponse>(
+            `${BackendEndpoints.SEARCH_BOOK}?title=${query}`,
+            {headers: {Authorization: `Bearer ${token}`}}
+        )
+        return apiResponse.data
+    }catch (apiError) {
+        throw apiError;
+    }
+}

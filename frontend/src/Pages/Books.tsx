@@ -4,6 +4,7 @@ import {AdminContext} from "../Context/AdminProvider.tsx";
 import {toast} from "react-toastify";
 import type {BookModel, BooksResponse} from "../Model/book.model.ts";
 import { getAllBooks} from "../Services/book.Service.ts";
+import SearchBar from "../Components/Books page/SearchBar.tsx";
 
 const Books: React.FC = () => {
     const [book,setBook] = useState<BookModel[]>([])
@@ -56,20 +57,7 @@ const Books: React.FC = () => {
                     </div>
 
                     <div className="mb-8 space-y-6">
-                        <div className="relative">
-                            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                <svg className="h-5 w-5 text-[var(--text-secondary)]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                                    <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" strokeLinecap="round" strokeLinejoin="round"></path>
-                                </svg>
-                            </span>
-                            <input
-                                // onChange={}
-                                // value={}
-                                type="search"
-                                className="input w-full pl-10 pr-4 py-3"
-                                placeholder="Search by title, author, or keyword..."
-                            />
-                        </div>
+                        <SearchBar />
 
                         <div className="flex flex-wrap items-center gap-4">
                             <span className="text-sm font-medium">Filter by:</span>

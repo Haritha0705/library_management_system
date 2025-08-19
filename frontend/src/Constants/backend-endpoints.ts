@@ -25,6 +25,9 @@ const BackendEndpoints = {
 
     //Check Book Borrow
     CHECK_BOOK_BORROW:"api/v1/book/checkBookBorrow",
+
+    //Search Book By Title
+    SEARCH_BOOK:"api/v1/book/search-book",
 }
 export default BackendEndpoints
 

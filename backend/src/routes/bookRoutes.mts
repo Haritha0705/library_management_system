@@ -30,6 +30,5 @@ bookRoutes.patch("/update-book/:id",authMiddleware,roleMiddleware("librarian"),u
 bookRoutes.delete("/delete-book/:id",authMiddleware,roleMiddleware("librarian"),deleteBook)
 
 bookRoutes.post("/checkBookBorrow",authMiddleware,roleMiddleware("member"),bookAlreadyBorrow)
-// bookRoutes.get("/get-allBooks",authMiddleware,roleMiddleware("member"),getAllBooks)
 
 export default bookRoutes
