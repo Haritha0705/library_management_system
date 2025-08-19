@@ -9,7 +9,8 @@ import {
     bookSearchByTitle,
     getBook,
     bookBorrow,
-    bookReturn
+    bookReturn,
+    bookAlreadyBorrow
 } from "../controllers/bookControllers.mjs";
 import upload from "../middlewares/multer.mjs";
 
@@ -27,5 +28,8 @@ bookRoutes.post("/return/:bookId/:memberId",authMiddleware,roleMiddleware("membe
 bookRoutes.post("/add-book",authMiddleware,roleMiddleware("librarian"),upload.single('image'),addBook)
 bookRoutes.patch("/update-book/:id",authMiddleware,roleMiddleware("librarian"),updateBook)
 bookRoutes.delete("/delete-book/:id",authMiddleware,roleMiddleware("librarian"),deleteBook)
+
+bookRoutes.post("/checkBookBorrow",authMiddleware,roleMiddleware("member"),bookAlreadyBorrow)
+// bookRoutes.get("/get-allBooks",authMiddleware,roleMiddleware("member"),getAllBooks)
 
 export default bookRoutes

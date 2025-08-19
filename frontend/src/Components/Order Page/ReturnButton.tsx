@@ -4,9 +4,9 @@ import {returnBookById} from "../../Services/book.Service.ts";
 import {toast} from "react-toastify";
 
 interface ButtonProps {
-    token:string
-    memberId:string
-    bookId:string
+    token?:string
+    memberId?:string
+    bookId?:string
 }
 
 const ReturnButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {

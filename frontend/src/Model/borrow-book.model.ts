@@ -12,3 +12,8 @@ export interface BorrowResponse {
     message:string
     borrow?:BorrowModel
 }
+
+export interface BookBorrowResponse {
+    success:boolean
+    message:string
+}

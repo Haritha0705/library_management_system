@@ -9,7 +9,6 @@ const Books: React.FC = () => {
     const [book,setBook] = useState<BookModel[]>([])
     const [loading,setLoading] = useState<boolean>(true)
 
-
     const navigate = useNavigate();
 
     const adminContext = useContext(AdminContext);
@@ -44,7 +43,6 @@ const Books: React.FC = () => {
     if (book.length === 0) {
         return <div className="p-4 text-gray-600">No Books</div>;
     }
-
 
     return (
         <div className="flex min-h-screen flex-col font-sans antialiased">

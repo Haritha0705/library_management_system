@@ -22,6 +22,9 @@ const BackendEndpoints = {
 
     //Update User Profile
     UPDATE_USER_PROFILE:"api/v1/user/update-profile/member",
+
+    //Check Book Borrow
+    CHECK_BOOK_BORROW:"api/v1/book/checkBookBorrow",
 }
 export default BackendEndpoints
 

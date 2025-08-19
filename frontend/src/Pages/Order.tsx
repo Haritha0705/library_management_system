@@ -8,7 +8,7 @@ import BorrowButton from "../Components/Order Page/BorrowButton.tsx";
 import ReturnButton from "../Components/Order Page/ReturnButton.tsx";
 
 const Order: React.FC = () => {
-    const { bookId } = useParams<{ bookId: string }>();
+    const { bookId } = useParams();
     const [book, setBook] = useState<BookModel | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -159,7 +159,7 @@ const Order: React.FC = () => {
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-6">
                             <BorrowButton token={token} memberId={memberId} bookId={bookId}/>
-                            <ReturnButton token={token} memberId={memberId} bookId={bookId}/>
+                            {/*<ReturnButton token={token} memberId={memberId} bookId={bookId}/>*/}
                         </div>
                     </div>
                 </div>

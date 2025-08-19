@@ -309,4 +309,36 @@ const bookReturn = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-export {getBook,addBook,getAllBooks,updateBook,deleteBook,bookSearchByTitle,bookBorrow,bookReturn}
+const bookAlreadyBorrow= async (req: Request, res: Response): Promise<void> => {
+    try {
+        const {bookId,memberId} = req.body
+
+        //Check Book id is  missing
+        if (!bookId || !memberId){
+            res.status(400).json({success: false, message: "Book ID and  Member ID  required"});
+            return
+        }
+
+        // Check if the member has already borrowed this specific book
+        const alreadyIssuedBook = await issueModel.findOne({
+            memberId,
+            bookId,
+            status: "issued"
+        });
+
+        if (alreadyIssuedBook) {
+            res.status(400).json({
+                success: false,
+                message: "You have already borrowed this book. Please return it before borrowing again."
+            });
+            return
+        }
+
+        res.status(200).json({ success: true,message: "You can borrow this book."});
+
+    }catch (error: any) {
+        console.error( error);
+        res.status(500).json({success: false, message: "Something went wrong.", error: error.message,});
+    }
+}
+export {getBook,addBook,getAllBooks,updateBook,deleteBook,bookSearchByTitle,bookBorrow,bookReturn,bookAlreadyBorrow}

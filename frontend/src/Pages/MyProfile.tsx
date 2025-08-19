@@ -70,7 +70,7 @@ const MyProfile: React.FC = () => {
             const res = await updateProfile(memberId, token, formData);
             if (res.success) {
                 toast.success("Profile updated successfully");
-                setProfile(res.updatedProfile); // ✅ assuming API returns updated profile in `data`
+                setProfile(res.updatedProfile);
                 setIsEdit(false);
             }
         } catch (err) {
@@ -178,7 +178,7 @@ const MyProfile: React.FC = () => {
                 <p className="text-neutral-500 underline mt-3">CONTACT INFORMATION</p>
                 <div className="grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700">
                     <p className="font-medium">Email:</p>
-                    <p className="text-blue-500">{profile.email}</p>
+                    <p className="text-gray-500">{profile.email}</p>
 
                     <p className="font-medium">Full Name :</p>
                     {isEdit ? (
@@ -191,7 +191,7 @@ const MyProfile: React.FC = () => {
                             }
                         />
                     ) : (
-                        <p className="text-blue-400">{profile.full_name}</p>
+                        <p className="text-gray-500">{profile.full_name}</p>
                     )}
 
                     <p className="font-medium">Phone :</p>
@@ -205,7 +205,7 @@ const MyProfile: React.FC = () => {
                             }
                         />
                     ) : (
-                        <p className="text-blue-400">{profile.phone}</p>
+                        <p className="text-gray-500">{profile.phone}</p>
                     )}
                 </div>
             </div>
