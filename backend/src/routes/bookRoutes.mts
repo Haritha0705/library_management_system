@@ -10,7 +10,7 @@ import {
     getBook,
     bookBorrow,
     bookReturn,
-    bookAlreadyBorrow
+    bookAlreadyBorrow, bookFilterByAuthor
 } from "../controllers/bookControllers.mjs";
 import upload from "../middlewares/multer.mjs";
 

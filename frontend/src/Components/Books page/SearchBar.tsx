@@ -61,7 +61,7 @@ const SearchBar: React.FC<SearchProps> = () => {
                 value={search}
                 type="search"
                 className="input w-full pl-10 pr-4 py-3"
-                placeholder="Search by title, author, or keyword..."
+                placeholder="Search by title"
             />
 
             {/* display search results */}

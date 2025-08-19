@@ -5,10 +5,12 @@ import {toast} from "react-toastify";
 import type {BookModel, BooksResponse} from "../Model/book.model.ts";
 import { getAllBooks} from "../Services/book.Service.ts";
 import SearchBar from "../Components/Books page/SearchBar.tsx";
+// import Filter from "../Model/Filter.tsx";
 
 const Books: React.FC = () => {
     const [book,setBook] = useState<BookModel[]>([])
     const [loading,setLoading] = useState<boolean>(true)
+    const [selectedAuthor, setSelectedAuthor] = useState<string>("");
 
     const navigate = useNavigate();
 
@@ -37,6 +39,11 @@ const Books: React.FC = () => {
         fetchBooks()
     }, [token]);
 
+    const uniqueAuthors = Array.from(new Set(book.map((b) => b.author)));
+
+    // Filter books by selected author
+    const filteredBooks = selectedAuthor === "" ? book : book.filter((b) => b.author === selectedAuthor);
+
     if (loading) {
         return <div className="p-4 text-gray-600">Loading Books...</div>;
     }
@@ -58,16 +65,17 @@ const Books: React.FC = () => {
 
                     <div className="mb-8 space-y-6">
                         <SearchBar />
-
                         <div className="flex flex-wrap items-center gap-4">
                             <span className="text-sm font-medium">Filter by:</span>
                             <select
-                                // onChange={handleChange} value={selectedAuthor}
+                                value={selectedAuthor}
+                                onChange={(e) => setSelectedAuthor(e.target.value)}
+                                className="border rounded px-2 py-1"
                             >
-                                <option value="">Author</option>
-                                {book.map((book) => (
-                                    <option key={book._id} value={book.author}>
-                                        {book.author}
+                                <option value="">All Authors</option>
+                                {uniqueAuthors.map((author, index) => (
+                                    <option key={index} value={author}>
+                                        {author}
                                     </option>
                                 ))}
                             </select>
@@ -75,7 +83,7 @@ const Books: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-6 py-6">
-                        {book.map((book, index) => (
+                        {filteredBooks.map((book, index) => (
                             <div
                                 key={index}
                                 onClick={() => navigate(`/order/${book._id}`)}

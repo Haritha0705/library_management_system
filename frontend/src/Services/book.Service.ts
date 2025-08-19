@@ -79,3 +79,15 @@ export const searchBookByTitle =  async (query:string,token:string): Promise<Sea
         throw apiError;
     }
 }
+
+export const filterBookByAuthor =  async (author:string,token:string): Promise<FilterResponse>=>{
+    try {
+        const apiResponse = await AxiosService.get<FilterResponse>(
+            `${BackendEndpoints.Filter_BOOK}?author=${author}`,
+            {headers: {Authorization: `Bearer ${token}`}}
+        )
+        return apiResponse.data
+    }catch (apiError) {
+        throw apiError;
+    }
+}
