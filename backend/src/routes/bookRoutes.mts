@@ -10,7 +10,7 @@ import {
     getBook,
     bookBorrow,
     bookReturn,
-    bookAlreadyBorrow
+    bookAlreadyBorrow, bookBorrowHistory
 } from "../controllers/bookControllers.mjs";
 import upload from "../middlewares/multer.mjs";
 
@@ -30,5 +30,6 @@ bookRoutes.patch("/update-book/:id",authMiddleware,roleMiddleware("librarian"),u
 bookRoutes.delete("/delete-book/:id",authMiddleware,roleMiddleware("librarian"),deleteBook)
 
 bookRoutes.post("/checkBookBorrow",authMiddleware,roleMiddleware("member"),bookAlreadyBorrow)
+bookRoutes.get("/BorrowHistory",authMiddleware,roleMiddleware("member"),bookBorrowHistory)
 
 export default bookRoutes

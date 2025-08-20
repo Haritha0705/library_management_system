@@ -102,13 +102,11 @@ const getAllBooks =   async (req: Request, res: Response):Promise<any> =>{
 }
 
 interface CustomRequest extends Request {
-    body: {
         title?: string;
         author?: string;
         category?: string;
         description?: string;
         availableCopies?: number;
-    };
 }
 
 //API - Update Book
@@ -331,4 +329,36 @@ const bookAlreadyBorrow= async (req: Request, res: Response): Promise<void> => {
     }
 }
 
-export {getBook,addBook,getAllBooks,updateBook,deleteBook,bookSearchByTitle,bookBorrow,bookReturn,bookAlreadyBorrow}
+// API - Book Borrow History
+const bookBorrowHistory = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { memberId } = req.body;
+
+        // Check if memberId is missing
+        if (!memberId) {
+            res.status(400).json({success: false, message: "Member ID is required",});
+            return;
+        }
+
+        // Find all borrow history for the member
+        const bookHistory = await issueModel.find({ memberId });
+
+        if (!bookHistory || bookHistory.length === 0) {
+            res.status(404).json({success: false, message: "No borrow history found for this member",});
+            return;
+        }
+
+        res.status(200).json({success: true, data: bookHistory});
+
+    } catch (error: any) {
+        console.error("Book Borrow History Error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong while fetching borrow history.",
+            error: error.message,
+        });
+    }
+};
+
+
+export {getBook,addBook,getAllBooks,updateBook,deleteBook,bookSearchByTitle,bookBorrow,bookReturn,bookAlreadyBorrow,bookBorrowHistory}
