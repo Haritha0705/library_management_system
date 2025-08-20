@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import {v2 as cloudinary} from "cloudinary"
 import librarianModel from "../models/librarianModel.mjs";
 import memberModel from "../models/memberModel.mjs";
+import bookModel from "../models/bookModel.mjs";
+import issueModel from "../models/issueModel.mjs";
 
 //API - librarian account create
 const addLibrarian = async (req: Request, res: Response):Promise<any> =>{
@@ -103,5 +105,50 @@ const deleteLibrarian = async (req: Request, res: Response):Promise<any> =>{
     }
 }
 
-export {addLibrarian,getAllMembers,getAllLibrarian,deleteLibrarian}
+// API - Librarian Dashboard Counts
+const librarianDashBoard = async (_: Request, res: Response): Promise<void> => {
+    try {
+        // Run counts in parallel
+        const [
+            memberCount,
+            librarianCount,
+            bookCount,
+            borrowedBooksCount,
+            overdueBooksCount,
+            uniqueAuthors,
+            uniqueCategory
+        ] = await Promise.all([
+            memberModel.countDocuments(),
+            librarianModel.countDocuments(),
+            bookModel.countDocuments(),
+            issueModel.countDocuments({ status: "issued" }),
+            issueModel.countDocuments({ status: "overdue" }),
+            bookModel.distinct("author"),
+            bookModel.distinct("category"),
+        ]);
+
+        const bookAuthorCount = uniqueAuthors.length;
+        const bookCategoryCount = uniqueCategory.length;
+
+        const allData = {
+            memberCount,
+            librarianCount,
+            bookCount,
+            borrowedBooksCount,
+            overdueBooksCount,
+            bookAuthorCount,
+            bookCategoryCount
+        };
+
+        res.status(200).json({ success: true, data: allData });
+    } catch (error: any) {
+        console.error("Dashboard Error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong while fetching dashboard counts",
+        });
+    }
+};
+
+export {addLibrarian,getAllMembers,getAllLibrarian,deleteLibrarian,librarianDashBoard}
 

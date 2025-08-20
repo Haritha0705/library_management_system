@@ -5,7 +5,8 @@ import {
     addLibrarian,
     deleteLibrarian,
     getAllLibrarian,
-    getAllMembers
+    getAllMembers,
+    librarianDashBoard
 } from "../controllers/dashboardControllers.mjs";
 import upload from "../middlewares/multer.mjs";
 
@@ -16,5 +17,6 @@ dashboardRoutes.post("/add-librarian",authMiddleware,roleMiddleware("admin"),upl
 dashboardRoutes.delete("/delete-librarian/:id",authMiddleware,roleMiddleware("admin"),deleteLibrarian)
 
 dashboardRoutes.get("/get-allMembers",authMiddleware,roleMiddleware("admin","librarian"),getAllMembers)
+dashboardRoutes.get("/get-count",authMiddleware,roleMiddleware("admin","librarian"),librarianDashBoard)
 
 export default dashboardRoutes
