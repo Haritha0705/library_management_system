@@ -2,13 +2,13 @@ const BackendEndpoints = {
     //auth
     Login_Admin:"api/v1/auth/login",
 
-    //add Librarian
+    //add DashBoard
     ADD_LIBRARIAN:"api/v1/dashboard/add-librarian",
 
-    //get all Librarian
+    //get all DashBoard
     ALL_LIBRARIANS:"api/v1/dashboard/get-allLibrarian",
 
-    //delete Librarian
+    //delete DashBoard
     DELETE_LIBRARIAN:"api/v1/dashboard/delete-librarian",
 
     //get all Members
@@ -17,10 +17,10 @@ const BackendEndpoints = {
     //add Book
     ADD_BOOK:"api/v1/book/add-book",
 
-    //Librarian DashBoard Counts
+    //DashBoard DashBoard Counts
     DASHBOARD_COUNTS:"api/v1/dashboard/get-count",
 
-    //Librarian and Admin Borrowed Books List
+    //DashBoard and Admin Borrowed Books List
     BORROW_BOOK_LIST:"api/v1/dashboard/get-borrowBookList"
 
 }

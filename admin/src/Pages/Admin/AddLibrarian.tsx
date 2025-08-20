@@ -34,7 +34,7 @@ const AddLibrarian: React.FC = () => {
             const data = await addLibrarian(formData, token);
 
             if (data && data.success) {
-                toast.success(data.message || "Librarian added successfully!");
+                toast.success(data.message || "DashBoard added successfully!");
                 setLibImg(null);
                 setName("");
                 setEmail("");

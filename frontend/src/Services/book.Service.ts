@@ -3,7 +3,9 @@ import AxiosService from "./axios.service.ts";
 import BackendEndpoints from "../Constants/backend-endpoints.ts";
 import type {BorrowResponse} from "../Model/borrow-book.model.ts";
 import type {ReturnResponse} from "../Model/return-book.model.ts";
-import type {BookBorrowResponse} from "../Model/user.model.ts";
+import type {BookBorrowResponse} from "../Model/borrow-book.model.ts";
+import type {SearchResponse} from "../Model/search.model.ts";
+import type {HistoryResponse} from "../Model/history.model.ts";
 
 export const getAllBooks = async (token:string):Promise<BooksResponse>=>{
     try {
@@ -80,14 +82,15 @@ export const searchBookByTitle =  async (query:string,token:string): Promise<Sea
     }
 }
 
-export const filterBookByAuthor =  async (author:string,token:string): Promise<FilterResponse>=>{
+export const borrowHistory = async (memberId: string, token: string): Promise<HistoryResponse> => {
     try {
-        const apiResponse = await AxiosService.get<FilterResponse>(
-            `${BackendEndpoints.Filter_BOOK}?author=${author}`,
-            {headers: {Authorization: `Bearer ${token}`}}
-        )
-        return apiResponse.data
-    }catch (apiError) {
+        const apiResponse = await AxiosService.post<HistoryResponse>(
+            BackendEndpoints.BOOK_BORROW_HISTORY,
+            { memberId },
+            {headers: { Authorization: `Bearer ${token}` }}
+        );
+        return apiResponse.data;
+    } catch (apiError) {
         throw apiError;
     }
-}
+};

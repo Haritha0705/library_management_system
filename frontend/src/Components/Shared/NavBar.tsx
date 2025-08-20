@@ -54,7 +54,7 @@ const NavBar:React.FC = () => {
                             <div className={"absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block"}>
                                 <div className={"min-w-48 bg-stone-100 rounded-xl flex flex-col gap-4 p-4"}>
                                     <p onClick={()=>navigate("/my-profile")} className={"hover:text-black cursor-pointer"}>My Profile</p>
-                                    <p onClick={()=>navigate("/my-return-books")} className={"hover:text-black cursor-pointer "}>My Appointments</p>
+                                    <p onClick={()=>navigate("/borrow-history")} className={"hover:text-black cursor-pointer "}>My Borrow History</p>
                                     <p onClick={logout} className={"hover:text-black cursor-pointer"}>Logout</p>
                                 </div>
                             </div>
@@ -79,7 +79,6 @@ const NavBar:React.FC = () => {
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/books"}><p className={"px-4 py-2 rounded-full inline-block"}>All Books</p></NavLink>
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/about"}><p className={"px-4 py-2 rounded-full inline-block"}>About</p></NavLink>
                                 <NavLink  onClick={()=>setShowMenu(false)} to={"/contact"}><p className={"px-4 py-2 rounded-full inline-block"}>Contact</p></NavLink>
-                                <NavLink  onClick={()=>setShowMenu(false)} to={"/return-books"}><p className={"px-4 py-2 rounded-full inline-block"}>Return books</p></NavLink>
                             </ul>
                             <button className={"bg-primary text-white py-2 px-4 rounded-full font-light"}
                                     onClick={logout}>Logout

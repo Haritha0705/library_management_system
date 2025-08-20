@@ -36,7 +36,7 @@ const LibrariansList: React.FC = () => {
     const handleDelete = async (id: string) => {
         try {
             await deleteLibrarian(id, token);
-            toast.success("Librarian deleted successfully");
+            toast.success("DashBoard deleted successfully");
             setLibrariansList((prev) => prev.filter((lib) => lib._id !== id));
         } catch (apiError: any) {
             toast.error(apiError.message || "Failed to delete librarian");

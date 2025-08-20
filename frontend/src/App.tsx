@@ -10,8 +10,6 @@ import About from "./Pages/About.tsx";
 import Order from "./Pages/Order.tsx";
 import MyOrder from "./Pages/MyOrder.tsx";
 import Books from "./Pages/Books.tsx";
-import Favourite from "./Pages/Favourite.tsx";
-import Cart from "./Pages/Cart.tsx";
 import NotFoundPage from "./Pages/NotFoundPage.tsx";
 import { ToastContainer } from "react-toastify";
 import { AppContext } from "./Context/AppContext.tsx";
@@ -38,9 +36,7 @@ const App: React.FC = () => {
                         <Route path="/books/:category" element={<Category />} />
                         <Route path="/my-profile" element={<MyProfile />} />
                         <Route path="/order/:bookId" element={<Order />} />
-                        <Route path="/my-orders" element={<MyOrder />} />
-                        <Route path="/favourite" element={<Favourite />} />
-                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/borrow-history" element={<MyOrder />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                     <Footer />

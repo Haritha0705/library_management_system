@@ -29,8 +29,8 @@ const BackendEndpoints = {
     //Search Book By Title
     SEARCH_BOOK:"api/v1/book/search-book",
 
-    //Filter Book By Author
-    Filter_BOOK:"api/v1/book/filterAuthor",
+    //Get Book Borrow History
+    BOOK_BORROW_HISTORY:"api/v1/book/borrowHistory",
 }
 export default BackendEndpoints
 

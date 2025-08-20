@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import {NavLink} from "react-router-dom";
-import homeLogo from "../assets/home_icon.svg"
-import appointmentLogo from "../assets/appointment_icon.svg"
-import peopleLogo from "../assets/people_icon.svg"
-import addLogo from "../assets/add_icon.svg"
-import {AdminContext} from "../Context/AdminContext.tsx";
+import homeLogo from "../../assets/home_icon.svg"
+import appointmentLogo from "../../assets/appointment_icon.svg"
+import peopleLogo from "../../assets/people_icon.svg"
+import addLogo from "../../assets/add_icon.svg"
+import {AdminContext} from "../../Context/AdminContext.tsx";
 
 const SideBar:React.FC = () => {
 

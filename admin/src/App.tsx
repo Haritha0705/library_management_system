@@ -5,14 +5,13 @@ import AddLibrarian from "./Pages/Admin/AddLibrarian.tsx"
 import AdminDashBoard from "./Pages/Admin/AdminDashBoard.tsx"
 import LibrarianDashBoard from "./Pages/Librarian/LibrarianDashBoard.tsx"
 import LibrariansList from "./Pages/Admin/LibrariansList.tsx"
-import AllBorrowedAdmin from "./Pages/Admin/AllBorrowed.tsx"
-import AllBorrowedLibrarian from "./Pages/Librarian/AllBorrowed.tsx"
 import Login from "./Pages/Login.tsx";
-import NavBar from "./Components/NavBar.tsx";
-import SideBar from "./Components/SideBar.tsx";
+import NavBar from "./Components/Shared/NavBar.tsx";
+import SideBar from "./Components/Shared/SideBar.tsx";
 import {AdminContext} from "./Context/AdminContext.tsx";
 import MemberList from "./Pages/Librarian/MemberList.tsx";
 import AddBook from "./Pages/Librarian/AddBook.tsx";
+import AllBorrowed from "./Components/DashBoard/AllBorrowed.tsx";
 
 const App:React.FC = ()=> {
 
@@ -31,17 +30,17 @@ const App:React.FC = ()=> {
             <Routes>
                   {role === "admin" ? (
                   <>
-                      <Route path={"/"} element={<></>}/>
+                      <Route path={"/"} element={<AdminDashBoard/>}/>
                       <Route path={"/admin-dashboard"} element={<AdminDashBoard/>}/>
-                      <Route path={"/all-borrowedBooks"} element={<AllBorrowedAdmin/>}/>
+                      <Route path={"/all-borrowedBooks"} element={<AllBorrowed/>}/>
                       <Route path={"/add-librarian"} element={<AddLibrarian/>}/>
                       <Route path={"/librarians-list"} element={<LibrariansList/>}/>
                   </>
                   ):(
                   <>
-                      <Route path={"/"} element={<></>}/>
+                      <Route path={"/"} element={<AdminDashBoard/>}/>
                       <Route path={"/librarian-dashboard"} element={<LibrarianDashBoard/>}/>
-                      <Route path={"/all-borrowedBooks"} element={<AllBorrowedLibrarian/>}/>
+                      <Route path={"/all-borrowedBooks"} element={<AllBorrowed/>}/>
                       <Route path={"/add-book"} element={<AddBook/>}/>
                       <Route path={"/member-list"} element={<MemberList/>}/>
                   </>
@@ -51,7 +50,9 @@ const App:React.FC = ()=> {
     </div>
   ):(
       <>
-        <Login/>
+        <Routes>
+            <Route path="/" element={<Login />} />
+        </Routes>
         <ToastContainer/>
       </>
   )

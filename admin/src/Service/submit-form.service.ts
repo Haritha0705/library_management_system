@@ -1,6 +1,6 @@
 import AxiosService from "./axios-service";
 import BackendEndpoints from "../Constants/backend-endpoints";
-import type {BookResponse} from "../Pages/Admin/book.model.ts";
+import type {BookResponse} from "../Models/book.model";
 
 export const addLibrarian = async (formData: FormData,token:string): Promise<any> => {
     try {

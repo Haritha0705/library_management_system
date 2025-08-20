@@ -340,8 +340,8 @@ const bookBorrowHistory = async (req: Request, res: Response): Promise<void> => 
             return;
         }
 
-        // Find all borrow history for the member
-        const bookHistory = await issueModel.find({ memberId });
+        // Populate book details (title, image)
+        const bookHistory = await issueModel.find({ memberId }).populate("bookId","title image")
 
         if (!bookHistory || bookHistory.length === 0) {
             res.status(404).json({success: false, message: "No borrow history found for this member",});
