@@ -150,5 +150,19 @@ const librarianDashBoard = async (_: Request, res: Response): Promise<void> => {
     }
 };
 
-export {addLibrarian,getAllMembers,getAllLibrarian,deleteLibrarian,librarianDashBoard}
+// API - View All Borrowed Books List
+const borrowBooksList = async (_: Request, res: Response): Promise<void> => {
+    try {
+        // Get all books that are still not returned (only issued ones)
+        const stillNotReturnBooks = await issueModel.find({ status: "issued" });
+
+        res.status(200).json({success: true, data: stillNotReturnBooks});
+    } catch (error: any) {
+        console.error("Dashboard Error:", error);
+        res.status(500).json({success: false, message: "Something went wrong while fetching borrow book list",});
+    }
+};
+
+
+export {addLibrarian,getAllMembers,getAllLibrarian,deleteLibrarian,librarianDashBoard,borrowBooksList}
 

@@ -2,7 +2,7 @@ import {Router} from "express";
 import {authMiddleware} from "../middlewares/authMiddlewares.mjs";
 import {roleMiddleware} from "../middlewares/roleMiddlewares.mjs";
 import {
-    addLibrarian,
+    addLibrarian, borrowBooksList,
     deleteLibrarian,
     getAllLibrarian,
     getAllMembers,
@@ -18,5 +18,6 @@ dashboardRoutes.delete("/delete-librarian/:id",authMiddleware,roleMiddleware("ad
 
 dashboardRoutes.get("/get-allMembers",authMiddleware,roleMiddleware("admin","librarian"),getAllMembers)
 dashboardRoutes.get("/get-count",authMiddleware,roleMiddleware("admin","librarian"),librarianDashBoard)
+dashboardRoutes.get("/get-borrowBookList",authMiddleware,roleMiddleware("admin","librarian"),borrowBooksList)
 
 export default dashboardRoutes
