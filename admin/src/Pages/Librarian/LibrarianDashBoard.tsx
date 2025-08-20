@@ -42,8 +42,8 @@ const LibrarianDashBoard:React.FC = () => {
                     className={`bg-primary rounded-3xl p-4 text-white h-[250px] w-[640px] shadow-lg shadow-gray-400`}
                 >
                     <div className="flex flex-col ">
-                        <p className="text-2xl mb-5">{stat.title}</p>
-                        <p className="text-5xl font-semibold">{stat.value}</p>
+                        <p className="text-3xl mb-5">{stat.title}</p>
+                        <p className="text-6xl font-semibold">{stat.value}</p>
                     </div>
                 </div>
             ))}
