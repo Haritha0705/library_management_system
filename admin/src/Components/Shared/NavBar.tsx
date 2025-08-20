@@ -9,11 +9,11 @@ const NavBar: React.FC = () => {
 
     if (!adminContext) return null;
 
-    const { setToken, role } = adminContext;
+    const { setToken, role,profile } = adminContext;
 
     const logout = () => {
         setToken("");
-        localStorage.removeItem("token"); 
+        localStorage.removeItem("token");
         navigate("/");
     };
 
@@ -30,12 +30,17 @@ const NavBar: React.FC = () => {
                     {role}
                 </p>
             </div>
-            <button
-                onClick={logout}
-                className="bg-primary text-white text-sm px-10 rounded-full py-2 cursor-pointer"
-            >
-                Logout
-            </button>
+            <div className={"flex items-center gap-10"}>
+                {role === "librarian" && (
+                    <img className={"w-10 rounded-full"} src={profile?.image} onClick={()=>navigate("/profile")} alt={profile?.name}/>
+                )}
+                <button
+                    onClick={logout}
+                    className="bg-primary text-white text-sm px-10 rounded-full py-2 cursor-pointer"
+                >
+                    Logout
+                </button>
+            </div>
         </div>
     );
 };

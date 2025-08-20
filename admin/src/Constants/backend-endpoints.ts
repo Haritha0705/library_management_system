@@ -17,11 +17,17 @@ const BackendEndpoints = {
     //add Book
     ADD_BOOK:"api/v1/book/add-book",
 
-    //DashBoard DashBoard Counts
+    //DashBoard Counts
     DASHBOARD_COUNTS:"api/v1/dashboard/get-count",
 
     //DashBoard and Admin Borrowed Books List
-    BORROW_BOOK_LIST:"api/v1/dashboard/get-borrowBookList"
+    BORROW_BOOK_LIST:"api/v1/dashboard/get-borrowBookList",
+
+    //Get User Profile
+    GET_LIBRARIAN_PROFILE:"api/v1/user/get-profile/librarian",
+
+    //Update User Profile
+    UPDATE_LIBRARIAN_PROFILE:"api/v1/user/update-profile/librarian",
 
 }
 

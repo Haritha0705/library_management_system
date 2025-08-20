@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import memberModel from "../models/memberModel.mjs";
-import mongoose from "mongoose";
+import mongoose, {Types} from "mongoose";
 import { v2 as cloudinary } from "cloudinary";
 import issueModel from "../models/issueModel.mjs";
 import librarianModel from "../models/librarianModel.mjs";
@@ -57,7 +57,7 @@ const updateProfile = async (req: CustomRequest, res: Response): Promise<void> =
     try {
         const { id, role } = req.params;
 
-        if (!id) {
+        if (!id || !Types.ObjectId.isValid(id)) {
             res.status(400).json({ success: false, message: "Missing User ID" });
             return;
         }

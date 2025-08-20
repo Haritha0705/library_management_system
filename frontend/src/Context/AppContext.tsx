@@ -26,7 +26,6 @@ export interface AdminContextType {
     profile:UserModel | null;
     loading: boolean;
     fetchBooks: () => void;
-
 }
 
 export const AppContext = createContext<AdminContextType | undefined>(undefined);
