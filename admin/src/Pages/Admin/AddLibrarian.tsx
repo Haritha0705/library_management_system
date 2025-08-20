@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import uploadImg from "../../assets/upload_area.svg";
 import { addLibrarian } from "../../Service/submit-form.service";
-import { AdminContext } from "../../Context/AdminProvider.tsx";
+import { AdminContext } from "../../Context/AdminContext.tsx";
 
 const AddLibrarian: React.FC = () => {
     const [libImg, setLibImg] = useState<File | null>(null);

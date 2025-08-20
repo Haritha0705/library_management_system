@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { AdminContext } from "../../Context/AdminProvider.tsx";
+import { AdminContext } from "../../Context/AdminContext.tsx";
 import { toast } from "react-toastify";
 import { addBook } from "../../Service/submit-form.service.ts";
 import uploadImg from "../../assets/upload_area.svg";

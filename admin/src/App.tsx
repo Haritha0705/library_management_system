@@ -10,7 +10,7 @@ import AllBorrowedLibrarian from "./Pages/Librarian/AllBorrowed.tsx"
 import Login from "./Pages/Login.tsx";
 import NavBar from "./Components/NavBar.tsx";
 import SideBar from "./Components/SideBar.tsx";
-import {AdminContext} from "./Context/AdminProvider.tsx";
+import {AdminContext} from "./Context/AdminContext.tsx";
 import MemberList from "./Pages/Librarian/MemberList.tsx";
 import AddBook from "./Pages/Librarian/AddBook.tsx";
 

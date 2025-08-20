@@ -4,7 +4,7 @@ import homeLogo from "../assets/home_icon.svg"
 import appointmentLogo from "../assets/appointment_icon.svg"
 import peopleLogo from "../assets/people_icon.svg"
 import addLogo from "../assets/add_icon.svg"
-import {AdminContext} from "../Context/AdminProvider.tsx";
+import {AdminContext} from "../Context/AdminContext.tsx";
 
 const SideBar:React.FC = () => {
 

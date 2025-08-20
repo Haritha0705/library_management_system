@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import {useNavigate} from "react-router-dom";
 import logo from "../assets/Combo shape.svg"
-import {AdminContext} from "../Context/AdminProvider.tsx";
+import {AdminContext} from "../Context/AdminContext.tsx";
 
 const NavBar:React.FC = () => {
     const navigate = useNavigate();

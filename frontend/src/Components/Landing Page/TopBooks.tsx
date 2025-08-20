@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import { useNavigate } from "react-router-dom";
-import {  Star } from "lucide-react";
 import {AppContext} from "../../Context/AppContext.tsx";
 
 const TopBooks: React.FC = () => {
@@ -32,14 +31,6 @@ const TopBooks: React.FC = () => {
                             className="w-full h-96 object-cover bg-blue-50"
                         />
                         <div className="p-4 flex flex-col items-start gap-2">
-                            <div className="flex items-center justify-between w-full">
-                                <div className="flex items-center gap-2 px-3 py-1 bg-primary rounded-full">
-                                    <Star className="fill-yellow-500 text-yellow-500" size={16} />
-                                    <span className="text-white text-sm">4.5</span>
-                                </div>
-                                <p className="text-xs text-gray-500">140 Reviews</p>
-                            </div>
-
                             <p className="text-lg font-medium">{item.title}</p>
                             <p className="text-gray-500 text-sm">{item.category}</p>
                         </div>

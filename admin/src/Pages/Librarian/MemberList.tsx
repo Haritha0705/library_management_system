@@ -1,6 +1,6 @@
 import React,{ useContext, useEffect, useState } from 'react';
 import { toast } from "react-toastify";
-import {AdminContext} from "../../Context/AdminProvider.tsx";
+import {AdminContext} from "../../Context/AdminContext.tsx";
 import type {MemberModel, MemberResponse} from "../../Models/member.model.ts";
 import {getAllMembers} from "../../Service/member.service.ts";
 

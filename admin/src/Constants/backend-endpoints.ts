@@ -15,7 +15,10 @@ const BackendEndpoints = {
     ALL_Members:"api/v1/dashboard/get-allMembers",
 
     //add Book
-    ADD_BOOK:"api/v1/book/add-book"
+    ADD_BOOK:"api/v1/book/add-book",
+
+    //Librarian DashBoard Counts
+    DASHBOARD_COUNTS:"api/v1/dashboard/get-count"
 
 }
 

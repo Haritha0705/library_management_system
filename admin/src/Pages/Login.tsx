@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import type { LoginModel,LoginResponse } from "../Models/login.model";
 import { loginAdmin } from "../Service/auth.service.ts";
-import {AdminContext} from "../Context/AdminProvider.tsx";
+import {AdminContext} from "../Context/AdminContext.tsx";
 
 const Login: React.FC = () => {
     const [state, setState] = useState<"Admin" | "Librarian">("Admin");

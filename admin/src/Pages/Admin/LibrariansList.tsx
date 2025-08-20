@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import type { LibrarianModel, LibrarianResponse } from "../../Models/librarian.model";
 import { toast } from "react-toastify";
 import { deleteLibrarian, getAllLibrarians } from "../../Service/librarians.service";
-import { AdminContext } from "../../Context/AdminProvider";
+import { AdminContext } from "../../Context/AdminContext.tsx";
 
 const LibrariansList: React.FC = () => {
     const [librariansList, setLibrariansList] = useState<LibrarianModel[]>([]);
