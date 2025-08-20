@@ -7,8 +7,11 @@ import React, {
     type ReactNode,
 } from "react";
 import {jwtDecode} from "jwt-decode";
-import type {BookModel} from "../Model/book.model.ts";
+import type {BookModel, BooksResponse} from "../Model/book.model.ts";
 import {getAllBooks} from "../Services/book.Service.ts";
+import {toast} from "react-toastify";
+import type {UserModel, UserResponse} from "../Model/user.model.ts";
+import {getProfile} from "../Services/user.Service.ts";
 
 interface CustomJwtPayload {
     id?: string;
@@ -20,18 +23,20 @@ export interface AdminContextType {
     setToken: Dispatch<SetStateAction<string>>;
     memberId: string;
     books: BookModel[];
+    profile:UserModel | null;
     loading: boolean;
     fetchBooks: () => void;
 
 }
 
-export const AdminContext = createContext<AdminContextType | undefined>(undefined);
+export const AppContext = createContext<AdminContextType | undefined>(undefined);
 
-export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [token, setToken] = useState<string>(localStorage.getItem("token") || "");
     const [memberId, setmemberId] = useState<string>("");
     const [books, setBooks] = useState<BookModel[]>([]);
     const [loading, setLoading] = useState(true);
+    const [profile, setProfile] = useState<UserModel | null>(null);
 
     useEffect(() => {
         if (token) {
@@ -46,6 +51,23 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             setmemberId("");
         }
     }, [token]);
+
+    useEffect(() => {
+        if (!token || !memberId) {
+            setLoading(false);
+            return;
+        }
+        const getUser = async () => {
+            try {
+                const res: UserResponse = await getProfile(memberId, token);
+                setProfile(res.data);
+            } catch (apiError: any) {
+                toast.error(apiError.message || "Failed to fetch member profile");
+                console.error("Error fetching member profile:", apiError);
+            }
+        };
+        getUser()
+    }, [token, memberId]);
 
     const fetchBooks = async () => {
         try {
@@ -68,10 +90,10 @@ export const AdminProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     }, [token]);
 
     return (
-        <AdminContext.Provider value={{ token, setToken, memberId,books, loading, fetchBooks }}>
+        <AppContext.Provider value={{ token, setToken, memberId,books, loading, fetchBooks,profile }}>
             {children}
-        </AdminContext.Provider>
+        </AppContext.Provider>
     );
 };
 
-export default AdminProvider;
+export default AppContextProvider;

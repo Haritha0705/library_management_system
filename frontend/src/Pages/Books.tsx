@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
-import {AdminContext} from "../Context/AdminProvider.tsx";
+import {AppContext} from "../Context/AppContext.tsx";
 import {toast} from "react-toastify";
 import type {BookModel, BooksResponse} from "../Model/book.model.ts";
 import { getAllBooks} from "../Services/book.Service.ts";
@@ -13,7 +13,7 @@ const Books: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const adminContext = useContext(AdminContext);
+    const adminContext = useContext(AppContext);
     if (!adminContext) return null;
 
     const { token } = adminContext;

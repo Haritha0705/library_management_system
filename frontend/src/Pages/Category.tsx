@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react';
-import {useParams} from "react-router-dom";
-import {AdminContext} from "../Context/AdminProvider.tsx";
-
+import React, {useContext} from 'react';
+import {useNavigate, useParams} from "react-router-dom";
+import {AppContext} from "../Context/AppContext.tsx";
 
 const Category: React.FC = () => {
-    const adminContext = useContext(AdminContext);
+    const navigate = useNavigate();
+    const adminContext = useContext(AppContext);
     if (!adminContext) return null;
 
     const { books,loading } = adminContext;

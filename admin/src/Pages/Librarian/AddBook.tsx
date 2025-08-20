@@ -110,14 +110,6 @@ const AddBook: React.FC = () => {
 
                         <div className="flex flex-col gap-2">
                             <label className="font-semibold text-gray-700">Category</label>
-                            {/*<input*/}
-                            {/*    type="text"*/}
-                            {/*    required*/}
-                            {/*    placeholder="Enter Category"*/}
-                            {/*    className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"*/}
-                            {/*    onChange={(e) => setCategory(e.target.value)}*/}
-                            {/*    value={category}*/}
-                            {/*/>*/}
                             <select
                                 value={category}
                                 required

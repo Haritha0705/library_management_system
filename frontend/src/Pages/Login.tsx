@@ -1,7 +1,7 @@
 import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {loginMember, registerMember} from "../Services/auth.Service.ts";
-import {AdminContext} from "../Context/AdminProvider.tsx";
+import {AppContext} from "../Context/AppContext.tsx";
 import type {LoginModel, LoginResponse, RegisterModel, RegisterResponse} from "../Model/auth.model.ts";
 import {toast} from "react-toastify";
 
@@ -13,7 +13,7 @@ const Login: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
 
     const navigate = useNavigate();
-    const adminContext = useContext(AdminContext);
+    const adminContext = useContext(AppContext);
 
     if (!adminContext) return null
 

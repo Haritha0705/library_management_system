@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import type { SearchModel, SearchResponse } from "../../Model/search.model.ts";
 import { searchBookByTitle } from "../../Services/book.Service.ts";
-import { AdminContext } from "../../Context/AdminProvider.tsx";
+import { AppContext } from "../../Context/AppContext.tsx";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar: React.FC<SearchProps> = () => {
+const SearchBar: React.FC = () => {
     const [search, setSearch] = useState<string>("");
     const [results, setResults] = useState<SearchModel[]>([]);
 
     const navigate = useNavigate();
 
-    const adminContext = useContext(AdminContext);
+    const adminContext = useContext(AppContext);
     if (!adminContext) return null;
 
     const { token } = adminContext;

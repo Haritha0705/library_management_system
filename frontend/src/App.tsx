@@ -14,11 +14,11 @@ import Favourite from "./Pages/Favourite.tsx";
 import Cart from "./Pages/Cart.tsx";
 import NotFoundPage from "./Pages/NotFoundPage.tsx";
 import { ToastContainer } from "react-toastify";
-import { AdminContext } from "./Context/AdminProvider.tsx";
+import { AppContext } from "./Context/AppContext.tsx";
 import Category from "./Pages/Category.tsx";
 
 const App: React.FC = () => {
-    const adminContext = useContext(AdminContext);
+    const adminContext = useContext(AppContext);
 
     if (!adminContext) return null;
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import userimg from "../assets/userIcon.png";
 import type { UserModel, UserResponse } from "../Model/user.model.ts";
-import { AdminContext } from "../Context/AdminProvider.tsx";
+import { AppContext } from "../Context/AppContext.tsx";
 import { getProfile, updateProfile } from "../Services/user.Service.ts";
 import { toast } from "react-toastify";
 import { FiEdit2 } from "react-icons/fi";
@@ -23,7 +23,7 @@ const MyProfile: React.FC = () => {
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
-    const adminContext = useContext(AdminContext);
+    const adminContext = useContext(AppContext);
     if (!adminContext) return null;
 
     const { token, memberId } = adminContext;

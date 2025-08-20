@@ -2,18 +2,18 @@ import React, {useContext, useState} from 'react';
 import {assets} from "../../assets/assets.ts";
 import {NavLink, useNavigate} from "react-router-dom";
 import { Menu, X,ChevronDown } from "lucide-react";
-import {AdminContext} from "../../Context/AdminProvider.tsx";
+import {AppContext} from "../../Context/AppContext.tsx";
 
 const NavBar:React.FC = () => {
 
     const [showMenu,setShowMenu] = useState(false)
     const navigate = useNavigate();
 
-    const adminContext = useContext(AdminContext);
+    const adminContext = useContext(AppContext);
 
     if (!adminContext) return null;
 
-    const { token,setToken } = adminContext;
+    const { token,setToken,profile } = adminContext;
 
     const logout = () =>{
         localStorage.removeItem("token")
@@ -48,7 +48,7 @@ const NavBar:React.FC = () => {
                 {
                     token
                     ? <div className={"cursor-pointer flex items-center gap-5"}>
-                        <img className={"w-10 rounded-full"} src={assets.profilePic} onClick={()=>navigate("/my-profile")} alt={""}/>
+                        <img className={"w-10 rounded-full"} src={profile?.image} onClick={()=>navigate("/my-profile")} alt={""}/>
                         <div className={"cursor-pointer flex items-center gap-2 group relative"}>
                             <ChevronDown/>
                             <div className={"absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block"}>
