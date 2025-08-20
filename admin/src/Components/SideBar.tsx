@@ -25,7 +25,7 @@ const SideBar:React.FC = () => {
                         </NavLink>
                         <NavLink className={({isActive})=>`flex items-center gap-3 py-3.5 px-3 md:min-w-72 cursor-pointer md:px-9 ${isActive ? 'bg-[#F2F3Ff] border-r-4 border-primary':''} `} to={'/all-borrowedBooks'}>
                             <img src={appointmentLogo} alt={"Borrowed-books-logo"}/>
-                            <p>Borrowed Books</p>
+                            <p>Not Return Books</p>
                         </NavLink>
                         <NavLink className={({isActive})=>`flex items-center gap-3 py-3.5 px-3 md:min-w-72 cursor-pointer md:px-9 ${isActive ? 'bg-[#F2F3Ff] border-r-4 border-primary':''} `} to={'/add-librarian'}>
                             <img src={addLogo} alt={"add-logo"}/>
@@ -44,7 +44,7 @@ const SideBar:React.FC = () => {
                         </NavLink>
                         <NavLink className={({isActive})=>`flex items-center gap-3 py-3.5 px-3 md:min-w-72 cursor-pointer md:px-9 ${isActive ? 'bg-[#F2F3Ff] border-r-4 border-primary':''} `} to={'/all-borrowedBooks'}>
                             <img src={appointmentLogo} alt={"Borrowed-books-logo"}/>
-                            <p>Borrowed Books</p>
+                            <p>Not Return Books</p>
                         </NavLink>
                         <NavLink className={({isActive})=>`flex items-center gap-3 py-3.5 px-3 md:min-w-72 cursor-pointer md:px-9 ${isActive ? 'bg-[#F2F3Ff] border-r-4 border-primary':''} `} to={'/add-book'}>
                             <img src={addLogo} alt={"add-logo"}/>
