@@ -13,10 +13,10 @@ const Books: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const adminContext = useContext(AppContext);
-    if (!adminContext) return null;
+    const appContext = useContext(AppContext);
+    if (!appContext) return null;
 
-    const { token } = adminContext;
+    const { token } = appContext;
 
     const fetchBooks = async ()=>{
         try {

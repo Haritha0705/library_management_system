@@ -12,3 +12,8 @@ export interface BookResponse {
     message:string;
 }
 
+export interface BookUpdateResponse {
+    success:boolean
+    message:string
+    updatedBook:BookModel
+}

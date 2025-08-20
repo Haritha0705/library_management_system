@@ -29,6 +29,12 @@ const BackendEndpoints = {
     //Update User Profile
     UPDATE_LIBRARIAN_PROFILE:"api/v1/user/update-profile/librarian",
 
+    //Search Book By Title
+    SEARCH_BOOK:"api/v1/book/search-book",
+
+    //Update Book Data
+    UPDATE_BOOK_DATA:"api/v1/book/update-book"
+
 }
 
 export default BackendEndpoints

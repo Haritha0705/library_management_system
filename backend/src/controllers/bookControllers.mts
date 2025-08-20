@@ -107,46 +107,57 @@ interface CustomRequest extends Request {
         category?: string;
         description?: string;
         availableCopies?: number;
+        file?: Express.Multer.File;
 }
 
 //API - Update Book
-const updateBook= async (req: CustomRequest, res: Response): Promise<void> => {
+const updateBook = async (req: CustomRequest, res: Response): Promise<void> => {
     try {
-        const lId = req.params.id;
-        const {title, author, category, description, availableCopies} = req.body;
+        const bookId = req.params.id;
+        const { title, author, category, description, availableCopies } = req.body;
+        const imageFile = req.file;
 
-        // Check if memberId is provided
-        if (!lId){
-            res.status(400).json({success: false, message: "Book isbn is required",});
-            return
+        // Validate bookId
+        if (!bookId) {
+            res.status(400).json({ success: false, message: "Book ID is required" });
+            return;
         }
 
-        // Check if isbn is a valid MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(lId))
-        {res.status(400).json({success: false, message: "Invalid isbn format",});
-            return
+        if (!mongoose.Types.ObjectId.isValid(bookId)) {
+            res.status(400).json({ success: false, message: "Invalid Book ID format" });
+            return;
+        }
+
+        // Find existing book
+        const existingBook = await bookModel.findById(bookId);
+        if (!existingBook) {
+            res.status(404).json({ success: false, message: "Book not found" });
+            return;
+        }
+
+        // Handle image upload
+        let imageURL = existingBook.image || null;
+        if (imageFile) {
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
+                resource_type: "image",
+            });
+            imageURL = imageUpload.secure_url;
         }
 
         // Update book data
         const updatedBook = await bookModel.findByIdAndUpdate(
-            lId,
-            { title, author, category, description, availableCopies },
+            bookId,
+            { title, author, category, description, availableCopies, image: imageURL },
             { new: true }
-        )
+        );
 
-        // If no isbn was found
-        if (!updatedBook) {res.status(404).json({success: false, message: "Book not found",});
-            return;
-        }
-
-        // Success
-        res.status(200).json({success: true, message: "Book Updated", updatedBook});
+        res.status(200).json({ success: true, message: "Book updated successfully", updatedBook });
 
     } catch (error: any) {
         console.error(error);
-        res.status(500).json({success: false, message: "Something went wrong", error: error.message,});
+        res.status(500).json({ success: false, message: "Something went wrong", error: error.message });
     }
-}
+};
 
 //API - Delete Book
 const deleteBook = async (req: Request, res: Response):Promise<any> =>{

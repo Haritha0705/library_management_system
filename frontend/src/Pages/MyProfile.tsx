@@ -38,9 +38,9 @@ const MyProfile: React.FC = () => {
                 const res: UserResponse = await getProfile(memberId, token);
                 setProfile(res.data);
                 setUserData({
-                    full_name: res.data.full_name || "",
-                    phone: res.data.phone || "",
-                    address: res.data.address || "",
+                    full_name: res.data?.full_name || "",
+                    phone: res.data?.phone || "",
+                    address: res.data?.address || "",
                     imageFile: null,
                 });
             } catch (apiError: any) {

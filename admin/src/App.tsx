@@ -13,6 +13,7 @@ import MemberList from "./Pages/Librarian/MemberList.tsx";
 import AddBook from "./Pages/Librarian/AddBook.tsx";
 import AllBorrowed from "./Components/DashBoard/AllBorrowed.tsx";
 import MyProfile from "./Pages/Librarian/MyProfile.tsx";
+import UpdateBook from "./Pages/Librarian/UpdateBook.tsx";
 
 const App:React.FC = ()=> {
 
@@ -45,6 +46,7 @@ const App:React.FC = ()=> {
                       <Route path={"/add-book"} element={<AddBook/>}/>
                       <Route path={"/member-list"} element={<MemberList/>}/>
                       <Route path={"/profile"} element={<MyProfile/>}/>
+                      <Route path={"/book-update"} element={<UpdateBook/>}/>
                   </>
                   )}
             </Routes>
