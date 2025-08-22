@@ -69,11 +69,10 @@ export const checkBookBorrow =  async (bookId:string,memberId:string,token:strin
     }
 }
 
-export const searchBookByTitle =  async (query:string,token:string): Promise<SearchResponse>=>{
+export const searchBookByTitle =  async (query:string): Promise<SearchResponse>=>{
     try {
         const apiResponse = await AxiosService.get<SearchResponse>(
-            `${BackendEndpoints.SEARCH_BOOK}?title=${query}`,
-            {headers: {Authorization: `Bearer ${token}`}}
+            `${BackendEndpoints.SEARCH_BOOK}?title=${query}`
         )
         return apiResponse.data
     }catch (apiError) {

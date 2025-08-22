@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { SearchModel, SearchResponse } from "../../Model/search.model.ts";
 import { searchBookByTitle } from "../../Services/book.Service.ts";
-import { AppContext } from "../../Context/AppContext.tsx";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar: React.FC = () => {
@@ -10,16 +9,9 @@ const SearchBar: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const adminContext = useContext(AppContext);
-    if (!adminContext) return null;
-
-    const { token } = adminContext;
-
     const searchBook = async (value: string) => {
         try {
-            if (!token) return;
-
-            const res: SearchResponse = await searchBookByTitle(value, token);
+            const res: SearchResponse = await searchBookByTitle(value);
             setResults(res.data || []);
         } catch (e) {
             console.log(e);
@@ -64,7 +56,6 @@ const SearchBar: React.FC = () => {
                 placeholder="Search by title"
             />
 
-            {/* display search results */}
             {results.length > 0 && (
                 <ul className="absolute bg-white w-full mt-1 border rounded shadow z-10">
                     {results.map((book, index) => (
