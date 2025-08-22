@@ -19,7 +19,7 @@ const bookRoutes = Router();
 //Book Routes
 
 bookRoutes.get("/get-book/:bookId",authMiddleware,roleMiddleware("librarian","member"),getBook)
-bookRoutes.get("/get-allBooks",authMiddleware,roleMiddleware("librarian","member"),getAllBooks)
+bookRoutes.get("/get-allBooks",getAllBooks)
 
 bookRoutes.get("/search-book",authMiddleware,roleMiddleware("librarian","member"),bookSearchByTitle)
 bookRoutes.post("/borrow/:bookId/:memberId",authMiddleware,roleMiddleware("member"),bookBorrow)
