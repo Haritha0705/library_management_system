@@ -1,6 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
-import {AppContext} from "../Context/AppContext.tsx";
 import {toast} from "react-toastify";
 import type {BookModel, BooksResponse} from "../Model/book.model.ts";
 import { getAllBooks} from "../Services/book.Service.ts";
@@ -13,14 +12,9 @@ const Books: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const appContext = useContext(AppContext);
-    if (!appContext) return null;
-
-    const { token } = appContext;
-
     const fetchBooks = async ()=>{
         try {
-            const res: BooksResponse = await getAllBooks(token);
+            const res: BooksResponse = await getAllBooks();
             setBook(res.data);
         }catch (apiError: any) {
             toast.error(apiError.message || "Failed to fetch librarians");
@@ -31,12 +25,8 @@ const Books: React.FC = () => {
     }
 
     useEffect(() => {
-        if (!token) {
-            setLoading(false);
-            return;
-        }
         fetchBooks()
-    }, [token]);
+    }, []);
 
     const uniqueAuthors = Array.from(new Set(book.map((b) => b.author)));
 

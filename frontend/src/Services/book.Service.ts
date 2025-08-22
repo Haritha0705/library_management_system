@@ -7,11 +7,10 @@ import type {BookBorrowResponse} from "../Model/borrow-book.model.ts";
 import type {SearchResponse} from "../Model/search.model.ts";
 import type {HistoryResponse} from "../Model/history.model.ts";
 
-export const getAllBooks = async (token:string):Promise<BooksResponse>=>{
+export const getAllBooks = async ():Promise<BooksResponse>=>{
     try {
         const apiResponse = await AxiosService.get<BooksResponse>(
-            BackendEndpoints.Fetch_Books,
-            {headers: {Authorization: `Bearer ${token}`}}
+            BackendEndpoints.Fetch_Books
         )
         return apiResponse.data
     }catch (apiError) {

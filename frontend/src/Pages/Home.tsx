@@ -2,6 +2,7 @@ import React from 'react';
 import Header from "../Components/Landing Page/Header.tsx";
 import CategoryMenu from "../Components/Landing Page/CategoryMenu.tsx";
 import TopBooks from "../Components/Landing Page/TopBooks.tsx";
+import Banner from "../Components/Landing Page/Banner.tsx";
 
 const Home:React.FC = () => {
     return(
@@ -9,6 +10,7 @@ const Home:React.FC = () => {
             <Header/>
             <CategoryMenu/>
             <TopBooks/>
+            <Banner/>
         </div>
     )
 }
