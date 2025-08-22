@@ -70,7 +70,7 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children
 
     const fetchBooks = async () => {
         try {
-            const res: BooksResponse = await getAllBooks(token);
+            const res: BooksResponse = await getAllBooks();
             setBooks(res.data);
         } catch (apiError: any) {
             toast.error(apiError.message || "Failed to fetch books");
@@ -81,12 +81,8 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children
     };
 
     useEffect(() => {
-        if (!token) {
-            setLoading(false);
-            return;
-        }
         fetchBooks();
-    }, [token]);
+    }, []);
 
     return (
         <AppContext.Provider value={{ token, setToken, memberId,books, loading, fetchBooks,profile }}>
