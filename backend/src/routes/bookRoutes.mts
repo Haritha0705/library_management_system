@@ -21,7 +21,7 @@ const bookRoutes = Router();
 bookRoutes.get("/get-book/:bookId",authMiddleware,roleMiddleware("librarian","member"),getBook)
 bookRoutes.get("/get-allBooks",getAllBooks)
 
-bookRoutes.get("/search-book",authMiddleware,roleMiddleware("librarian","member"),bookSearchByTitle)
+bookRoutes.get("/search-book",bookSearchByTitle)
 bookRoutes.post("/borrow/:bookId/:memberId",authMiddleware,roleMiddleware("member"),bookBorrow)
 bookRoutes.post("/return/:bookId/:memberId",authMiddleware,roleMiddleware("member"),bookReturn)
 
