@@ -19,9 +19,9 @@ const Order: React.FC = () => {
 
     const fetchBook = async () => {
         try {
-            if (!bookId || !token) return;
+            if (!bookId ) return;
 
-            const result: BookResponse = await bookById(bookId, token);
+            const result: BookResponse = await bookById(bookId);
             if (result.success && result.bookData) {
                 setBook(result.bookData);
             } else {
@@ -40,7 +40,7 @@ const Order: React.FC = () => {
 
     useEffect(() => {
         fetchBook();
-    }, [bookId, token]);
+    }, [bookId]);
 
     if (loading) {
         return <div className="p-6 text-center">Loading...</div>;
@@ -68,7 +68,7 @@ const Order: React.FC = () => {
                                 >
                                     <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
                                 </svg>
-                                Order
+                                Book
                             </a>
                         </li>
                         <li>
@@ -156,13 +156,14 @@ const Order: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Action Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                            {book.availableCopies > 0 && (
-                                <BorrowButton token={token} memberId={memberId} bookId={bookId}/>
-                            )}
-                            <ReturnButton token={token} memberId={memberId} bookId={bookId}/>
-                        </div>
+                        {token && (
+                            <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                                {book.availableCopies > 0 && (
+                                    <BorrowButton token={token} memberId={memberId} bookId={bookId}/>
+                                )}
+                                <ReturnButton token={token} memberId={memberId} bookId={bookId}/>
+                            </div>
+                        )}
                     </div>
                 </div>
             </main>

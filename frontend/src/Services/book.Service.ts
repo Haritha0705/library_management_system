@@ -18,11 +18,10 @@ export const getAllBooks = async ():Promise<BooksResponse>=>{
     }
 }
 
-export const bookById = async (bookId:string,token:string):Promise<BookResponse>=>{
+export const bookById = async (bookId:string):Promise<BookResponse>=>{
     try {
         const apiResponse = await AxiosService.get<BookResponse>(
-            `${BackendEndpoints.BOOK_BY_ID}/${bookId}`,
-            {headers: {Authorization: `Bearer ${token}`}}
+            `${BackendEndpoints.BOOK_BY_ID}/${bookId}`
         )
         return apiResponse.data
     }catch (apiError) {
