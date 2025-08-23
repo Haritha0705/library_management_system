@@ -26,7 +26,7 @@ const Login: React.FC = () => {
             const response: LoginResponse = await loginAdmin(reqBody) as LoginResponse;
 
             if (response?.success && response.token) {
-                localStorage.setItem("token", response.token);
+                localStorage.setItem("AdminToken", response.token);
                 setToken(response.token);
                 navigate('/');
             } else {

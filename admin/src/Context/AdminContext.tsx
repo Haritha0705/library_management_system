@@ -30,7 +30,7 @@ export interface AdminContextType {
 export const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export const AdminContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [token, setToken] = useState<string>(localStorage.getItem("token") || "");
+    const [token, setToken] = useState<string>(localStorage.getItem("AdminToken") || "");
     const [role, setRole] = useState<string>("");
     const [profile, setProfile] = useState<UserModel | null>(null);
     const [librarianId, setlibrarianId] = useState<string>("");
