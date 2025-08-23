@@ -21,3 +21,8 @@ export interface UserUpdateResponse {
     updatedProfile:UserModel
 }
 
+export interface UserDeleteResponse {
+    success:boolean
+    message:string
+}
+

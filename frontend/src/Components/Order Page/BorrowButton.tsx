@@ -9,7 +9,6 @@ interface ButtonProps {
     bookId?:string
 }
 const BorrowButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
-    // const [borrow,setBorrow] = useState<boolean>(false)
 
     const handleBorrowBook = async () => {
         try {
@@ -28,27 +27,6 @@ const BorrowButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
             console.error("Error borrowing book:", apiError);
         }
     };
-
-    // const BorrowBook = async () => {
-    //     try {
-    //         if (!bookId || !memberId || !token) return;
-    //
-    //         const result: BookBorrowResponse = await checkBookBorrow(bookId, memberId, token);
-    //
-    //         if (result.success) {
-    //             setBorrow(true)
-    //         } else {
-    //             setBorrow(false)
-    //             toast.error(result.message);
-    //         }
-    //     } catch (apiError:any) {
-    //         toast.error(apiError.response?.data?.message || apiError.message || "Failed to borrow book");
-    //         console.error("Error borrowing book:", apiError);
-    //     }
-    // };
-    // useEffect(() => {
-    //     BorrowBook()
-    // }, [bookId, memberId, token]);
 
     return (
          <button

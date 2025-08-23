@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import userimg from "../assets/userIcon.png";
-import type { UserModel, UserResponse } from "../Model/user.model.ts";
+import type {UserDeleteResponse, UserModel, UserResponse} from "../Model/user.model.ts";
 import { AppContext } from "../Context/AppContext.tsx";
-import { getProfile, updateProfile } from "../Services/user.Service.ts";
+import {deleteProfile, getProfile, updateProfile} from "../Services/user.Service.ts";
 import { toast } from "react-toastify";
 import { FiEdit2 } from "react-icons/fi";
+import {useNavigate} from "react-router-dom";
 
 const MyProfile: React.FC = () => {
     const [profile, setProfile] = useState<UserModel | null>(null);
@@ -22,6 +23,8 @@ const MyProfile: React.FC = () => {
     });
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
+
+    const navigate = useNavigate();
 
     const adminContext = useContext(AppContext);
     if (!adminContext) return null;
@@ -94,11 +97,22 @@ const MyProfile: React.FC = () => {
         return `${year}/${month}/${day} ${String(hours).padStart(2, "0")}:${minutes} ${ampm}`;
     };
 
+    const deleteMember = async () => {
+        if (!token || !memberId) return;
+        try {
+            const res: UserDeleteResponse = await deleteProfile(memberId, token);
+            toast.success(res.message)
+        } catch (apiError: any) {
+            toast.error(apiError.message || "Failed to fetch member profile");
+            console.error("Error fetching member profile:", apiError);
+        }
+    }
+
     if (loading) {
-        return (
-            <div className="h-screen flex items-center justify-center text-lg text-gray-600">
-                Loading profile...
-            </div>
+    return (
+        <div className="h-screen flex items-center justify-center text-lg text-gray-600">
+            Loading profile...
+        </div>
         );
     }
 
@@ -255,7 +269,13 @@ const MyProfile: React.FC = () => {
                         >
                             Edit
                         </button>
-                        <button className="border bg-red-500 px-8 py-2 rounded-full text-white hover:bg-red-600 transition-all cursor-pointer">
+                        <button className="border bg-red-500 px-8 py-2 rounded-full text-white hover:bg-red-600 transition-all cursor-pointer"
+                        onClick={()=>{
+                            localStorage.removeItem("token")
+                            navigate("/")
+                            deleteMember()
+                        }}
+                        >
                             Delete
                         </button>
                     </div>

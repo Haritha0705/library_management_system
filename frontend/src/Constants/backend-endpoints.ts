@@ -23,6 +23,9 @@ const BackendEndpoints = {
     //Update User Profile
     UPDATE_USER_PROFILE:"api/v1/user/update-profile/member",
 
+    //Delete User Profile
+    DELETE_USER_PROFILE:"api/v1/user/delete-profile/member",
+
     //Check Book Borrow
     CHECK_BOOK_BORROW:"api/v1/book/checkBookBorrow",
 
