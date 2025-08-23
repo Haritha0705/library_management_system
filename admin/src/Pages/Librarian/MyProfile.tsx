@@ -255,9 +255,6 @@ const MyProfile: React.FC = () => {
                         >
                             Edit
                         </button>
-                        <button className="border bg-red-500 px-8 py-2 rounded-full text-white hover:bg-red-600 transition-all cursor-pointer">
-                            Delete
-                        </button>
                     </div>
                 )}
             </div>
