@@ -159,9 +159,16 @@ const Order: React.FC = () => {
                         {token && (
                             <div className="flex flex-col sm:flex-row gap-4 mt-6">
                                 {book.availableCopies > 0 && (
-                                    <BorrowButton token={token} memberId={memberId} bookId={bookId}/>
+                                    <BorrowButton token={token}
+                                                  memberId={memberId}
+                                                  bookId={bookId}
+                                    />
                                 )}
-                                <ReturnButton token={token} memberId={memberId} bookId={bookId}/>
+                                <ReturnButton
+                                    token={token}
+                                    memberId={memberId}
+                                    bookId={bookId}
+                                />
                             </div>
                         )}
                     </div>

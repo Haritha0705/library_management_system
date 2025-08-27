@@ -17,7 +17,6 @@ const BorrowButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
             const result: BorrowResponse = await borrowBookById(bookId, memberId, token);
 
             if (result.success) {
-                // setBorrow(false)
                 toast.success(result.message || "Book borrowed successfully");
             } else {
                 toast.error(result.message || "Failed to borrow book");
@@ -32,9 +31,7 @@ const BorrowButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
          <button
              className={`px-6 py-2 rounded-lg w-full sm:w-auto transition text-white bg-blue-600 hover:bg-blue-700 cursor-pointer
       `}
-        // ${borrow ? "bg-blue-600 hover:bg-blue-700 cursor-pointer" : "bg-gray-400 cursor-not-allowed"}
              onClick={handleBorrowBook}
-             // disabled={!borrow}
          >Borrow Book
          </button>
     );

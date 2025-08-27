@@ -32,9 +32,7 @@ const ReturnButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
         <button
             className={`px-6 py-2 rounded-lg w-full sm:w-auto transition text-white bg-blue-600 hover:bg-blue-700 cursor-pointe
             `}
-            // ${bookReturn ? "bg-blue-600 hover:bg-blue-700 cursor-pointer" : "bg-gray-400 cursor-not-allowed"}
             onClick={handleReturnBook}
-            // disabled={!bookReturn}
         >
             Return Book
         </button>
