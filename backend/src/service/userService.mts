@@ -1,19 +1,18 @@
-import { Request, Response } from "express";
 import memberModel from "../models/memberModel.mjs";
 import mongoose, {Types} from "mongoose";
 import { v2 as cloudinary } from "cloudinary";
 import issueModel from "../models/issueModel.mjs";
 import librarianModel from "../models/librarianModel.mjs";
-import {LoginReq} from "../types/auth.type";
+import {Profile, ProfileReq, ProfileRes} from "../types/profile";
 
 export class UserService{
 
     // API - Get User Profile
-    getProfile = async (req: LoginReq) => {
+    getProfile = async (req: ProfileReq): Promise<ProfileRes>  => {
         try {
             const { id, role } = req.params;
 
-            let profile = null;
+            let profile:Profile | null = null;
 
             // check in userId enter
             if (!id) {
@@ -22,7 +21,6 @@ export class UserService{
 
             if (!role) {
                 return { success: false,status: 400, message: "Invalid role" }
-
             }
 
             if (role === "member") {
@@ -37,15 +35,15 @@ export class UserService{
                 return {success: false, status: 404, message: "Profile not found" };
             }
 
-            return {success: true, status: 200, data: profile};
+            return {success: true, status: 200, data:profile};
         } catch (e: any) {
             console.log(e);
-            return {success: false, status: 500, message: "Internal server error", error: e.message};
+            return {success: false, status: 500, message: `Internal server error ${e.message}`};
         }
     };
 
     // API - Update User Profile
-    updateProfile = async (req: CustomRequest) => {
+    updateProfile = async (req: ProfileReq):Promise<ProfileRes> => {
         try {
             const { id, role } = req.params;
 
@@ -57,7 +55,7 @@ export class UserService{
                 return {success: false, status: 400, message: "Missing User role"};
             }
 
-            const { full_name, phone, address } = req.body;
+            const { full_name, phone, address } = req.body || {};
             const imageFile = (req as any).file;
 
             let updatedProfile = null;
@@ -129,15 +127,14 @@ export class UserService{
             return {success: true, status: 200, data: updatedProfile};
         } catch (e: any) {
             console.error(e);
-            return {success: false, status: 500, message: "Internal server error", error: e.message};
+            return {success: false, status: 500, message: `Internal server error ${e.message}`};
         }
     };
 
-
     // API - Delete User Profile
-    deleteProfile = async (req: Request) => {
+    deleteProfile = async (req: ProfileReq) => {
         try {
-            const { id, role } = req.params;
+            const {id, role} = req.params;
 
             if (!id) {
                 return {success: false, status: 400, message: "Missing User ID"};
@@ -153,10 +150,10 @@ export class UserService{
 
             if (role === "member") {
                 // Delete issues related to this member
-                await issueModel.deleteMany({ memberId: new mongoose.Types.ObjectId(id) });
+                await issueModel.deleteMany({memberId: new mongoose.Types.ObjectId(id)});
 
                 // Delete the member profile
-                const deleteResult = await memberModel.deleteOne({ _id: id });
+                const deleteResult = await memberModel.deleteOne({_id: id});
 
                 if (deleteResult.deletedCount === 0) {
                     return {success: false, status: 404, message: "Member profile not found"};
@@ -165,7 +162,7 @@ export class UserService{
                 return {success: false, status: 404, message: "Invalid role"};
             }
 
-            return {success: false, status: 200,  message: `${role} profile deleted successfully`};
+            return {success: false, status: 200, message: `${role} profile deleted successfully`};
         } catch (e: any) {
             console.error(e);
             return {success: false, status: 500, message: "Internal server error", error: e.message};
