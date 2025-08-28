@@ -29,7 +29,7 @@ export class BookService {
 
         } catch (e: any) {
             console.error(e);
-            return {success: false, status: 500, message: e.message};
+            return {success: false, status: 500, message: "Something went wrong", error: error.message,};
         }
     };
 
