@@ -29,7 +29,7 @@ export class BookService {
 
         } catch (e: any) {
             console.error(e);
-            return {success: false, status: 500, message: "Something went wrong", error: error.message,};
+            return {success: false, status: 500, message: "Something went wrong", error: e.message,};
         }
     };
 
@@ -38,7 +38,7 @@ export class BookService {
         try {
             const {title, author, category, description, availableCopies} = req.body;
 
-            const imageFile: File = req.file
+            const imageFile = req.file
 
             // Check if file exists first
             if (!imageFile) {
