@@ -1,14 +1,15 @@
 import {Request,Response} from "express";
 import bookService,{BookService} from "../service/bookService.mjs";
-import {BookRes} from "../types/book";
+import {BookRes, BookUpdateBody} from "../types/book";
 
 class BookControllers {
     private readonly bookService:BookService
+
     constructor(bookService:BookService) {
         this.bookService=bookService
     }
 
-    getBook = async (req: Request<{ bookId: string }>, res: BookRes): Promise<void> => {
+    getBook = async (req: Request<{ bookId: string }>, res: Response): Promise<void> => {
         try {
             const result:BookRes = await this.bookService.getBook(req);
 
@@ -65,7 +66,7 @@ class BookControllers {
         }
     }
 
-    updateBook = async (req: Request, res: Response): Promise<void> => {
+    updateBook = async (req: Request<{ id: string }, {}, BookUpdateBody>, res: Response): Promise<void> => {
         try {
             const result = await this.bookService.updateBook(req);
 
@@ -84,7 +85,7 @@ class BookControllers {
         }
     }
 
-    deleteBook = async (req: Request, res: Response): Promise<void> => {
+    deleteBook = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
         try {
             const result = await this.bookService.deleteBook(req);
 
@@ -103,7 +104,7 @@ class BookControllers {
         }
     }
 
-    bookSearchByTitle = async (req: Request, res: Response): Promise<void> => {
+    bookSearchByTitle = async (req: Request<{}, {}, {}, { title?: string }>, res: Response): Promise<void> => {
         try {
             const result = await this.bookService.bookSearchByTitle(req);
 
@@ -122,7 +123,7 @@ class BookControllers {
         }
     }
 
-    bookBorrow = async (req: Request, res: Response): Promise<void> => {
+    bookBorrow = async (req: Request<{ bookId: string, memberId: string }>, res: Response): Promise<void> => {
         try {
             const result = await this.bookService.bookBorrow(req);
 
@@ -142,7 +143,7 @@ class BookControllers {
         }
     }
 
-    bookReturn = async (req: Request, res: Response): Promise<void> => {
+    bookReturn = async (req: Request<{ bookId: string, memberId: string }>, res: Response): Promise<void> => {
         try {
             const result = await this.bookService.bookReturn(req);
 

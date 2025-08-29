@@ -1,9 +1,9 @@
 import { Response } from "express";
 import userService, { UserService } from "../service/userService.mjs"; // works if tsconfig has "allowJs": true
-import {ProfileReq, ProfileRes} from "../types/profile";
+import {ProfileReq, ProfileRes, UpdateProfileRes} from "../types/profile";
 
 class UserControllers {
-    private userService: UserService;
+    private readonly userService: UserService;
 
     constructor(userService: UserService) {
         this.userService = userService;
@@ -37,7 +37,7 @@ class UserControllers {
 
     updateProfile = async (req: ProfileReq, res: Response): Promise<void> => {
         try {
-            const result: ProfileRes  = await this.userService.updateProfile(req);
+            const result: UpdateProfileRes  = await this.userService.updateProfile(req);
 
             if (!result.success) {
                 res.status(result.status ?? 500).json({

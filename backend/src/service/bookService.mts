@@ -86,7 +86,7 @@ export class BookService {
     }
 
     //API - Update Book
-    updateBook = async (req: Request<{ id: string }, {}, BookUpdateBody>) => {
+    updateBook = async (req: e.Request<{ id: string }, {}, BookUpdateBody>) => {
         try {
             const {id} = req.params;
             const {title, author, category, description, availableCopies} = req.body;
@@ -132,7 +132,7 @@ export class BookService {
     };
 
     //API - Delete Book
-    deleteBook = async (req: Request<{ id: string; }>) => {
+    deleteBook = async (req: Request<{ id: string }>) => {
         try {
             const {id} = req.params;
 

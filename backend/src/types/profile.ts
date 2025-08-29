@@ -36,7 +36,7 @@ export interface ProfileRes {
 
 export interface UpdateProfileRes {
     success: boolean;
-    status?: number;
+    status: number;
     data?: UpdateProfile | undefined ;
     message?:string
 }

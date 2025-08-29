@@ -1,10 +1,11 @@
 export interface BookBody {
-    title?: string;
-    author?: string;
-    category?: string;
-    description?: string;
-    availableCopies?: number;
-    image?:string
+    _id: string;
+    title: string;
+    author: string;
+    category: string;
+    description: string;
+    availableCopies: number;
+    image:string
 }
 
 export interface BookUpdateBody {
@@ -27,5 +28,14 @@ export interface BorrowHistoryBody {
 
 export interface BookRes {
     success:boolean;
-    data:BookBody;
+    status:number
+    message?:string
+    data?:BookBody;
+}
+
+export interface UpdateBookRes {
+    success:boolean;
+    status:number
+    message:string
+    data?:BookUpdateBody;
 }
