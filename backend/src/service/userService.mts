@@ -3,7 +3,7 @@ import mongoose, {Types} from "mongoose";
 import { v2 as cloudinary } from "cloudinary";
 import issueModel from "../models/issueModel.mjs";
 import librarianModel from "../models/librarianModel.mjs";
-import {Profile, ProfileReq, ProfileRes} from "../types/profile";
+import {Profile, ProfileReq, ProfileRes, UpdateProfile, UpdateProfileRes} from "../types/profile";
 
 export class UserService{
 
@@ -43,7 +43,7 @@ export class UserService{
     };
 
     // API - Update User Profile
-    updateProfile = async (req: ProfileReq):Promise<ProfileRes> => {
+    updateProfile = async (req: ProfileReq):Promise<UpdateProfileRes> => {
         try {
             const { id, role } = req.params;
 
@@ -105,7 +105,7 @@ export class UserService{
                     imageURL = imageUpload.secure_url;
                 }
 
-                updatedProfile = await librarianModel.findByIdAndUpdate(
+                updatedProfile = await librarianModel.findByIdAndUpdate<UpdateProfile>(
                     existingProfile._id,
                     {
                         full_name,
