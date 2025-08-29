@@ -51,7 +51,7 @@ export class AuthService{
             return { success: true, status: 200, message: `${userType.charAt(0).toUpperCase() + userType.slice(1)} login successful`,data: { id: user._id, email: user.email,role:user.role },token:token };
         } catch (error: any) {
             console.error(error);
-            return {success: false, status: 500, message: "Internal server error", error: e.message};
+            return {success: false, status: 500, message: "Internal server error", error: error.message};
         }
     };
 
