@@ -24,6 +24,7 @@ export interface LoginRes {
 }
 
 export interface RegisterRes {
+    user: any
     success:boolean
     status:number
     message:string;

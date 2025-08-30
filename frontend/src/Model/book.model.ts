@@ -15,7 +15,7 @@ export interface BooksResponse {
 
 export interface BookResponse {
     success: boolean;
-    bookData?: BookModel;
+    data?: BookModel;
 }
 
 

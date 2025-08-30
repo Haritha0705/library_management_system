@@ -39,7 +39,7 @@ class AuthControllers {
                 return;
             }
 
-            res.status(200).json({success: true, message: result.message, data: result.user, token: result.token});
+            res.status(200).json({success: true, message: result.message, data: result.data, token: result.token});
 
         }catch (e: any) {
             console.log(e);

@@ -9,6 +9,7 @@ import ReturnButton from "../Components/Order Page/ReturnButton.tsx";
 
 const Order: React.FC = () => {
     const { bookId } = useParams();
+    console.log(bookId)
     const [book, setBook] = useState<BookModel | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -22,8 +23,8 @@ const Order: React.FC = () => {
             if (!bookId ) return;
 
             const result: BookResponse = await bookById(bookId);
-            if (result.success && result.bookData) {
-                setBook(result.bookData);
+            if (result.success && result.data) {
+                setBook(result.data);
             } else {
                 toast.error("Book not found");
                 setBook(null);
