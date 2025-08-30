@@ -6,6 +6,7 @@ import peopleLogo from "../../assets/people_icon.svg"
 import addLogo from "../../assets/add_icon.svg"
 import {AdminContext} from "../../Context/AdminContext.tsx";
 import { GrUpdate } from "react-icons/gr";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const SideBar:React.FC = () => {
 
@@ -58,6 +59,10 @@ const SideBar:React.FC = () => {
                         <NavLink className={({isActive})=>`flex items-center gap-3 py-3.5 px-3 md:min-w-72 cursor-pointer md:px-9 ${isActive ? 'bg-[#F2F3Ff] border-r-4 border-primary':''} `} to={'/book-update'}>
                             <GrUpdate style={{ strokeWidth: 2 }} size={20} />
                             <p>Update Book</p>
+                        </NavLink>
+                        <NavLink className={({isActive})=>`flex items-center gap-3 py-3.5 px-3 md:min-w-72 cursor-pointer md:px-9 ${isActive ? 'bg-[#F2F3Ff] border-r-4 border-primary':''} `} to={'/book-delete'}>
+                            <AiOutlineDelete  size={30}/>
+                            <p>Delete Book</p>
                         </NavLink>
                     </ul>
                 )}

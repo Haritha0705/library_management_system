@@ -14,6 +14,7 @@ import AddBook from "./Pages/Librarian/AddBook.tsx";
 import AllBorrowed from "./Components/DashBoard/AllBorrowed.tsx";
 import MyProfile from "./Pages/Librarian/MyProfile.tsx";
 import UpdateBook from "./Pages/Librarian/UpdateBook.tsx";
+import DeleteBook from "./Pages/Librarian/DeleteBook.tsx";
 
 const App:React.FC = ()=> {
 
@@ -47,6 +48,7 @@ const App:React.FC = ()=> {
                       <Route path={"/member-list"} element={<MemberList/>}/>
                       <Route path={"/profile"} element={<MyProfile/>}/>
                       <Route path={"/book-update"} element={<UpdateBook/>}/>
+                      <Route path={"/book-delete"} element={<DeleteBook/>}/>
                   </>
                   )}
             </Routes>

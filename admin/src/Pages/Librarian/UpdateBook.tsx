@@ -198,7 +198,7 @@ const UpdateBook: React.FC = () => {
 
                                 <button
                                     type="submit"
-                                    className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                    className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
                                 >
                                     Update Book
                                 </button>
