@@ -17,6 +17,9 @@ const BackendEndpoints = {
     //add Book
     ADD_BOOK:"api/v1/book/add-book",
 
+    //delete Book
+    DELETE_BOOK:"api/v1/book/delete-book",
+
     //DashBoard Counts
     DASHBOARD_COUNTS:"api/v1/dashboard/get-count",
 

@@ -9,7 +9,6 @@ import ReturnButton from "../Components/Order Page/ReturnButton.tsx";
 
 const Order: React.FC = () => {
     const { bookId } = useParams();
-    console.log(bookId)
     const [book, setBook] = useState<BookModel | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 

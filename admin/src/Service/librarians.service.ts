@@ -14,7 +14,7 @@ export const getAllLibrarians = async (token:string): Promise<LibrarianResponse[
     }
 };
 
-export const deleteLibrarian = async (id:string,token:string):Promise<any>=>{
+export const deleteLibrarian = async (id:string,token:string):Promise<void>=>{
     try {
         const apiResponse = await AxiosService.delete(
             `${BackendEndpoints.DELETE_LIBRARIAN}/${id}`,

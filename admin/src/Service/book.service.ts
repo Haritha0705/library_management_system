@@ -31,3 +31,15 @@ export const updateBook = async (id: string, token: string, payload: FormData):P
         throw apiError;
     }
 }
+
+export const deleteBook = async (id: string, token: string):Promise<void>=>{
+    try {
+        const apiResponse = await AxiosService.delete(
+            `${BackendEndpoints.DELETE_BOOK}/${id}`,
+            {headers: {Authorization: `Bearer ${token}`}}
+        )
+        return apiResponse.data
+    } catch (apiError) {
+        throw apiError;
+    }
+}
