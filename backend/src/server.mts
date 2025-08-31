@@ -35,7 +35,6 @@ app.use("/api/v1/book",bookRoutes);
 app.use("/api/v1/user",userRoutes);
 app.use("/api/v1/dashboard",dashboardRoutes);
 
-// Start server
 const startServer = async () => {
     try {
         await connectDB();
