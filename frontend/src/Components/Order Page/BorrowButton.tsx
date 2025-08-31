@@ -7,8 +7,9 @@ interface ButtonProps {
     token?:string
     memberId?:string
     bookId?:string
+    onBorrow: () => void;
 }
-const BorrowButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
+const BorrowButton:React.FC<ButtonProps> = ({token,memberId,bookId,onBorrow}) => {
 
     const handleBorrowBook = async () => {
         try {
@@ -18,6 +19,7 @@ const BorrowButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
 
             if (result.success) {
                 toast.success(result.message || "Book borrowed successfully");
+                onBorrow();
             } else {
                 toast.error(result.message || "Failed to borrow book");
             }

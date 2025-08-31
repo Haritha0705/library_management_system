@@ -7,9 +7,10 @@ interface ButtonProps {
     token?:string
     memberId?:string
     bookId?:string
+    onReturn: () => void;
 }
 
-const ReturnButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
+const ReturnButton:React.FC<ButtonProps> = ({token,memberId,bookId,onReturn}) => {
 
     const handleReturnBook = async () => {
         try {
@@ -19,6 +20,7 @@ const ReturnButton:React.FC<ButtonProps> = ({token,memberId,bookId}) => {
 
             if (result.success) {
                 toast.success(result.message || "Book return successfully");
+                onReturn();
             } else {
                 toast.error(result.message || "Failed to return book");
             }

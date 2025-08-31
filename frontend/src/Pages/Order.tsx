@@ -42,6 +42,19 @@ const Order: React.FC = () => {
         fetchBook();
     }, [bookId]);
 
+    const handleBorrow = () => {
+        if (book) {
+            setBook({ ...book, availableCopies: book.availableCopies - 1 });
+        }
+    };
+
+    const handleReturn = () => {
+        if (book) {
+            setBook({ ...book, availableCopies: book.availableCopies + 1 });
+        }
+    };
+
+
     if (loading) {
         return <div className="p-6 text-center">Loading...</div>;
     }
@@ -162,12 +175,14 @@ const Order: React.FC = () => {
                                     <BorrowButton token={token}
                                                   memberId={memberId}
                                                   bookId={bookId}
+                                                  onBorrow={handleBorrow}
                                     />
                                 )}
                                 <ReturnButton
                                     token={token}
                                     memberId={memberId}
                                     bookId={bookId}
+                                    onReturn={handleReturn}
                                 />
                             </div>
                         )}
