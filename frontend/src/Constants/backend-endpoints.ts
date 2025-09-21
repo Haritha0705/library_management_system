@@ -12,28 +12,28 @@ const BackendEndpoints = {
     BOOK_BY_ID:"/api/v1/book/get-book",
 
     //Borrow Book
-    BORROW_BOOK:"api/v1/book/borrow",
+    BORROW_BOOK:"/api/v1/book/borrow",
 
     //Return Book
-    RETURN_BOOK:"api/v1/book/return",
+    RETURN_BOOK:"/api/v1/book/return",
 
     //Get User Profile
-    GET_USER_PROFILE:"api/v1/user/get-profile/member",
+    GET_USER_PROFILE:"/api/v1/user/get-profile/member",
 
     //Update User Profile
-    UPDATE_USER_PROFILE:"api/v1/user/update-profile/member",
+    UPDATE_USER_PROFILE:"/api/v1/user/update-profile/member",
 
     //Delete User Profile
-    DELETE_USER_PROFILE:"api/v1/user/delete-profile/member",
+    DELETE_USER_PROFILE:"/api/v1/user/delete-profile/member",
 
     //Check Book Borrow
-    CHECK_BOOK_BORROW:"api/v1/book/checkBookBorrow",
+    CHECK_BOOK_BORROW:"/api/v1/book/checkBookBorrow",
 
     //Search Book By Title
-    SEARCH_BOOK:"api/v1/book/search-book",
+    SEARCH_BOOK:"/api/v1/book/search-book",
 
     //Get Book Borrow History
-    BOOK_BORROW_HISTORY:"api/v1/book/borrowHistory",
+    BOOK_BORROW_HISTORY:"/api/v1/book/borrowHistory",
 }
 export default BackendEndpoints
 
