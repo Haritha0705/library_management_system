@@ -1,6 +1,6 @@
 import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {loginMember, registerMember} from "../Services/auth.Service.ts";
+import {loginMember,  registerMember} from "../Services/auth.Service.ts";
 import {AppContext} from "../Context/AppContext.tsx";
 import type {LoginModel, LoginResponse, RegisterModel, RegisterResponse} from "../Model/auth.model.ts";
 import {toast} from "react-toastify";

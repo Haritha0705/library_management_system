@@ -4,7 +4,7 @@ import dashboardService,{DashboardService} from "../service/dashboardService.mjs
 export class DashboardControllers {
     private readonly dashboardService:DashboardService
 
-    constructor(dashboardService:AuthService) {
+    constructor(dashboardService:DashboardService) {
         this.dashboardService=dashboardService
     }
 

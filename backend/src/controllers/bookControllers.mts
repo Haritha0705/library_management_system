@@ -1,6 +1,6 @@
 import {Request,Response} from "express";
 import bookService,{BookService} from "../service/bookService.mjs";
-import {BookRes, BookUpdateBody} from "../types/book";
+import {BookUpdateBody} from "../types/book";
 
 class BookControllers {
     private readonly bookService:BookService
@@ -11,7 +11,7 @@ class BookControllers {
 
     getBook = async (req: Request<{ bookId: string }>, res: Response): Promise<void> => {
         try {
-            const result:BookRes = await this.bookService.getBook(req);
+            const result = await this.bookService.getBook(req);
 
             if (!result.success) {
                 res.status(result.status ?? 500).json({ success: false, message: result.message });

@@ -1,4 +1,4 @@
-import {Request} from "express";
+import express, {Request} from "express";
 import bookModel from "../models/bookModel.mjs";
 import mongoose from "mongoose";
 import Issue from "../models/issueModel.mjs";
@@ -18,7 +18,7 @@ export class BookService {
                 return {success: false, status: 400, message: "Book ID is required"};
             }
             // Fetch member and exclude password
-            const bookData = await bookModel.findById(bookId);
+            const bookData = await bookModel.findById(bookId) ;
 
             if (!bookData) {
                 return {success: false, status: 404, message: "Book not found"};
@@ -86,7 +86,7 @@ export class BookService {
     }
 
     //API - Update Book
-    updateBook = async (req: e.Request<{ id: string }, {}, BookUpdateBody>) => {
+    updateBook = async (req: express.Request<{ id: string }, {}, BookUpdateBody>) => {
         try {
             const {id} = req.params;
             const {title, author, category, description, availableCopies} = req.body;

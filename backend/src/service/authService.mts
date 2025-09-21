@@ -102,12 +102,12 @@ export class AuthService{
                 success: true,
                 status: 201,
                 message: "Member registration successful",
-                user: {
-                    id: newUser._id,
+                data: {
                     email: newUser.email,
                     username: newUser.username,
                     role: role,
-                },token:token };
+                },
+                token:token };
         } catch (e: any) {
             console.error(e);
             return {success: false, status: 500, message: "Internal server error", error: e.message};

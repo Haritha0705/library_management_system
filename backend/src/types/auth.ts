@@ -24,15 +24,14 @@ export interface LoginRes {
 }
 
 export interface RegisterRes {
-    user: any
     success:boolean
     status:number
     message:string;
     data?:{
-        id:string;
         email:string;
         username:string;
         role:string;
     }
     token?:string;
 }
+
