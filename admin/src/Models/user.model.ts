@@ -13,11 +13,11 @@ export interface UserModel {
 
 export interface UserResponse {
     success:boolean
-    data?:string
+    data:UserModel
 }
 
 export interface UserUpdateResponse {
     success:boolean
-    updatedProfile?:UserModel
+    updatedProfile:UserModel
 }
 

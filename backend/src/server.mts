@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
-    "http://localhost:5173",
+    "https://library-management-system-4iii.vercel.app",
     "http://localhost:5174"
 ];
 

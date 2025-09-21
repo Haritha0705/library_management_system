@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import userimg from "../../assets/userIcon.png";
-import type { UserModel, UserResponse } from "../../Models/user.model.ts";
+import type {UserModel, UserResponse, UserUpdateResponse} from "../../Models/user.model.ts";
 import { getProfile, updateProfile } from "../../Service/user.Service.ts";
 import { toast } from "react-toastify";
 import { FiEdit2 } from "react-icons/fi";
@@ -24,9 +24,8 @@ const MyProfile: React.FC = () => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
     const adminContext = useContext(AdminContext);
-    if (!adminContext) return null;
-
-    const { token, librarianId } = adminContext;
+    const token = adminContext?.token || "";
+    const librarianId = adminContext?.librarianId || "";
 
     useEffect(() => {
         if (!token || !librarianId) {
@@ -67,7 +66,7 @@ const MyProfile: React.FC = () => {
                 formData.append("image", userData.imageFile);
             }
 
-            const res = await updateProfile(librarianId, token, formData);
+            const res:UserUpdateResponse = await updateProfile(librarianId, token, formData);
             if (res.success) {
                 toast.success("Profile updated successfully");
                 setProfile(res.updatedProfile);

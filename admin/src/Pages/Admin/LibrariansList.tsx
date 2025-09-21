@@ -9,9 +9,7 @@ const LibrariansList: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     const adminContext = useContext(AdminContext);
-    if (!adminContext) return null;
-
-    const { token } = adminContext;
+    const token = adminContext?.token || "";
 
     const fetchData = async () => {
         try {

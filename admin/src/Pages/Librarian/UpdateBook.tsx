@@ -8,7 +8,7 @@ import type {BookModel} from "../../Models/book.model.ts";
 const UpdateBook: React.FC = () => {
     const [search, setSearch] = useState<string>("");
     const [results, setResults] = useState<SearchModel[]>([]);
-    const [selectedBook, setSelectedBook] = useState<SearchModel | null>(null);
+    const [selectedBook, setSelectedBook] = useState<BookModel | null>(null);
 
     // Book fields
     const [title, setTitle] = useState<string>("");
@@ -19,8 +19,7 @@ const UpdateBook: React.FC = () => {
     const [imageFile, setImageFile] = useState<File | null>(null);
 
     const adminContext = useContext(AdminContext);
-    if (!adminContext) return null;
-    const { token } = adminContext;
+    const token = adminContext?.token || "";
 
     const searchBook = async (value: string) => {
         try {
