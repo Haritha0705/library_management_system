@@ -4,10 +4,10 @@ import {AppContext} from "../Context/AppContext.tsx";
 
 const Category: React.FC = () => {
     const navigate = useNavigate();
-    const adminContext = useContext(AppContext);
-    if (!adminContext) return null;
 
-    const { books,loading } = adminContext;
+    const adminContext = useContext(AppContext);
+    const books = adminContext?.books || [];
+    const loading = adminContext?.loading || false;
 
     const { category } = useParams<{ category: string }>();
 

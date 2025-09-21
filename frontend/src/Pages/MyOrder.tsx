@@ -6,9 +6,8 @@ import { borrowHistory } from "../Services/book.Service.ts";
 const MyOrder: React.FC = () => {
     const [data, setData] = useState<HistoryModel[]>([]);
     const adminContext = useContext(AppContext);
-
-    if (!adminContext) return null;
-    const { token, memberId } = adminContext;
+    const token = adminContext?.token || "";
+    const memberId = adminContext?.memberId || "";
 
     useEffect(() => {
         if (!token || !memberId) return;

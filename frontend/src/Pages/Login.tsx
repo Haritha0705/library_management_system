@@ -26,14 +26,14 @@ const Login: React.FC = () => {
 
         try {
             if (mode === 'Sign Up') {
-                const res:LoginResponse = await registerMember(reqRegisterBody)
+                const res:RegisterResponse = await registerMember(reqRegisterBody)
                 if (res.token && res.success){
                     localStorage.setItem("token", res.token);
                     setToken(res.token);
                     navigate('/');
                 }
             } else if (mode === 'Login') {
-                const res:RegisterResponse = await loginMember(reqLoginBody);
+                const res:LoginResponse = await loginMember(reqLoginBody);
                 if (res.token && res.success){
                     localStorage.setItem("token", res.token);
                     setToken(res.token);
@@ -42,7 +42,7 @@ const Login: React.FC = () => {
             } else {
                     toast.error("Login failed");
             }
-        } catch (err) {
+        } catch (err:any) {
             console.error('Auth error:', err);
             setError(err.res?.data?.message || 'Something went wrong');
         }

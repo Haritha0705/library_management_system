@@ -13,9 +13,8 @@ const Order: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     const adminContext = useContext(AppContext);
-    if (!adminContext) return null;
-
-    const { token,memberId } = adminContext;
+    const token = adminContext?.token || "";
+    const memberId = adminContext?.memberId || "";
 
     const fetchBook = async () => {
         try {

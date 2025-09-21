@@ -27,16 +27,16 @@ const MyProfile: React.FC = () => {
     const navigate = useNavigate();
 
     const adminContext = useContext(AppContext);
-    if (!adminContext) return null;
-
-    const { token, memberId } = adminContext;
+    const token = adminContext?.token || "";
+    const memberId = adminContext?.memberId || "";
 
     useEffect(() => {
-        if (!token || !memberId) {
-            setLoading(false);
-            return;
-        }
         const getUser = async () => {
+            if (!token || !memberId) {
+                setLoading(false);
+                return;
+            }
+
             try {
                 const res: UserResponse = await getProfile(memberId, token);
                 setProfile(res.data);
@@ -54,7 +54,7 @@ const MyProfile: React.FC = () => {
             }
         };
         getUser();
-    }, [token, memberId]);
+    }, [token,memberId]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
