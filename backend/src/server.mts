@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
     "https://library-management-system-eight-peach.vercel.app",
+    "https://library-management-system-yiu3.vercel.app",
     "http://localhost:5173",
     "http://localhost:5174"
 ];
