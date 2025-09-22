@@ -13,7 +13,7 @@ const NavBar: React.FC = () => {
 
     const logout = () => {
         setToken("");
-        localStorage.removeItem("token");
+        localStorage.removeItem(localStorage.getItem("token") ? "token" : "AdminToken");
         navigate("/");
     };
 
