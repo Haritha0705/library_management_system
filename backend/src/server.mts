@@ -12,7 +12,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
-    "https://library-management-system-4iii.vercel.app",
+    "https://library-management-system-eight-peach.vercel.app",
+    "http://localhost:5173",
     "http://localhost:5174"
 ];
 
@@ -26,6 +27,7 @@ app.use(cors({
     },
     credentials: true
 }));
+
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
