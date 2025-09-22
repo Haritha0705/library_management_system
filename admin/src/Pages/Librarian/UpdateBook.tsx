@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AdminContext } from "../../Context/AdminContext.tsx";
-import type { SearchModel, SearchResponse } from "../../Models/search.model.ts";
+import type { SearchResponse } from "../../Models/search.model.ts";
 import { searchBookByTitle, updateBook } from "../../Service/book.service.ts";
 import { toast } from 'react-toastify';
 import type {BookModel} from "../../Models/book.model.ts";
 
 const UpdateBook: React.FC = () => {
     const [search, setSearch] = useState<string>("");
-    const [results, setResults] = useState<SearchModel[]>([]);
+    const [results, setResults] = useState<BookModel[]>([]);
     const [selectedBook, setSelectedBook] = useState<BookModel | null>(null);
 
     // Book fields

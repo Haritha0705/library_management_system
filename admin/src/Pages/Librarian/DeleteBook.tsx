@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../../Context/AdminContext.tsx";
-import type { SearchModel, SearchResponse } from "../../Models/search.model.ts";
+import type { SearchResponse } from "../../Models/search.model.ts";
 import { searchBookByTitle, deleteBook as deleteBookService } from "../../Service/book.service.ts";
 import { toast } from "react-toastify";
+import type {BookModel} from "../../Models/book.model.ts";
 
 const DeleteBook: React.FC = () => {
     const [search, setSearch] = useState<string>("");
-    const [results, setResults] = useState<SearchModel[]>([]);
-    const [selectedBook, setSelectedBook] = useState<SearchModel | null>(null);
+    const [results, setResults] = useState<BookModel[]>([]);
+    const [selectedBook, setSelectedBook] = useState<BookModel | null>(null);
 
     const adminContext = useContext(AdminContext);
-    if (!adminContext) return null;
-    const { token } = adminContext;
+    const token = adminContext?.token || "";
 
     const searchBook = async (value: string) => {
         try {
@@ -36,7 +36,7 @@ const DeleteBook: React.FC = () => {
         return () => clearTimeout(timeOut);
     }, [search]);
 
-    const handleSelectBook = (book: SearchModel) => {
+    const handleSelectBook = (book: BookModel) => {
         setSelectedBook(book);
         setResults([]);
         setSearch("");

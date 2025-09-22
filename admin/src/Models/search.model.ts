@@ -1,11 +1,7 @@
-export interface SearchModel {
-    _id:string
-    title: string,
-    image: string
-}
+import type {BookModel} from "./book.model.ts";
 
 export interface SearchResponse {
     success: boolean;
-    data?: SearchModel[];
+    data?: BookModel[];
 }
 

@@ -5,7 +5,7 @@ export interface BookModel {
     category:string
     description:string
     availableCopies:number
-    image: File | string;
+    image: string;
 }
 
 export interface BookResponse {
@@ -16,5 +16,5 @@ export interface BookResponse {
 export interface BookUpdateResponse {
     success:boolean
     message:string
-    updatedBook:BookModel
+    data:BookModel
 }
