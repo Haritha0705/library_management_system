@@ -1,9 +1,8 @@
 # 📚 Library Management System
 
 A **full-stack Library Management System** built with **React (TypeScript)** for the frontend and **Node.js (TypeScript)** with **MongoDB** for the backend.
-It supports **role-based access control (RBAC)** for members, librarians, and admins.
 
-Includes features like **file upload with Multer** and **cloud storage via Cloudinary**.
+It supports **Role-Based Access Control (RBAC)** for **Members**, **Librarians**, and **Admins**, with secure authentication, book management, and file upload features via **Multer + Cloudinary**.
 
 ---
 
@@ -11,12 +10,12 @@ Includes features like **file upload with Multer** and **cloud storage via Cloud
 
 ### **Frontend**
 
-* ⚛️ React 18 (TypeScript)
-* 📦 Vite / CRA (build tool)
-* 🎨 TailwindCSS / MUI (styling)
+* ⚛️ React 19 (TypeScript)
+* 📦 Vite (build tool)
+* 🎨 TailwindCSS (UI components & styling)
+* 📡 Axios (API calls)
 * 🔐 JWT Authentication (via API)
-* 📡 Axios for API calls
-* 🛠 Admin panel (React + TS)
+* 🛠 Admin & Librarian dashboards
 
 ### **Backend**
 
@@ -24,39 +23,57 @@ Includes features like **file upload with Multer** and **cloud storage via Cloud
 * 🚏 Express.js
 * 🍃 MongoDB + Mongoose
 * 🔐 JWT Authentication + Bcrypt
-* 📂 Multer (local file handling)
-* ☁️ Cloudinary (image uploads)
+* 📂 Multer (file handling)
+* ☁️ Cloudinary (image storage)
 
 ---
 
 ## 🔑 Features
 
 * 👤 **User Roles**: Member, Librarian, Admin
-* 🔐 **Authentication**: Login / Register with JWT
-* 📚 **Profile Management**: Update, delete, view profiles
-* 🖼 **File Upload**: Profile images, book covers via Multer + Cloudinary
-* 📖 **Book Management**: Add, update, delete, borrow, and return books
-* 🛡 **Role-based Access Control** (RBAC):
+* 🔐 **Authentication**: Login & Register with JWT
+* 📚 **Book Management**: Add, update, delete, borrow, return books
+* 🖼 **File Uploads**: Profile pictures, book covers (Multer + Cloudinary)
+* 📖 **Profile Management**: View, update, delete profile
+* 🛡 **Role-Based Access Control (RBAC)**:
 
   * **Member** → Borrow / return books, view profile
-  * **Librarian** → Manage books, manage members
-  * **Admin** → Full system access, manage librarians and members
+  * **Librarian** → Manage books & members
+  * **Admin** → Full system access, manage librarians & members
 
 ---
 
 ## 📂 Project Structure
 
-### **Frontend**
+### **User Frontend**
 
 ```
 frontend/
 │── src/
-│   ├── components/     # Reusable UI components
-│   ├── pages/          # Screens (Dashboard, Login, Profile)
-│   ├── services/       # API calls (Axios)
-│   ├── hooks/          # Custom hooks
-│   ├── context/        # Auth context
-│   ├── types/          # TypeScript interfaces
+│   ├── assets/          # Static files
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # Screens (Dashboard, Login, Profile)
+│   ├── services/        # API calls (Axios)
+│   ├── models/          # TypeScript models & hooks
+│   ├── constants/       # Constants (auth, routes, etc.)
+│   ├── context/         # Context API providers
+│   └── App.tsx
+│── public/
+│── package.json
+```
+
+### **Admin and Librarian Frontend**
+
+```
+admin/
+│── src/
+│   ├── assets/          # Static files
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # Screens (Dashboard, Login, Profile)
+│   ├── services/        # API calls (Axios)
+│   ├── models/          # TypeScript models & hooks
+│   ├── constants/       # Constants (auth, routes, etc.)
+│   ├── context/         # Context API providers
 │   └── App.tsx
 │── public/
 │── package.json
@@ -67,13 +84,14 @@ frontend/
 ```
 backend/
 │── src/
-│   ├── controllers/    # Business logic
-│   ├── models/         # MongoDB schemas
-│   ├── routes/         # API routes
-│   ├── middlewares/    # Auth, role, multer, error handling
-│   ├── utils/          # Helpers (Cloudinary, JWT, etc.)
+│   ├── config/          # Env & database config
+│   ├── controllers/     # Business logic
+│   ├── models/          # MongoDB schemas
+│   ├── routes/          # API routes
+│   ├── middlewares/     # Auth, role-based, multer, error handling
+│   ├── services/        # Utility services (Cloudinary, JWT, etc.)
 │   └── server.ts
-│── uploads/            # Local uploads (Multer)
+│── uploads/             # Local uploads (Multer)
 │── package.json
 ```
 
@@ -84,7 +102,7 @@ backend/
 ### **1. Clone Repo**
 
 ```bash
-git clone https://github.com/your-username/library-management-system.git
+git clone https://github.com/Haritha0705/library_management_system.git
 cd library-management-system
 ```
 
@@ -95,10 +113,10 @@ cd backend
 npm install
 ```
 
-* Create `.env` file:
+Create `.env`:
 
 ```env
-PORT=5000
+PORT=3000
 MONGO_URI=mongodb+srv://your-db-url
 JWT_SECRET=your-secret-key
 CLOUDINARY_CLOUD_NAME=your-cloud-name
@@ -106,7 +124,7 @@ CLOUDINARY_API_KEY=your-api-key
 CLOUDINARY_API_SECRET=your-api-secret
 ```
 
-* Run backend:
+Run backend:
 
 ```bash
 npm run dev
@@ -122,44 +140,59 @@ npm run dev
 
 ---
 
-## 🌐 API Endpoints (Backend)
+## 🌐 API Endpoints
 
 ### **Auth**
 
-* `POST /api/v1/auth/register` – Register user
-* `POST /api/v1/auth/login` – Login user
+* `POST /api/v1/auth/register` → Register user
+* `POST /api/v1/auth/login` → Login user
 
 ### **User Management**
 
-* `GET /api/v1/user/get-profile/:id` – Get profile
-* `PUT /api/v1/user/update-profile/:id` – Update profile (Multer + Cloudinary)
-* `DELETE /api/v1/user/delete-profile/:id` – Delete profile
+* `GET /api/v1/user/:id` → Get profile
+* `PUT /api/v1/user/:id` → Update profile (Multer + Cloudinary)
+* `DELETE /api/v1/user/:id` → Delete profile
 
-### **Book Management (Librarian/Admin only)**
+### **Book Management**
 
-* `POST /api/v1/books` – Add book
-* `PUT /api/v1/books/:id` – Update book
-* `DELETE /api/v1/books/:id` – Delete book
-* `GET /api/v1/books` – List books
+* `GET /api/v1/books/:bookId` → Get book by ID
+* `GET /api/v1/books` → Get all books
+* `GET /api/v1/books/search?title=xyz` → Search books by title
+* `POST /api/v1/books/borrow/:bookId/:memberId` → Borrow book (Member only)
+* `POST /api/v1/books/return/:bookId/:memberId` → Return book (Member only)
+* `POST /api/v1/books` → Add book (Librarian only, with image upload)
+* `PUT /api/v1/books/:id` → Update book (Librarian only, with image upload)
+* `DELETE /api/v1/books/:id` → Delete book (Librarian only)
+* `POST /api/v1/books/check-borrow` → Check if a book is borrowed (Member only)
+* `POST /api/v1/books/borrow-history` → Borrow history (Member only)
+
+### **Dashboard Management**
+
+* `GET /api/v1/dashboard/librarians` → Get all librarians (Admin only)
+* `POST /api/v1/dashboard/librarians` → Add librarian (Admin only, with image upload)
+* `DELETE /api/v1/dashboard/librarians/:id` → Delete librarian (Admin only)
+* `GET /api/v1/dashboard/members` → Get all members (Admin & Librarian)
+* `GET /api/v1/dashboard/counts` → Dashboard counts (Admin & Librarian)
+* `GET /api/v1/dashboard/borrowed-books` → Borrowed books list (Admin & Librarian)
 
 ---
 
 ## 🛡 Role-Based Access
 
-* **Member**: Borrow/return books, manage own profile
-* **Librarian**: Manage books + members
-* **Admin**: Full control over system
+* **Member** → Borrow / return books, manage profile
+* **Librarian** → Manage books, manage members
+* **Admin** → Full system access, manage librarians + members
 
 ---
 
 ## 📸 File Uploads
 
-* **Multer** handles local image upload
-* **Cloudinary** stores and serves uploaded files
+* **Multer** → Handles local image upload
+* **Cloudinary** → Stores uploaded files
 
-Example flow:
+Flow:
 
-1. User uploads file → Multer saves temporarily
+1. User uploads file → Multer stores temporarily
 2. Backend uploads to Cloudinary
 3. Cloudinary returns secure URL → stored in MongoDB
 
@@ -167,18 +200,14 @@ Example flow:
 
 ## 🛠 Development
 
-### Run with Nodemon (backend)
+Run backend with Nodemon:
 
 ```bash
 npm run dev
 ```
 
-### Run with Vite (frontend)
+Run frontend with Vite:
 
 ```bash
 npm run dev
 ```
-
-🔥 That’s a **professional README.md** you can drop straight into your repo.
-
-👉 Do you also want me to add a **sequence diagram / architecture diagram (in Markdown + Mermaid)** to make the README look even more professional?
