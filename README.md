@@ -228,6 +228,12 @@ This project is deployed on:
 
 ---
 
+📊 Database Diagram – Library Management System
+
+![Library Management System ERD](https://i.postimg.cc/4shMnYnb/Screenshot-2025-10-03-at-10-46-42.png)
+
+---
+
 ## 🛠 Development
 
 Run backend with Nodemon:
