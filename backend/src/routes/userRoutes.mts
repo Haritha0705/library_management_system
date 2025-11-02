@@ -6,8 +6,8 @@ import userControllers from "../controllers/userControllers.mjs";
 
 const userRoutes = Router();
 
-userRoutes.get("/get-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),userControllers.getProfile)
-userRoutes.put("/update-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),upload.single('image'),userControllers.updateProfile)
-userRoutes.delete("/delete-profile/:role/:id",authMiddleware,roleMiddleware("librarian","member"),userControllers.deleteProfile)
+userRoutes.get("/get-profile/:role/:id",authMiddleware,roleMiddleware("admin","librarian","member"),userControllers.getProfile)
+userRoutes.put("/update-profile/:role/:id",authMiddleware,roleMiddleware("admin","librarian","member"),upload.single('image'),userControllers.updateProfile)
+userRoutes.delete("/delete-profile/:role/:id",authMiddleware,roleMiddleware("admin","librarian","member"),userControllers.deleteProfile)
 
 export default userRoutes;
