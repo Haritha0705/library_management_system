@@ -222,9 +222,15 @@ Flow:
 
 This project is deployed on:
 
-* 🌐 **Frontend (User Portal):** [Live on Vercel](https://library-management-system-yiu3.vercel.app)
+* 🌐 **Frontend (User Portal):** [Live on Vercel](https://library-management-system-eight-peach.vercel.app)
 * 🌐 **Admin & Librarian Frontend:** [Live on Vercel](https://library-management-system-yiu3.vercel.app)
 * ⚙️ **Backend API:** [Live on Render](https://library-management-system-alez.onrender.com)
+
+---
+
+📊 Database Diagram – Library Management System
+
+![Library Management System ERD](https://i.postimg.cc/4shMnYnb/Screenshot-2025-10-03-at-10-46-42.png)
 
 ---
 
