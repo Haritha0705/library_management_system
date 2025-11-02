@@ -197,6 +197,11 @@ VITE_BACKEND_URL=https://library-management-system-alez.onrender.com
 
 ---
 
+### 🌐 Postman API Documentation
+
+Access the full API collection here:  
+👉 **[View API Doc on Postman](https://documenter.getpostman.com/view/40267767/2sB3WpR19R)**
+
 ## 🛡 Role-Based Access
 
 * **Member** → Borrow / return books, manage profile
