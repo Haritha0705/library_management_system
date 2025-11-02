@@ -17,10 +17,9 @@ import profilePic from "./profileImg.png"
 import coverImg from "./mainCover.jpg"
 import logo from "./Combo shape.svg"
 import bookMain from "./img.png"
-import bookWithGirl from "./img-girl.png"
 
 
-export const assets = {book1, book2, book3, book4, book5, book6, book7, book8, book9, profilePic, coverImg,Astronaut,Fiction,History,Non_Fiction,Poetry,Thrill,logo,bookMain,bookWithGirl}
+export const assets = {book1, book2, book3, book4, book5, book6, book7, book8, book9, profilePic, coverImg,Astronaut,Fiction,History,Non_Fiction,Poetry,Thrill,logo,bookMain}
 
 export const CategoryData = [
     {

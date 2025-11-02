@@ -28,7 +28,7 @@ const TopBooks: React.FC = () => {
                         <img
                             src={item.image}
                             alt={item.title}
-                            className="w-full h-96 object-cover bg-blue-50"
+                            className="w-full h-[620px] sm:h-96 object-cover bg-blue-50"
                         />
                         <div className="p-4 flex flex-col items-start gap-2">
                             <p className="text-lg font-medium">{item.title}</p>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import banner from "../../assets/img-girl.png"
+import banner from "../../assets/top_vec.png"
 
 const Banner:React.FC = () => {
     const navigate = useNavigate();
@@ -15,8 +15,8 @@ const Banner:React.FC = () => {
                 <button onClick={()=>{navigate("/login");scrollTo(0,0)}} className={"bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all "}>Create account</button>
             </div>
             {/*Right Side*/}
-            <div className={"hidden md:block md:w-1/2 lg:w-[370px] relative"}>
-                <img className={"w-full absolute bottom-0 right-0 max-w-md"} src={banner} alt={"banner-img"}/>
+            <div className={"hidden md:block md:w-1/2 lg:w-[670px] relative"}>
+                <img className={"w-full absolute bottom-0 right-0 max-w-lg"} src={banner} alt={"banner-img"}/>
             </div>
         </div>
     );
