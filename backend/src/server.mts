@@ -14,8 +14,6 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
     "https://library-management-system-eight-peach.vercel.app",
     "https://library-management-system-kgjl.vercel.app",
-    "http://localhost:5173",
-    "http://localhost:5174"
 ];
 
 app.use(cors({
