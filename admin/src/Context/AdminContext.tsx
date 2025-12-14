@@ -54,7 +54,7 @@ export const AdminContextProvider: React.FC<{ children: ReactNode }> = ({ childr
     }, [token]);
 
     useEffect(() => {
-        if (!token || !librarianId) {
+        if (!token || !librarianId || !role) {
             setLoading(false);
             return;
         }
