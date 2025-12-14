@@ -27,7 +27,7 @@ const AddLibrarian: React.FC = () => {
             const formData = new FormData();
             formData.append("image", libImg);
             formData.append("username", username);
-            formData.append("full_name", fullName);
+            formData.append("fullname", fullName);
             formData.append("email", email);
             formData.append("password", password);
             formData.append("address", address);
