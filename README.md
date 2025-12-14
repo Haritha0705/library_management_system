@@ -227,9 +227,25 @@ Flow:
 
 This project is deployed on:
 
-* 🌐 **Frontend (User Portal):** [Live on Vercel](https://library-management-system-eight-peach.vercel.app)
-* 🌐 **Admin & Librarian Frontend:** [Live on Vercel](https://library-management-system-yiu3.vercel.app)
-* ⚙️ **Backend API:** [Live on Render](https://library-management-system-alez.onrender.com)
+<ul>
+  <li>🌐 <strong>Frontend (User Portal):</strong>
+    <a href="https://library-management-system-eight-peach.vercel.app" target="_blank" rel="noopener noreferrer">
+      Live on Vercel
+    </a>
+  </li>
+
+  <li>🌐 <strong>Admin & Librarian Frontend:</strong>
+    <a href="https://library-management-system-kgjl.vercel.app" target="_blank" rel="noopener noreferrer">
+      Live on Vercel
+    </a>
+  </li>
+
+  <li>⚙️ <strong>Backend API:</strong>
+    <a href="https://library-management-system-alez.onrender.com" target="_blank" rel="noopener noreferrer">
+      Live on Render
+    </a>
+  </li>
+</ul>
 
 ---
 
