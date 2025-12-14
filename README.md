@@ -1,270 +1,346 @@
-# 📚 Library Management System
+<div align="center">
 
-A **full-stack Library Management System (LMS)** built with **React (TypeScript)** for the frontend and **Node.js (TypeScript)** with **MongoDB** for the backend.
+# Library Management System
 
-It supports **Role-Based Access Control (RBAC)** for **Members**, **Librarians**, and **Admins**, with secure authentication, book management, dashboards, and file upload features via **Multer + Cloudinary**.
+A modern, full-stack Library Management System featuring role-based access control, secure authentication, and cloud-based file storage.
 
----
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat&logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-7.0-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 🚀 Tech Stack
+[Live Demo (User Portal)](https://library-management-system-eight-peach.vercel.app) · [Admin Portal](https://library-management-system-kgjl.vercel.app) · [API Documentation](https://documenter.getpostman.com/view/40267767/2sB3WpR19R)
 
-### **Frontend**
-
-* ⚛️ React 19 (TypeScript)
-* 📦 Vite (build tool)
-* 🎨 TailwindCSS (UI & styling)
-* 📡 Axios (API requests)
-* 🔐 JWT Authentication
-* 🛠 Admin & Librarian dashboards
-
-### **Backend**
-
-* 🟦 Node.js (TypeScript)
-* 🚏 Express.js
-* 🍃 MongoDB + Mongoose
-* 🔐 JWT Authentication + Bcrypt
-* 📂 Multer (file handling)
-* ☁️ Cloudinary (image storage)
+</div>
 
 ---
 
-## 🔑 Features
+## Table of Contents
 
-* 👤 **User Roles**: Member, Librarian, Admin
-* 🔐 **Authentication**: Login & Register with JWT
-* 📚 **Book Management**: Add, update, delete, borrow, return books
-* 🖼 **File Uploads**: Profile pictures, book covers (Multer + Cloudinary)
-* 📖 **Profile Management**: View, update, delete profile
-* 🛡 **Role-Based Access Control (RBAC)**:
-
-  * **Member** → Borrow / return books, view profile
-  * **Librarian** → Manage books & members
-  * **Admin** → Full access, manage librarians & members
-
----
-
-## 📂 Project Structure
-
-### **User Frontend**
-
-```
-frontend/
-│── src/
-│   ├── assets/          # Static files
-│   ├── components/      # Reusable UI components
-│   ├── pages/           # Screens (Dashboard, Login, Profile)
-│   ├── services/        # Axios API services
-│   ├── models/          # TypeScript models
-│   ├── constants/       # App constants
-│   ├── context/         # Context API providers
-│   └── App.tsx
-│── public/
-│── package.json
-```
-
-### **Admin & Librarian Frontend**
-
-```
-admin/
-│── src/
-│   ├── assets/
-│   ├── components/
-│   ├── pages/
-│   ├── services/
-│   ├── models/
-│   ├── constants/
-│   ├── context/
-│   └── App.tsx
-│── public/
-│── package.json
-```
-
-### **Backend**
-
-```
-backend/
-│── src/
-│   ├── config/          # Env & DB config
-│   ├── controllers/     # Business logic
-│   ├── models/          # MongoDB schemas
-│   ├── routes/          # API routes
-│   ├── middlewares/     # Auth, RBAC, Multer
-│   ├── services/        # Cloudinary, JWT utils
-│   └── server.ts
-│── uploads/             # Local uploads
-│── package.json
-```
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Variables](#environment-variables)
+- [API Reference](#api-reference)
+- [Role-Based Access Control](#role-based-access-control)
+- [File Upload Pipeline](#file-upload-pipeline)
+- [Database Schema](#database-schema)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## ⚙️ Installation
+## Overview
 
-### **1. Clone Repository**
+The Library Management System (LMS) is a comprehensive solution designed to streamline library operations. Built with modern web technologies, it provides separate interfaces for members, librarians, and administrators, ensuring secure and efficient management of books, users, and borrowing activities.
 
-```bash
-git clone https://github.com/Haritha0705/library_management_system.git
-cd library-management-system
+---
+
+## Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Multi-Role Authentication** | Secure JWT-based authentication with role-specific access levels |
+| **Book Management** | Full CRUD operations for books with image upload support |
+| **Borrowing System** | Track book loans, returns, and borrowing history |
+| **User Management** | Profile management with avatar uploads |
+| **Admin Dashboard** | Comprehensive analytics and system management tools |
+| **Cloud Storage** | Seamless image uploads via Cloudinary integration |
+| **Responsive Design** | Mobile-first UI built with TailwindCSS |
+
+---
+
+## Tech Stack
+
+### Frontend
+| Technology | Purpose |
+|------------|---------|
+| React 19 | UI Framework |
+| TypeScript | Type Safety |
+| Vite | Build Tool |
+| TailwindCSS | Styling |
+| Axios | HTTP Client |
+| React Router | Navigation |
+
+### Backend
+| Technology | Purpose |
+|------------|---------|
+| Node.js | Runtime Environment |
+| Express.js | Web Framework |
+| TypeScript | Type Safety |
+| MongoDB | Database |
+| Mongoose | ODM |
+| JWT | Authentication |
+| Bcrypt | Password Hashing |
+| Multer | File Handling |
+| Cloudinary | Cloud Storage |
+
+---
+
+## Architecture
+
+```
+library-management-system/
+├── frontend/                 # Member-facing application
+│   ├── src/
+│   │   ├── assets/          # Static resources
+│   │   ├── components/      # Reusable UI components
+│   │   ├── pages/           # Route components
+│   │   ├── services/        # API integration layer
+│   │   ├── models/          # TypeScript interfaces
+│   │   ├── constants/       # Application constants
+│   │   ├── context/         # React Context providers
+│   │   └── App.tsx          # Application entry point
+│   └── package.json
+│
+├── admin/                    # Admin & Librarian dashboard
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── models/
+│   │   ├── constants/
+│   │   ├── context/
+│   │   └── App.tsx
+│   └── package.json
+│
+└── backend/                  # REST API server
+    ├── src/
+    │   ├── config/          # Environment & database configuration
+    │   ├── controllers/     # Request handlers
+    │   ├── models/          # MongoDB schemas
+    │   ├── routes/          # API route definitions
+    │   ├── middlewares/     # Auth, RBAC, file upload middleware
+    │   ├── services/        # Business logic & external services
+    │   └── server.ts        # Server entry point
+    ├── uploads/             # Temporary file storage
+    └── package.json
 ```
 
-### **2. Setup Backend**
+---
 
-```bash
-cd backend
-npm install
-```
+## Getting Started
 
-Create `.env`:
+### Prerequisites
+
+Ensure you have the following installed:
+
+- **Node.js** (v18 or higher)
+- **npm** or **yarn**
+- **MongoDB** (local instance or Atlas connection)
+- **Cloudinary account** (for image storage)
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/Haritha0705/library_management_system.git
+   cd library-management-system
+   ```
+
+2. **Install backend dependencies**
+
+   ```bash
+   cd backend
+   npm install
+   ```
+
+3. **Install frontend dependencies**
+
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+4. **Install admin dashboard dependencies**
+
+   ```bash
+   cd ../admin
+   npm install
+   ```
+
+### Environment Variables
+
+Create `.env` files in each directory with the following configurations:
+
+<details>
+<summary><strong>Backend (.env)</strong></summary>
 
 ```env
 PORT=3000
-MONGO_URI=mongodb+srv://your-db-url
-JWT_SECRET=your-secret-key
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>
+JWT_SECRET=your-secure-secret-key
 CLOUDINARY_CLOUD_NAME=your-cloud-name
 CLOUDINARY_API_KEY=your-api-key
 CLOUDINARY_API_SECRET=your-api-secret
 ```
 
-Run backend:
+</details>
 
-```bash
-npm run dev
-```
-
-### **3. Setup User Frontend**
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Create `.env`:
+<details>
+<summary><strong>Frontend (.env)</strong></summary>
 
 ```env
-VITE_API_URL=https://library-management-system-alez.onrender.com
+VITE_API_URL=http://localhost:3000
 ```
 
-### **4. Setup Admin & Librarian Frontend**
+</details>
 
-```bash
-cd admin
-npm install
-npm run dev
-```
-
-Create `.env`:
+<details>
+<summary><strong>Admin Dashboard (.env)</strong></summary>
 
 ```env
-VITE_BACKEND_URL=https://library-management-system-alez.onrender.com
+VITE_BACKEND_URL=http://localhost:3000
 ```
 
----
+</details>
 
-## 🌐 API Endpoints
+### Running the Application
 
-### **Auth**
-
-* `POST /api/v1/auth/register` → Register user
-* `POST /api/v1/auth/login` → Login user
-
-### **User Management**
-
-* `GET /api/v1/user/:id` → Get profile
-* `PUT /api/v1/user/:id` → Update profile (Multer + Cloudinary)
-* `DELETE /api/v1/user/:id` → Delete profile
-
-### **Book Management**
-
-* `GET /api/v1/books/:bookId` → Get book by ID
-* `GET /api/v1/books` → Get all books
-* `GET /api/v1/books/search?title=xyz` → Search books by title
-* `POST /api/v1/books/borrow/:bookId/:memberId` → Borrow book (Member only)
-* `POST /api/v1/books/return/:bookId/:memberId` → Return book (Member only)
-* `POST /api/v1/books` → Add book (Librarian only, image upload)
-* `PUT /api/v1/books/:id` → Update book (Librarian only, image upload)
-* `DELETE /api/v1/books/:id` → Delete book (Librarian only)
-* `POST /api/v1/books/check-borrow` → Check if book is borrowed (Member only)
-* `POST /api/v1/books/borrow-history` → Borrow history (Member only)
-
-### **Dashboard Management**
-
-* `GET /api/v1/dashboard/librarians` → Get all librarians (Admin only)
-* `POST /api/v1/dashboard/librarians` → Add librarian (Admin only, image upload)
-* `DELETE /api/v1/dashboard/librarians/:id` → Delete librarian (Admin only)
-* `GET /api/v1/dashboard/members` → Get all members (Admin & Librarian)
-* `GET /api/v1/dashboard/counts` → Dashboard counts (Admin & Librarian)
-* `GET /api/v1/dashboard/borrowed-books` → Borrowed books list (Admin & Librarian)
-
----
-
-### 🌐 Postman API Documentation
-
-Access the full API collection here:  
-👉 **[View API Doc on Postman](https://documenter.getpostman.com/view/40267767/2sB3WpR19R)**
-
-## 🛡 Role-Based Access
-
-* **Member** → Borrow / return books, manage profile
-* **Librarian** → Manage books & members
-* **Admin** → Full system access, manage librarians + members
-
----
-
-## 📸 File Uploads
-
-* **Multer** → Handles local file upload
-* **Cloudinary** → Stores uploaded images
-
-Flow:
-
-1. User uploads file → Multer stores temporarily
-2. Backend uploads to Cloudinary
-3. Cloudinary returns secure URL → Stored in MongoDB
-
----
-
-## 🌍 Deployment
-
-This project is deployed on:
-
-<ul>
-  <li>🌐 <strong>Frontend (User Portal):</strong>
-    <a href="https://library-management-system-eight-peach.vercel.app" target="_blank" rel="noopener noreferrer">
-      Live on Vercel
-    </a>
-  </li>
-
-  <li>🌐 <strong>Admin & Librarian Frontend:</strong>
-    <a href="https://library-management-system-kgjl.vercel.app" target="_blank" rel="noopener noreferrer">
-      Live on Vercel
-    </a>
-  </li>
-
-  <li>⚙️ <strong>Backend API:</strong>
-    <a href="https://library-management-system-alez.onrender.com" target="_blank" rel="noopener noreferrer">
-      Live on Render
-    </a>
-  </li>
-</ul>
-
----
-
-📊 Database Diagram – Library Management System
-
-![Library Management System ERD](https://i.postimg.cc/4shMnYnb/Screenshot-2025-10-03-at-10-46-42.png)
-
----
-
-## 🛠 Development
-
-Run backend with Nodemon:
+Start each service in separate terminal windows:
 
 ```bash
-npm run dev
+# Terminal 1 - Backend
+cd backend && npm run dev
+
+# Terminal 2 - Frontend
+cd frontend && npm run dev
+
+# Terminal 3 - Admin Dashboard
+cd admin && npm run dev
 ```
 
-Run frontend with Vite:
+---
 
-```bash
-npm run dev
+## API Reference
+
+Base URL: `https://library-management-system-alez.onrender.com/api/v1`
+
+### Authentication
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/auth/register` | Register a new user |
+| `POST` | `/auth/login` | Authenticate user and receive JWT |
+
+### Users
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| `GET` | `/user/:id` | Get user profile | Authenticated |
+| `PUT` | `/user/:id` | Update user profile | Owner |
+| `DELETE` | `/user/:id` | Delete user account | Owner/Admin |
+
+### Books
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| `GET` | `/books` | List all books | Public |
+| `GET` | `/books/:bookId` | Get book details | Public |
+| `GET` | `/books/search?title=` | Search books by title | Public |
+| `POST` | `/books` | Add new book | Librarian |
+| `PUT` | `/books/:id` | Update book | Librarian |
+| `DELETE` | `/books/:id` | Delete book | Librarian |
+| `POST` | `/books/borrow/:bookId/:memberId` | Borrow a book | Member |
+| `POST` | `/books/return/:bookId/:memberId` | Return a book | Member |
+| `POST` | `/books/check-borrow` | Check borrow status | Member |
+| `POST` | `/books/borrow-history` | Get borrow history | Member |
+
+### Dashboard
+
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| `GET` | `/dashboard/counts` | Get system statistics | Admin/Librarian |
+| `GET` | `/dashboard/members` | List all members | Admin/Librarian |
+| `GET` | `/dashboard/librarians` | List all librarians | Admin |
+| `POST` | `/dashboard/librarians` | Add new librarian | Admin |
+| `DELETE` | `/dashboard/librarians/:id` | Remove librarian | Admin |
+| `GET` | `/dashboard/borrowed-books` | List borrowed books | Admin/Librarian |
+
+> 📖 **Full API Documentation**: [View on Postman](https://documenter.getpostman.com/view/40267767/2sB3WpR19R)
+
+---
+
+## Role-Based Access Control
+
+The system implements three distinct user roles with specific permissions:
+
+| Role | Permissions |
+|------|-------------|
+| **Member** | Browse catalog, borrow/return books, manage personal profile, view borrowing history |
+| **Librarian** | All Member permissions + manage book inventory, view member records |
+| **Admin** | Full system access including librarian management, system configuration, and analytics |
+
+---
+
+## File Upload Pipeline
+
+The application uses a two-stage upload process for optimal performance and reliability:
+
 ```
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│    Client    │────▶│    Multer    │────▶│  Cloudinary  │────▶│   MongoDB    │
+│  (File Form) │     │ (Temp Store) │     │   (Cloud)    │     │  (URL Ref)   │
+└──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
+```
+
+1. **Client** submits file via multipart form
+2. **Multer** temporarily stores file on server
+3. **Cloudinary** receives and hosts the optimized image
+4. **MongoDB** stores the secure CDN URL
+
+---
+
+## Database Schema
+
+![Database ERD](https://i.postimg.cc/4shMnYnb/Screenshot-2025-10-03-at-10-46-42.png)
+
+---
+
+## Deployment
+
+The application is deployed across multiple platforms for optimal performance:
+
+| Service | Platform | URL |
+|---------|----------|-----|
+| User Portal | Vercel | [library-management-system-eight-peach.vercel.app](https://library-management-system-eight-peach.vercel.app) |
+| Admin Dashboard | Vercel | [library-management-system-kgjl.vercel.app](https://library-management-system-kgjl.vercel.app) |
+| Backend API | Render | [library-management-system-alez.onrender.com](https://library-management-system-alez.onrender.com) |
+
+---
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please ensure your code follows the existing style conventions and includes appropriate tests.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+**[⬆ Back to Top](#library-management-system)**
+
+Made with ❤️ by [Haritha](https://github.com/Haritha0705)
+
+</div>
