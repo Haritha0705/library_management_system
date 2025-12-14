@@ -33,6 +33,7 @@ export const AppContext = createContext<AdminContextType | undefined>(undefined)
 export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [token, setToken] = useState<string>(localStorage.getItem("token") || "");
     const [memberId, setmemberId] = useState<string>("");
+    const [userRole, setUserRole] = useState<string>("");
     const [books, setBooks] = useState<BookModel[]>([]);
     const [loading, setLoading] = useState(true);
     const [profile, setProfile] = useState<UserModel | null>(null);
@@ -42,17 +43,20 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children
             try {
                 const decoded = jwtDecode<CustomJwtPayload>(token);
                 setmemberId(decoded.id || "");
+                setUserRole(decoded.role || "");
             } catch (error) {
                 console.error("Invalid token", error);
                 setmemberId("");
+                setUserRole("");
             }
         } else {
             setmemberId("");
+            setUserRole("");
         }
     }, [token]);
 
     useEffect(() => {
-        if (!token || !memberId) {
+        if (!token || !memberId || userRole === "admin") {
             setLoading(false);
             return;
         }
@@ -66,7 +70,7 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children
             }
         };
         getUser()
-    }, [token, memberId]);
+    }, [token, memberId, userRole]);
 
     const fetchBooks = async () => {
         try {
