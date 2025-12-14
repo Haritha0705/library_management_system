@@ -9,7 +9,6 @@ export const addLibrarian = async (formData: FormData,token:string): Promise<any
             formData,{
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data"
                 }
             }
         );
@@ -26,7 +25,6 @@ export const addBook = async (formData: FormData,token:string): Promise<BookResp
             formData,{
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data"
                 }
             }
         );
