@@ -162,7 +162,7 @@ export class UserService{
                 return {success: false, status: 404, message: "Invalid role"};
             }
 
-            return {success: false, status: 200, message: `${role} profile deleted successfully`};
+            return {success: true, status: 200, message: `${role} profile deleted successfully`};
         } catch (e: any) {
             console.error(e);
             return {success: false, status: 500, message: "Internal server error", error: e.message};

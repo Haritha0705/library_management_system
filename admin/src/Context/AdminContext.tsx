@@ -58,6 +58,11 @@ export const AdminContextProvider: React.FC<{ children: ReactNode }> = ({ childr
             setLoading(false);
             return;
         }
+        // Skip fetching profile for admin since admin doesn't have a profile in the database
+        if (role === "admin") {
+            setLoading(false);
+            return;
+        }
         const getUser = async () => {
             try {
                 const res: UserResponse = await getProfile(librarianId, token);
@@ -65,10 +70,12 @@ export const AdminContextProvider: React.FC<{ children: ReactNode }> = ({ childr
             } catch (apiError: any) {
                 toast.error(apiError.message || "Failed to fetch member profile");
                 console.error("Error fetching member profile:", apiError);
+            } finally {
+                setLoading(false);
             }
         };
         getUser()
-    }, [token, librarianId]);
+    }, [token, librarianId, role]);
 
     return (
         <AdminContext.Provider value={{ token, setToken, role, setRole,profile,librarianId,loading }}>

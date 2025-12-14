@@ -8,7 +8,7 @@ export interface ProfileReq extends Request {
 }
 
 export interface Profile {
-    id: string;
+    _id: string;
     image: string;
     username: string;
     email: string;

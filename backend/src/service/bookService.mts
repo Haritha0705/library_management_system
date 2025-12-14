@@ -150,7 +150,7 @@ export class BookService {
 
         } catch (error: any) {
             console.error(error);
-            return {success: true, status: 500, message: "Something went wrong", error: error.message};
+            return {success: false, status: 500, message: "Something went wrong", error: error.message};
         }
     }
 
@@ -176,7 +176,7 @@ export class BookService {
 
         } catch (error: any) {
             console.error("Issue error:", error);
-            return {success: true, status: 500, message: "Something went wrong", error: error.message};
+            return {success: false, status: 500, message: "Something went wrong", error: error.message};
         }
     }
 
@@ -232,7 +232,7 @@ export class BookService {
 
         } catch (error: any) {
             console.error("Issue error:", error);
-            return {success: true, status: 500, message: "Something went wrong", error: error.message};
+            return {success: false, status: 500, message: "Something went wrong", error: error.message};
         }
     };
 
@@ -284,7 +284,7 @@ export class BookService {
 
         } catch (error: any) {
             console.error("Issue error:", error);
-            return {success: true, status: 500, message: "Something went wrong", error: error.message};
+            return {success: false, status: 500, message: "Something went wrong", error: error.message};
         }
     };
 
@@ -317,7 +317,7 @@ export class BookService {
 
         } catch (error: any) {
             console.error(error);
-            return {success: true, status: 500, message: "Something went wrong", error: error.message};
+            return {success: false, status: 500, message: "Something went wrong", error: error.message};
         }
     }
 
@@ -342,7 +342,7 @@ export class BookService {
 
         } catch (error: any) {
             console.error("Book Borrow History Error:", error);
-            return {success: true, status: 500, message: "Something went wrong", error: error.message};
+            return {success: false, status: 500, message: "Something went wrong", error: error.message};
         }
     }
 }

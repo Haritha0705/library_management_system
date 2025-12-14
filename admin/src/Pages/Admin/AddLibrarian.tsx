@@ -6,7 +6,8 @@ import { AdminContext } from "../../Context/AdminContext.tsx";
 
 const AddLibrarian: React.FC = () => {
     const [libImg, setLibImg] = useState<File | null>(null);
-    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
+    const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [address, setAddress] = useState("");
@@ -25,7 +26,8 @@ const AddLibrarian: React.FC = () => {
         try {
             const formData = new FormData();
             formData.append("image", libImg);
-            formData.append("name", name);
+            formData.append("username", username);
+            formData.append("full_name", fullName);
             formData.append("email", email);
             formData.append("password", password);
             formData.append("address", address);
@@ -36,7 +38,8 @@ const AddLibrarian: React.FC = () => {
             if (data && data.success) {
                 toast.success(data.message || "DashBoard added successfully!");
                 setLibImg(null);
-                setName("");
+                setUsername("");
+                setFullName("");
                 setEmail("");
                 setPassword("");
                 setAddress("");
@@ -82,14 +85,26 @@ const AddLibrarian: React.FC = () => {
                     {/* Left Section */}
                     <div className="w-full lg:flex-1 flex flex-col gap-6">
                         <div className="flex flex-col gap-2">
-                            <label className="font-semibold text-gray-700">Name</label>
+                            <label className="font-semibold text-gray-700">Username</label>
                             <input
                                 type="text"
                                 required
-                                placeholder="Name"
+                                placeholder="Username"
                                 className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                onChange={(e) => setName(e.target.value)}
-                                value={name}
+                                onChange={(e) => setUsername(e.target.value)}
+                                value={username}
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <label className="font-semibold text-gray-700">Full Name</label>
+                            <input
+                                type="text"
+                                required
+                                placeholder="Full Name"
+                                className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                onChange={(e) => setFullName(e.target.value)}
+                                value={fullName}
                             />
                         </div>
 
